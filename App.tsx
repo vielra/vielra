@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import Hello from './app/components/hello';
+import WelcomeScreen from './app/screens/welcome-screen';
 
-const App: FC = () => <Hello />;
+const App: FC = () => <WelcomeScreen />;
 
 export default App;

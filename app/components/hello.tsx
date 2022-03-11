@@ -1,14 +1,23 @@
 import React, { FC } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, StatusBar } from 'react-native';
+import { Ionicons } from './icons';
 
 const backgroundColor = '#ff4991';
 
 const Hello: FC = () => (
   <SafeAreaView style={styles.root}>
     <StatusBar barStyle="light-content" backgroundColor={backgroundColor} />
-    <View>
+
+    <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
       <Text style={styles.smallText}>Hello 👋,</Text>
-      <Text style={styles.bigText}>React Native</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <Text style={styles.bigText}>React Native</Text>
+        <Ionicons name="heart" color="#fbfbfb" style={{ marginLeft: 12 }} size={26} />
+      </View>
+    </View>
+
+    <View>
+      <Text style={{ color: '#eee', marginBottom: 20 }}>By Riski</Text>
     </View>
   </SafeAreaView>
 );

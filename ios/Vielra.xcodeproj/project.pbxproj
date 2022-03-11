@@ -39,6 +39,9 @@
 		1D0AE47A65C8663E3B452821 /* Pods-Vielra-VielraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.release.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.release.xcconfig"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-Vielra.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-Vielra-VielraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.debug.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		71BE1E4527DBC9F9008BD140 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		71BE1E4627DBCA01008BD140 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		71BE1E4727DBCA0D008BD140 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Vielra/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABFE59519B596E51CEFDCCC0 /* libPods-Vielra-VielraTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra-VielraTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0A881CF5CF3F2B244570E2A /* Pods-Vielra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra.debug.xcconfig"; path = "Target Support Files/Pods-Vielra/Pods-Vielra.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +89,7 @@
 		13B07FAE1A68108700A75B9A /* Vielra */ = {
 			isa = PBXGroup;
 			children = (
+				71BE1E4427DBC929008BD140 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -104,6 +108,16 @@
 				ABFE59519B596E51CEFDCCC0 /* libPods-Vielra-VielraTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		71BE1E4427DBC929008BD140 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				71BE1E4627DBCA01008BD140 /* MaterialIcons.ttf */,
+				71BE1E4727DBCA0D008BD140 /* Ionicons.ttf */,
+				71BE1E4527DBC9F9008BD140 /* MaterialCommunityIcons.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -145,7 +159,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-Vielra-VielraTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-Vielra-VielraTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
