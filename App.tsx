@@ -1,6 +1,17 @@
 import React, { FC } from 'react';
-import WelcomeScreen from './app/screens/welcome-screen';
+import { NavigationProvider, SafeAreaProvider, StateProvider } from '@/components/providers';
+import { RootStackNavigator } from '@/navigations';
 
-const App: FC = () => <WelcomeScreen />;
+const App: FC = () => {
+  return (
+    <StateProvider>
+      <NavigationProvider>
+        <SafeAreaProvider>
+          <RootStackNavigator />
+        </SafeAreaProvider>
+      </NavigationProvider>
+    </StateProvider>
+  );
+};
 
 export default App;

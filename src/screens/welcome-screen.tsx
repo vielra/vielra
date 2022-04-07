@@ -1,5 +1,5 @@
 import React from 'react';
-import Hello from '../components/hello';
+import Hello from '@/components/hello';
 
 const WelcomeScreen = () => <Hello />;
 
