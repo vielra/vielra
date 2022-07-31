@@ -1,10 +1,14 @@
+// Redux.
 import { combineReducers } from 'redux';
-import { commonReducer, CommonState } from '@/store/common/reducer';
 
-export interface RootState {
-  common: CommonState;
-}
+// Reducers.
+import { themeReducer, ThemeState } from '@/modules/theme/redux';
+
+// Root State.
+export type RootState = {
+  theme: ThemeState;
+};
 
 export default combineReducers<RootState>({
-  common: commonReducer,
+  theme: themeReducer,
 });

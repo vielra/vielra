@@ -1,16 +1,22 @@
 import React, { FC } from 'react';
-import { NavigationProvider, SafeAreaProvider, StateProvider } from '@/components/providers';
-import { RootStackNavigator } from '@/navigations';
+
+// Providers.
+import { ReduxProvider, ThemeProvider, NavigationProvider, SafeAreaProvider } from '@/providers';
+
+// RootStack navigator.
+import { RootStackNavigator } from '@/navigators';
 
 const App: FC = () => {
   return (
-    <StateProvider>
-      <NavigationProvider>
-        <SafeAreaProvider>
-          <RootStackNavigator />
-        </SafeAreaProvider>
-      </NavigationProvider>
-    </StateProvider>
+    <ReduxProvider>
+      <ThemeProvider>
+        <NavigationProvider>
+          <SafeAreaProvider>
+            <RootStackNavigator />
+          </SafeAreaProvider>
+        </NavigationProvider>
+      </ThemeProvider>
+    </ReduxProvider>
   );
 };
 

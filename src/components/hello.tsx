@@ -5,29 +5,38 @@ import { Ionicons } from './icons';
 const backgroundColor = '#ff4991';
 import { useAppSelector } from '@/store';
 import { useDispatch } from 'react-redux';
-import { toggleDarkMode } from '@/store/common/actions';
+import { theme_actionToggleMode, theme_rootSelector } from '@/modules/theme/redux';
+import { useTheme } from '@/modules/theme/hooks';
+import { red } from '@/modules/theme/libs';
 
 const Hello: FC = () => {
-  const state = useAppSelector((s) => s.common);
+  const state = useAppSelector((s) => theme_rootSelector(s));
   const dispatch = useDispatch();
 
-  const toggleMode = () => {
-    dispatch(toggleDarkMode());
+  const theme = useTheme();
+
+  const toggleThemeMode = () => {
+    dispatch(theme_actionToggleMode());
   };
 
-  console.log('state ->>', state);
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView
+      style={StyleSheet.flatten([
+        styles.root,
+        {
+          backgroundColor: theme.palette.background.paper,
+        },
+      ])}>
       <StatusBar barStyle="light-content" backgroundColor={backgroundColor} />
 
       <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
-        <Text style={styles.smallText}>Hello 👋,</Text>
+        <Text style={StyleSheet.flatten([styles.smallText, { color: theme.palette.text.secondary }])}>Hello 👋,</Text>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={styles.bigText}>React Native</Text>
-          <Ionicons name="heart" color="#fbfbfb" style={{ marginLeft: 12 }} size={26} />
+          <Text style={StyleSheet.flatten([styles.bigText, { color: theme.palette.text.primary }])}>React Native</Text>
+          <Ionicons name="heart" color={red[500]} style={{ marginLeft: 12 }} size={26} />
         </View>
 
-        <Button onPress={toggleMode} title="Toggle" />
+        <Button onPress={toggleThemeMode} title="Toggle" />
       </View>
 
       <View>
@@ -43,15 +52,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    backgroundColor,
   },
   smallText: {
     fontSize: 16,
-    color: '#fbfbfb',
   },
   bigText: {
     fontSize: 28,
-    color: '#fbfbfb',
     fontWeight: '600',
   },
 });
