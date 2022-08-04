@@ -54,6 +54,7 @@ export interface IThemePalette {
   common: IThemeCommonPalettte;
   text: IThemeTextPalette;
   background: IThemeBackgroundPalette;
+  divider: string;
 }
 
 export interface ITheme {
