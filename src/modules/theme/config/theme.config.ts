@@ -8,57 +8,58 @@
 import { grey } from '@/modules/theme/libs';
 
 // Utils.
-import { createTheme } from '@/modules/theme/utils';
+/* eslint import/no-cycle: [2, { ignoreExternal: true }]*/
+// import { createTheme } from '@/modules/theme/utils';
 
 // Interfaces.
-import { ITheme, IThemePalette, IThemeShape, IThemeTypography } from '@/modules/theme/interfaces';
+import { IThemePalette, IThemeShape, IThemeTypography } from '@/modules/theme/interfaces';
 
 /**  Base palette */
-export const paletteBase: Omit<IThemePalette, 'background' | 'text' | 'mode'> = {
+export const paletteBase: Omit<IThemePalette, 'background' | 'text' | 'mode' | 'divider'> = {
   primary: {
-    main: '#3393FF',
-    dark: '#1955B7',
-    light: '#D6F1FF',
+    main: '#FF4564',
+    dark: '#F10930',
+    light: '#FEF2EF',
     contrastText: '#fbfbfb',
   },
   secondary: {
-    main: '#fd9d00',
-    dark: '#B66200',
-    light: '#FEF3CB',
+    main: '#3393FF',
+    dark: '#1955B7',
+    light: '#EEF9FE',
     contrastText: '#fbfbfb',
   },
   success: {
-    main: '#13C471',
-    dark: '#0DA86F',
-    light: '#CEFCD4',
+    main: '#0CB954',
+    dark: '#089F56',
+    light: '#e2ffe2',
     contrastText: '#fbfbfb',
   },
   info: {
     main: '#069efe',
     dark: '#047ADA',
-    light: '#CDF7FE',
+    light: '#EEFCFE',
     contrastText: '#fbfbfb',
   },
   warning: {
     main: '#ffa50b',
     dark: '#DB8508',
-    light: '#FFF4CE',
-    contrastText: '#fbfbfb',
+    light: '#FFF9E6',
+    contrastText: '#fff',
   },
   error: {
     main: '#ff3517',
     dark: '#B70B10',
-    light: '#FFE5D0',
-    contrastText: '#fbfbfb',
+    light: '#FFEFE3',
+    contrastText: '#fff',
   },
   common: {
-    white: '#ffffff',
+    white: '#fff',
     black: '#000000',
   },
 };
 
 /** Palette light */
-export const paletteLight: Pick<IThemePalette, 'text' | 'background' | 'mode'> = {
+export const paletteLight: Pick<IThemePalette, 'text' | 'background' | 'mode' | 'divider'> = {
   mode: 'light',
   text: {
     primary: grey[800],
@@ -69,20 +70,22 @@ export const paletteLight: Pick<IThemePalette, 'text' | 'background' | 'mode'> =
     default: '#f9f9f9',
     paper: '#fff',
   },
+  divider: 'rgba(0, 0, 0, 0.12)',
 };
 
 /** Palette dark */
-export const paletteDark: Pick<IThemePalette, 'text' | 'background' | 'mode'> = {
+export const paletteDark: Pick<IThemePalette, 'text' | 'background' | 'mode' | 'divider'> = {
   mode: 'dark',
   text: {
-    primary: grey[100],
-    secondary: grey[200],
-    disabled: grey[300],
+    primary: '#fbfbfb',
+    secondary: 'rgba(255, 255, 255, 0.65)',
+    disabled: 'rgba(255, 255, 255, 0.2)',
   },
   background: {
     default: grey[900],
     paper: '#0e0e0e',
   },
+  divider: 'rgba(255, 255, 255, 0.18)',
 };
 
 /** Typography */
@@ -104,5 +107,8 @@ export const shape: IThemeShape = {
   borderRadius: 3,
 };
 
+/** Theme spacing */
+export const SPACING = 4;
+
 /** Default theme (light mode) */
-export const defaultTheme: ITheme = createTheme('light');
+// export const defaultTheme: ITheme = createTheme('light');

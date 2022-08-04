@@ -4,6 +4,4 @@ import { IconProps } from 'react-native-vector-icons/Icon';
 
 type Props = IconProps;
 
-const Ionicons: FC<Props> = (props: Props) => <Icon {...props} />;
-
-export default Ionicons;
+export const Ionicons: FC<Props> = (props: Props) => <Icon {...props} />;

@@ -7,6 +7,22 @@
 		<string>MaterialIcons.ttf</string>
 		<string>MaterialCommunityIcons.ttf</string>
 		<string>Ionicons.ttf</string>
+		<string>BeVietnamPro-Thin.ttf</string>
+		<string>BeVietnamPro-ThinItalic.ttf</string>
+		<string>BeVietnamPro-ExtraLight.ttf</string>
+		<string>BeVietnamPro-ExtraLightItalic.ttf</string>
+		<string>BeVietnamPro-Light.ttf</string>
+		<string>BeVietnamPro-LightItalic.ttf</string>
+		<string>BeVietnamPro-Regular.ttf</string>
+		<string>BeVietnamPro-Italic.ttf</string>
+		<string>BeVietnamPro-Medium.ttf</string>
+		<string>BeVietnamPro-MediumItalic.ttf</string>
+		<string>BeVietnamPro-SemiBold.ttf</string>
+		<string>BeVietnamPro-SemiBoldItalic.ttf</string>
+		<string>BeVietnamPro-Bold.ttf</string>
+		<string>BeVietnamPro-BoldItalic.ttf</string>
+		<string>BeVietnamPro-Black.ttf</string>
+		<string>BeVietnamPro-BlackItalic.ttf</string>
 	</array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
