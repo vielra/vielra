@@ -78,8 +78,8 @@ export const paletteDark: Pick<IThemePalette, 'text' | 'background' | 'mode' | '
   mode: 'dark',
   text: {
     primary: '#fbfbfb',
-    secondary: 'rgba(255, 255, 255, 0.65)',
-    disabled: 'rgba(255, 255, 255, 0.2)',
+    secondary: 'rgba(255, 255, 255, 0.75)',
+    disabled: 'rgba(255, 255, 255, 0.5)',
   },
   background: {
     default: grey[900],

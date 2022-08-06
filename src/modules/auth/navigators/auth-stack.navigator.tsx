@@ -19,12 +19,13 @@ export interface IAuthStackParamList extends Record<string, object | undefined> 
 const AuthStack = createNativeStackNavigator<IAuthStackParamList>();
 
 export const AuthStackNavigator: FC = () => {
-  const { palette } = useTheme();
   return (
     <>
-      <AuthStack.Navigator screenOptions={{ headerShown: false }} initialRouteName={RoutesConstant.Auth.RegisterScreen}>
-        <AuthStack.Screen name={RoutesConstant.Auth.LoginScreen} component={LoginScreen} />
-        <AuthStack.Screen name={RoutesConstant.Auth.RegisterScreen} component={RegisterScreen} />
+      <AuthStack.Navigator
+        screenOptions={{ headerShown: false }}
+        initialRouteName={RoutesConstant.AuthStack.RegisterScreen}>
+        <AuthStack.Screen name={RoutesConstant.AuthStack.LoginScreen} component={LoginScreen} />
+        <AuthStack.Screen name={RoutesConstant.AuthStack.RegisterScreen} component={RegisterScreen} />
       </AuthStack.Navigator>
     </>
   );

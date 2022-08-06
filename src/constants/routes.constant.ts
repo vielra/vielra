@@ -1,8 +1,23 @@
 export const RoutesConstant = {
-  Auth: {
+  RootStack: {
+    BottomTabStack: 'BottomTabStack',
     AuthStack: 'AuthStack',
+    SettingsScreen: 'SettingsScreen',
+  },
+
+  AuthStack: {
     LoginScreen: 'LoginScreen',
     RegisterScreen: 'RegisterScreen',
   },
-  WelcomeScreen: 'WelcomeScreen',
+
+  BottomTab: {
+    HomeScreen: 'HomeScreen',
+    Phrasebook: 'Phrasebook',
+    Profile: 'Profile',
+    ChatStack: 'ChatStack',
+  },
+
+  ChatStack: {
+    ChatScreen: 'ChatScreen',
+  },
 };
