@@ -1,6 +1,59 @@
 import React, { FC } from 'react';
-import WelcomeScreen from './app/screens/welcome-screen';
+import { StyleSheet } from 'react-native';
 
-const App: FC = () => <WelcomeScreen />;
+// Gesture Handler Root View.
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default App;
+// React Native Screens.
+import { enableScreens } from 'react-native-screens';
+
+// Providers.
+import { ReduxProvider, ThemeProvider, NavigationProvider, SafeAreaProvider } from '@/components/providers';
+
+// RootStack navigator.
+import { RootStackNavigator } from '@/navigators';
+
+// Bottom sheet modal provider.
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+
+// Components.
+import { Toast } from '@/components/core/toast';
+import { StatusBar } from '@/components/shared';
+
+// CodePush
+import CodePush, { CodePushOptions } from 'react-native-code-push';
+
+enableScreens();
+
+const codePushOptions: CodePushOptions = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  updateDialog: {
+    appendReleaseDescription: true,
+  },
+};
+
+const App: FC = () => {
+  return (
+    <ReduxProvider>
+      <ThemeProvider>
+        <NavigationProvider>
+          <GestureHandlerRootView style={styles.root}>
+            <SafeAreaProvider>
+              <BottomSheetModalProvider>
+                <StatusBar translucent backgroundColor="transparent" />
+                <Toast />
+                <RootStackNavigator />
+              </BottomSheetModalProvider>
+            </SafeAreaProvider>
+          </GestureHandlerRootView>
+        </NavigationProvider>
+      </ThemeProvider>
+    </ReduxProvider>
+  );
+};
+
+const styles = StyleSheet.create({
+  root: { flex: 1 },
+});
+
+export default CodePush(codePushOptions)(App);

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Vielra</string>
+    <string name="app_description">Speak Vietnamese with Confidence</string>
+
+    <!-- CodePush -->
+    <string moduleConfig="true" name="CodePushDeploymentKey">OD9Uozm5t-nfM62yAjfF224_wQbTM3CKdEjY4</string>
 </resources>
