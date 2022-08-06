@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { View, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 // Assets
 import { LogoPrimaryVerticalLookup } from '@/assets';
@@ -34,7 +34,7 @@ type AuthStackNavigationProp = NativeStackNavigationProp<
 >;
 
 export const HomeScreen: FC<Props> = (props) => {
-  const { palette } = useTheme();
+  const theme = useTheme();
   const dispatch = useDispatch();
 
   const navigation = useNavigation<AuthStackNavigationProp>();
@@ -42,49 +42,59 @@ export const HomeScreen: FC<Props> = (props) => {
   return (
     <>
       <SafeAreaView>
-        <View>
-          <Typography variant="h2">Hello 👋 </Typography>
-          <Image style={styles.image} source={LogoPrimaryVerticalLookup} />
+        <View
+          style={{
+            borderWidth: 1,
+            padding: createSpacing(4),
+            marginVertical: createSpacing(8),
+            marginHorizontal: createSpacing(8),
+            borderColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.secondary.main,
+            borderRadius: theme.shape.borderRadius * 2,
+          }}>
+          <Image
+            style={{ height: 28, width: 'auto', resizeMode: 'contain', marginBottom: createSpacing(1) }}
+            source={LogoPrimaryVerticalLookup}
+          />
+          <Typography variant="h4" style={{ textAlign: 'center', color: theme.palette.secondary.contrastText }}>
+            Test! This is a new update feature!
+          </Typography>
         </View>
 
-        <Button
-          onPress={() => navigation.navigate(RoutesConstant.RootStack.AuthStack)}
-          title="Navigate to AuthStack"
-          startIcon="log-in"
-          iconType="ionicons"
-          color="secondary"
-          variant="outlined"
-          style={{ marginBottom: createSpacing(2), borderRadius: 40 }}
-        />
+        <View style={{ marginHorizontal: createSpacing(6) }}>
+          <Button
+            onPress={() => navigation.navigate(RoutesConstant.RootStack.AuthStack)}
+            title="Navigate to AuthStack"
+            startIcon="log-in"
+            iconType="ionicons"
+            color="secondary"
+            variant="outlined"
+            style={{ marginBottom: createSpacing(2), borderRadius: 40 }}
+          />
 
-        <Button
-          onPress={() => navigation.navigate(RoutesConstant.RootStack.SettingsScreen)}
-          title="Go to settings"
-          startIcon="settings"
-          iconType="ionicons"
-          color="secondary"
-          variant="text"
-          style={{ marginBottom: createSpacing(2), borderRadius: 40 }}
-        />
+          <Button
+            onPress={() => navigation.navigate(RoutesConstant.RootStack.SettingsScreen)}
+            title="Go to settings"
+            startIcon="settings"
+            iconType="ionicons"
+            color="secondary"
+            variant="text"
+            style={{ marginBottom: createSpacing(2), borderRadius: 40 }}
+          />
 
-        <Button
-          color="secondary"
-          onPress={() => dispatch(theme_actionToggleMode())}
-          title="Toggle Theme"
-          size="small"
-          startIcon="moon"
-          iconType="ionicons"
-          style={{ marginBottom: createSpacing(2) }}
-        />
+          <Button
+            color="secondary"
+            onPress={() => dispatch(theme_actionToggleMode())}
+            title="Toggle Theme"
+            size="small"
+            startIcon="moon"
+            iconType="ionicons"
+            style={{ marginBottom: createSpacing(2) }}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  image: {
-    width: Dimensions.get('screen').width / 2,
-    height: 100,
-    resizeMode: 'contain',
-  },
-});
+const styles = StyleSheet.create({});

@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "start-android-cmd": "SET ENVFILE=.env.development && react-native run-android",
+    "codepush-android": "appcenter codepush release-react -a vielra/VielraDev -d Development",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
@@ -24,6 +25,7 @@
     "react": "17.0.2",
     "react-hook-form": "^7.34.0",
     "react-native": "0.67.2",
+    "react-native-code-push": "^7.0.5",
     "react-native-config": "^1.4.6",
     "react-native-device-info": "^10.0.2",
     "react-native-gesture-handler": "2.5.0",

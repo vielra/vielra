@@ -186,9 +186,7 @@ export const BottomTabNavigator: FC = () => {
   };
 
   const renderBackdropBottomSheet = useCallback(
-    (props) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.25} pressBehavior="close" />
-    ),
+    (props) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior="close" />,
     [],
   );
 
