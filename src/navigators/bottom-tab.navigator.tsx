@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useCallback, useMemo, useRef } from 'react';
-import { TouchableOpacity, View, Image, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, Image, StyleSheet, Pressable } from 'react-native';
 
 // React Navigation
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -16,7 +16,7 @@ import { Typography } from '@/components/core';
 // Utils
 import { createSpacing } from '@/modules/theme/utils';
 import { useTheme } from '@/modules/theme/hooks';
-import { isIOS } from '@/utils';
+import { isAndroid, isIOS } from '@/utils';
 
 // Constants
 import { RoutesConstant } from '@/constants';
@@ -70,11 +70,17 @@ export const BottomTabNavigator: FC = () => {
 
   const renderCustomTab = ({ state, descriptors, navigation }: BottomTabBarProps): ReactNode => {
     return (
-      <View style={StyleSheet.flatten([styles.customTab_root, { backgroundColor: theme.palette.background.paper }])}>
+      <View
+        style={StyleSheet.flatten([
+          styles.customTab_root,
+          {
+            backgroundColor: theme.palette.background.paper,
+          },
+        ])}>
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
           let icon = null;
-          const size = 24;
+          const size = 22;
           switch (route.name) {
             case RoutesConstant.BottomTab.HomeScreen:
               icon = (
@@ -144,14 +150,22 @@ export const BottomTabNavigator: FC = () => {
           };
 
           return (
-            <TouchableOpacity
+            <Pressable
               key={route.key}
-              activeOpacity={0.8}
               accessibilityRole="button"
               accessibilityState={isFocused ? { selected: true } : {}}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={styles.customTab_item}>
+              style={({ pressed }) =>
+                StyleSheet.flatten([
+                  styles.customTab_item,
+                  {
+                    ...(pressed && {
+                      backgroundColor: theme.palette.primary.light,
+                    }),
+                  },
+                ])
+              }>
               {route.name === RoutesConstant.BottomTab.Profile ? (
                 isLoggedIn ? (
                   <Image source={AvatarSample} style={styles.customTab_itemProfileImage} />
@@ -163,14 +177,13 @@ export const BottomTabNavigator: FC = () => {
               )}
 
               <Typography
-                variant="subtitle2"
                 style={{
                   color: isFocused ? theme.palette.primary.main : theme.palette.text.disabled,
-                  marginTop: createSpacing(0.5),
+                  fontSize: 10,
                 }}>
                 {label}
               </Typography>
-            </TouchableOpacity>
+            </Pressable>
           );
         })}
 
@@ -179,7 +192,7 @@ export const BottomTabNavigator: FC = () => {
           activeOpacity={0.8}
           onPress={handleOpenBottomSheet}
           style={StyleSheet.flatten([styles.customTab_addOnItem, { backgroundColor: theme.palette.primary.main }])}>
-          <MaterialIcons name="add" size={32} color={theme.palette.primary.contrastText} />
+          <MaterialIcons name="add" size={26} color={theme.palette.primary.contrastText} />
         </TouchableOpacity>
       </View>
     );
@@ -212,7 +225,7 @@ export const BottomTabNavigator: FC = () => {
           component={ChatStackNavigator}
         />
         <TabStack.Screen
-          options={{ tabBarLabel: 'Profile' }}
+          options={{ tabBarLabel: 'Me' }}
           name={RoutesConstant.BottomTab.Profile}
           component={ProfileScreen}
         />
@@ -247,27 +260,34 @@ const styles = StyleSheet.create({
   customTab_root: {
     flexDirection: 'row',
     paddingRight: AddOnTabItemWidth,
-    paddingLeft: createSpacing(1),
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'relative',
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 2,
+      height: -20,
+    },
+    shadowColor: '#000000',
+    elevation: 4,
+    shadowOpacity: 0.1,
   },
   customTab_item: {
     flex: 1,
     alignItems: 'center',
-    marginTop: createSpacing(2),
-    marginBottom: isIOS ? createSpacing(6) : createSpacing(1),
+    paddingTop: createSpacing(2),
+    paddingBottom: isIOS ? createSpacing(6) : createSpacing(1),
+    borderRadius: 10,
   },
   customTab_itemProfileImage: {
-    width: 28,
-    height: 28,
-    borderRadius: 28,
+    width: 24,
+    height: 24,
+    borderRadius: 24,
   },
   customTab_addOnItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomLeftRadius: 48,
-    borderTopLeftRadius: 48,
+    borderBottomLeftRadius: isAndroid ? 0 : 22,
+    borderTopLeftRadius: 22,
     height: '100%',
     width: AddOnTabItemWidth,
     position: 'absolute',
