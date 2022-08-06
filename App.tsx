@@ -20,7 +20,17 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { Toast } from '@/components/core/toast';
 import { StatusBar } from '@/components/shared';
 
+// CodePush
+import CodePush, { CodePushOptions } from 'react-native-code-push';
+
 enableScreens();
+
+const codePushOptions: CodePushOptions = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  updateDialog: {
+    appendReleaseDescription: true,
+  },
+};
 
 const App: FC = () => {
   return (
@@ -46,4 +56,4 @@ const styles = StyleSheet.create({
   root: { flex: 1 },
 });
 
-export default App;
+export default CodePush(codePushOptions)(App);
