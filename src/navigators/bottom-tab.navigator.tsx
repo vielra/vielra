@@ -264,8 +264,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowRadius: 5,
     shadowOffset: {
-      width: 2,
-      height: -20,
+      width: 0,
+      height: -4,
     },
     shadowColor: '#000000',
     elevation: 4,
@@ -286,8 +286,8 @@ const styles = StyleSheet.create({
   customTab_addOnItem: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomLeftRadius: isAndroid ? 0 : 22,
-    borderTopLeftRadius: 22,
+    borderBottomLeftRadius: isAndroid ? 0 : 40,
+    borderTopLeftRadius: isIOS ? 40 : 20,
     height: '100%',
     width: AddOnTabItemWidth,
     position: 'absolute',
