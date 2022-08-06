@@ -66,7 +66,7 @@ export const AuthLayout: FC<PropsWithChildren<ReactNode>> = ({ children }) => {
 
   /** is register page */
   const isRegisterScreen = useMemo<boolean>(() => {
-    return routes.name === RoutesConstant.Auth.RegisterScreen;
+    return routes.name === RoutesConstant.AuthStack.RegisterScreen;
   }, [routes]);
 
   const handleToggleThemeMode = (): void => {
@@ -94,7 +94,7 @@ export const AuthLayout: FC<PropsWithChildren<ReactNode>> = ({ children }) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate(
-                  isRegisterScreen ? RoutesConstant.Auth.LoginScreen : RoutesConstant.Auth.RegisterScreen,
+                  isRegisterScreen ? RoutesConstant.AuthStack.LoginScreen : RoutesConstant.AuthStack.RegisterScreen,
                 )
               }>
               <Typography style={{ color: theme.palette.primary.main, fontWeight: '700' }}>
