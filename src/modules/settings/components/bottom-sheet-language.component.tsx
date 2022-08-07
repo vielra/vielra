@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useMemo, useRef } from 'react';
 
-import { Image, Pressable, StyleSheet, ToastAndroid, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 // Bottom sheet
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -27,10 +27,12 @@ import { useTheme } from '@/modules/theme/hooks';
 
 // Utils
 import { isSmallScreen } from '@/utils';
-import { createSpacing } from '@/modules/theme/utils';
+import { createSpacing, isDarkMode } from '@/modules/theme/utils';
 
 // Localization modules
 import { AppLanguage, localization_actionSetLanguage, useLocalization } from '@/modules/localization';
+import { toast_actionSetToast } from '@/modules/toast/redux';
+import { grey } from '@/modules/theme/libs';
 
 interface Props {
   index: number;
@@ -49,7 +51,7 @@ export const BottomSheetLanguage: FC<Props> = ({ index, setIndex }) => {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // variables
-  const snapPoints = useMemo(() => [195], []);
+  const snapPoints = useMemo(() => [205], []);
 
   // callbacks
   const handleSheetChanges = useCallback((currentIndex: number): void => {
@@ -69,7 +71,17 @@ export const BottomSheetLanguage: FC<Props> = ({ index, setIndex }) => {
     // i18n.changeLanguage(lang.code); // don't need to set language directly
     if (language.code !== lang.code) {
       dispatch(localization_actionSetLanguage(lang));
-      ToastAndroid.show(`${lang.name} selected`, ToastAndroid.SHORT);
+
+      // Show toast
+      dispatch(
+        toast_actionSetToast({
+          show: true,
+          placement: 'bottom',
+          messages: `Language has been set to ${lang.name}`,
+          variant: 'outlined',
+          severity: 'success',
+        }),
+      );
     }
   };
 
@@ -127,13 +139,13 @@ export const BottomSheetLanguage: FC<Props> = ({ index, setIndex }) => {
                     // Selected language style
                     ...(lang.code === language.code
                       ? {
-                          backgroundColor: theme.palette.secondary.light,
-                          borderColor: theme.palette.secondary.main,
+                          backgroundColor: isDarkMode(theme) ? grey[800] : theme.palette.secondary.light,
+                          borderColor: isDarkMode(theme) ? theme.palette.secondary.main : theme.palette.secondary.light,
                         }
                       : {}),
                     ...(pressed && {
-                      backgroundColor: theme.palette.secondary.light,
-                      borderColor: theme.palette.secondary.light,
+                      backgroundColor: isDarkMode(theme) ? grey[800] : theme.palette.secondary.light,
+                      borderColor: isDarkMode(theme) ? grey[800] : theme.palette.secondary.light,
                     }),
                   },
                 ])
