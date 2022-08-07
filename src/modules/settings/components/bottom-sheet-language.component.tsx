@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useMemo, useRef } from 'react';
 
-import { Image, Pressable, StyleSheet, ToastAndroid, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 // Bottom sheet
 import BottomSheet from '@gorhom/bottom-sheet';
@@ -31,6 +31,7 @@ import { createSpacing } from '@/modules/theme/utils';
 
 // Localization modules
 import { AppLanguage, localization_actionSetLanguage, useLocalization } from '@/modules/localization';
+import { toast_actionSetToast } from '@/modules/toast/redux';
 
 interface Props {
   index: number;
@@ -69,7 +70,17 @@ export const BottomSheetLanguage: FC<Props> = ({ index, setIndex }) => {
     // i18n.changeLanguage(lang.code); // don't need to set language directly
     if (language.code !== lang.code) {
       dispatch(localization_actionSetLanguage(lang));
-      ToastAndroid.show(`${lang.name} selected`, ToastAndroid.SHORT);
+
+      // Show toast
+      dispatch(
+        toast_actionSetToast({
+          show: true,
+          placement: 'bottom',
+          messages: `Language has been set to ${lang.name}`,
+          variant: 'outlined',
+          severity: 'success',
+        }),
+      );
     }
   };
 
