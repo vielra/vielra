@@ -7,6 +7,9 @@ import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/b
 // Bottom sheet
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 
+// Drop shadow
+import DropShadow from 'react-native-drop-shadow';
+
 // Icons
 import { Ionicons, MaterialIcons } from '@/components/icons';
 
@@ -14,7 +17,7 @@ import { Ionicons, MaterialIcons } from '@/components/icons';
 import { Typography } from '@/components/core';
 
 // Utils
-import { createSpacing } from '@/modules/theme/utils';
+import { createSpacing, isDarkMode } from '@/modules/theme/utils';
 import { useTheme } from '@/modules/theme/hooks';
 import { isAndroid, isIOS } from '@/utils';
 
@@ -35,6 +38,7 @@ import { HomeScreen } from '@/modules/home/screens';
 import { PhraseCategoryScreen } from '@/modules/phrasebook/screens';
 import { ProfileScreen } from '@/modules/profile/screens';
 import { ChatStackNavigator } from '@/modules/chat/navigators';
+import { grey } from '@/modules/theme/libs';
 
 export interface IBottomTabParamList extends Record<string, object | undefined> {
   HomeScreen: undefined;
@@ -70,131 +74,134 @@ export const BottomTabNavigator: FC = () => {
 
   const renderCustomTab = ({ state, descriptors, navigation }: BottomTabBarProps): ReactNode => {
     return (
-      <View
-        style={StyleSheet.flatten([
-          styles.customTab_root,
-          {
-            backgroundColor: theme.palette.background.paper,
-          },
-        ])}>
-        {state.routes.map((route, index) => {
-          const isFocused = state.index === index;
-          let icon = null;
-          const size = 22;
-          switch (route.name) {
-            case RoutesConstant.BottomTab.HomeScreen:
-              icon = (
-                <Ionicons
-                  name={isFocused ? 'ios-home' : 'ios-home-outline'}
-                  size={size}
-                  color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
-                />
-              );
-              break;
-            case RoutesConstant.BottomTab.ChatStack:
-              icon = (
-                <Ionicons
-                  name={isFocused ? 'ios-chatbubbles' : 'ios-chatbubbles-outline'}
-                  size={size}
-                  color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
-                />
-              );
-              break;
-            case RoutesConstant.BottomTab.Profile:
-              icon = (
-                <Ionicons
-                  name={isFocused ? 'person-circle' : 'person-circle-outline'}
-                  size={size}
-                  color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
-                />
-              );
-              break;
+      <DropShadow style={styles.customTab_shadow}>
+        <View
+          style={StyleSheet.flatten([
+            styles.customTab_root,
+            {
+              backgroundColor: theme.palette.background.paper,
+              borderTopColor: isDarkMode(theme) ? grey[900] : 'transparent',
+            },
+          ])}>
+          {state.routes.map((route, index) => {
+            const isFocused = state.index === index;
+            let icon = null;
+            const size = 22;
+            switch (route.name) {
+              case RoutesConstant.BottomTab.HomeScreen:
+                icon = (
+                  <Ionicons
+                    name={isFocused ? 'ios-home' : 'ios-home-outline'}
+                    size={size}
+                    color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
+                  />
+                );
+                break;
+              case RoutesConstant.BottomTab.ChatStack:
+                icon = (
+                  <Ionicons
+                    name={isFocused ? 'ios-chatbubbles' : 'ios-chatbubbles-outline'}
+                    size={size}
+                    color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
+                  />
+                );
+                break;
+              case RoutesConstant.BottomTab.Profile:
+                icon = (
+                  <Ionicons
+                    name={isFocused ? 'person-circle' : 'person-circle-outline'}
+                    size={size}
+                    color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
+                  />
+                );
+                break;
 
-            default:
-              icon = (
-                <Ionicons
-                  name={isFocused ? 'ios-book' : 'ios-book-outline'}
-                  size={size}
-                  color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
-                />
-              );
-              break;
-          }
-
-          const { options } = descriptors[route.key];
-          const label =
-            options.tabBarLabel !== undefined
-              ? options.tabBarLabel
-              : options.title !== undefined
-              ? options.title
-              : route.name;
-
-          const onPress = () => {
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (!isFocused && !event.defaultPrevented) {
-              // The `merge: true` option makes sure that the params inside the tab screen are preserved
-              navigation.navigate({ name: route.name, merge: true } as never);
+              default:
+                icon = (
+                  <Ionicons
+                    name={isFocused ? 'ios-book' : 'ios-book-outline'}
+                    size={size}
+                    color={isFocused ? theme.palette.primary.main : theme.palette.text.disabled}
+                  />
+                );
+                break;
             }
-          };
 
-          const onLongPress = () => {
-            navigation.emit({
-              type: 'tabLongPress',
-              target: route.key,
-            });
-          };
+            const { options } = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                ? options.title
+                : route.name;
 
-          return (
-            <Pressable
-              key={route.key}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? { selected: true } : {}}
-              onPress={onPress}
-              onLongPress={onLongPress}
-              style={({ pressed }) =>
-                StyleSheet.flatten([
-                  styles.customTab_item,
-                  {
-                    ...(pressed && {
-                      backgroundColor: theme.palette.primary.light,
-                    }),
-                  },
-                ])
-              }>
-              {route.name === RoutesConstant.BottomTab.Profile ? (
-                isLoggedIn ? (
-                  <Image source={AvatarSample} style={styles.customTab_itemProfileImage} />
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+                canPreventDefault: true,
+              });
+
+              if (!isFocused && !event.defaultPrevented) {
+                // The `merge: true` option makes sure that the params inside the tab screen are preserved
+                navigation.navigate({ name: route.name, merge: true } as never);
+              }
+            };
+
+            const onLongPress = () => {
+              navigation.emit({
+                type: 'tabLongPress',
+                target: route.key,
+              });
+            };
+
+            return (
+              <Pressable
+                key={route.key}
+                accessibilityRole="button"
+                accessibilityState={isFocused ? { selected: true } : {}}
+                onPress={onPress}
+                onLongPress={onLongPress}
+                style={({ pressed }) =>
+                  StyleSheet.flatten([
+                    styles.customTab_item,
+                    {
+                      ...(pressed && {
+                        backgroundColor: isDarkMode(theme) ? grey[800] : theme.palette.secondary.light,
+                      }),
+                    },
+                  ])
+                }>
+                {route.name === RoutesConstant.BottomTab.Profile ? (
+                  isLoggedIn ? (
+                    <Image source={AvatarSample} style={styles.customTab_itemProfileImage} />
+                  ) : (
+                    icon
+                  )
                 ) : (
                   icon
-                )
-              ) : (
-                icon
-              )}
+                )}
 
-              <Typography
-                style={{
-                  color: isFocused ? theme.palette.primary.main : theme.palette.text.disabled,
-                  fontSize: 10,
-                }}>
-                {label}
-              </Typography>
-            </Pressable>
-          );
-        })}
+                <Typography
+                  style={{
+                    color: isFocused ? theme.palette.primary.main : theme.palette.text.disabled,
+                    fontSize: 10,
+                  }}>
+                  {label}
+                </Typography>
+              </Pressable>
+            );
+          })}
 
-        {/* Custom button tab */}
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={handleOpenBottomSheet}
-          style={StyleSheet.flatten([styles.customTab_addOnItem, { backgroundColor: theme.palette.primary.main }])}>
-          <MaterialIcons name="add" size={26} color={theme.palette.primary.contrastText} />
-        </TouchableOpacity>
-      </View>
+          {/* Custom button tab */}
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={handleOpenBottomSheet}
+            style={StyleSheet.flatten([styles.customTab_addOnItem, { backgroundColor: theme.palette.primary.main }])}>
+            <MaterialIcons name="add" size={26} color={theme.palette.primary.contrastText} />
+          </TouchableOpacity>
+        </View>
+      </DropShadow>
     );
   };
 
@@ -262,21 +269,22 @@ const styles = StyleSheet.create({
     paddingRight: AddOnTabItemWidth,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowRadius: 5,
+    borderTopWidth: 1,
+  },
+  customTab_shadow: {
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: -4,
+      height: -2,
     },
-    shadowColor: '#000000',
-    elevation: 4,
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
   },
   customTab_item: {
     flex: 1,
     alignItems: 'center',
     paddingTop: createSpacing(2),
     paddingBottom: isIOS ? createSpacing(6) : createSpacing(1),
-    borderRadius: 10,
   },
   customTab_itemProfileImage: {
     width: 24,
