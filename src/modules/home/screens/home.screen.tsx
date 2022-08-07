@@ -26,6 +26,7 @@ import { theme_actionToggleMode } from '@/modules/theme/redux';
 // Interfaces
 import { IRootStackParamList } from '@/navigators';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useTranslation } from 'react-i18next';
 
 type Props = NativeStackScreenProps<IRootStackParamList, typeof RoutesConstant.BottomTab.HomeScreen>;
 type AuthStackNavigationProp = NativeStackNavigationProp<
@@ -36,6 +37,7 @@ type AuthStackNavigationProp = NativeStackNavigationProp<
 export const HomeScreen: FC<Props> = (props) => {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const navigation = useNavigation<AuthStackNavigationProp>();
 
@@ -44,20 +46,10 @@ export const HomeScreen: FC<Props> = (props) => {
       <SafeAreaView>
         <View
           style={{
-            borderWidth: 1,
-            padding: createSpacing(4),
-            marginVertical: createSpacing(8),
-            marginHorizontal: createSpacing(8),
-            borderColor: theme.palette.secondary.main,
-            backgroundColor: theme.palette.secondary.main,
-            borderRadius: theme.shape.borderRadius * 2,
+            marginTop: createSpacing(5),
           }}>
-          <Image
-            style={{ height: 28, width: 'auto', resizeMode: 'contain', marginBottom: createSpacing(1) }}
-            source={LogoPrimaryVerticalLookup}
-          />
-          <Typography variant="h4" style={{ textAlign: 'center', color: theme.palette.secondary.contrastText }}>
-            Test! This is a new update feature!
+          <Typography variant="h4" style={{ textAlign: 'center' }}>
+            {t('home.hello')}
           </Typography>
         </View>
 

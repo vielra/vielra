@@ -1,8 +1,10 @@
 import { Button, Typography } from '@/components/core';
-import { RoutesConstant } from '@/constants';
 import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+// Constants
+import { RoutesConstant } from '@/constants';
 
 // CodePush
 import CodePush, { SyncStatusChangedCallback } from 'react-native-code-push';
@@ -11,10 +13,19 @@ import { createSpacing } from '@/modules/theme/utils';
 
 // Theme config.
 import * as themeConfig from '@/modules/theme/config';
-import { BottomSheetBackdropComponent } from '@/components/shared';
+
+// Hooks
 import { useTheme } from '@/modules/theme/hooks';
-import { blue, green, grey, red } from '@/modules/theme/libs';
+
+// Components
+import { BottomSheetLanguage } from '@/modules/settings/components';
+import { BottomSheetBackdropComponent } from '@/components/shared';
 import { Ionicons } from '@/components/icons';
+
+// Theme lib
+import { blue, green, grey, red } from '@/modules/theme/libs';
+
+// Utils
 import { isSmallScreen } from '@/utils';
 
 export const SettingScreen: FC = (props) => {
@@ -22,6 +33,8 @@ export const SettingScreen: FC = (props) => {
 
   const [codePushSyncStatusText, setCodePushSyncStatusText] = useState<string | undefined>('');
   const [codePushSyncStatus, setCodePushSyncStatus] = useState<CodePush.SyncStatus | undefined>();
+
+  const [bottomSheetLanguageIndex, setBottomSheetLanguageIndex] = useState<number>(-1);
 
   // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -225,8 +238,25 @@ export const SettingScreen: FC = (props) => {
           title="Sync Update"
           style={{ marginBottom: createSpacing(3) }}
         />
-        <Button variant="contained" color="primary" onPress={handleCheckForUpdates} title="Check for updates" />
+        <Button
+          variant="contained"
+          color="primary"
+          onPress={handleCheckForUpdates}
+          title="Check for updates"
+          style={{ marginBottom: createSpacing(4) }}
+        />
+
+        <Button
+          variant="outlined"
+          color="secondary"
+          onPress={() => setBottomSheetLanguageIndex(0)}
+          title="Change Language"
+          rounded
+        />
       </ScrollView>
+
+      {/* Bottom sheet language */}
+      <BottomSheetLanguage index={bottomSheetLanguageIndex} setIndex={(index) => setBottomSheetLanguageIndex(index)} />
 
       {/* Bottom sheet CodePush update */}
       <BottomSheet
