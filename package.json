@@ -30,6 +30,7 @@
     "react-native-code-push": "^7.0.5",
     "react-native-config": "^1.4.6",
     "react-native-device-info": "^10.0.2",
+    "react-native-drop-shadow": "^0.0.5",
     "react-native-gesture-handler": "2.5.0",
     "react-native-offline": "^6.0.0",
     "react-native-pager-view": "^5.4.25",

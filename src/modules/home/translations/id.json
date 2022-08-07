@@ -1,5 +1,13 @@
 {
   "home": {
-    "hello": "Halo"
+    "hello": "Halo",
+    "greeting": {
+      "hi_there": "Hi, yang disana",
+      "not_logged_in": "Kamu belum login",
+      "good_morning": "⛅ Selamat pagi",
+      "good_evening": "☀️ Selamat sore",
+      "good_afternoon": "🌙 Selamat malam",
+      "good_night": "🌙 Selamat malam"
+    }
   }
 }

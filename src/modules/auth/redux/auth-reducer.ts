@@ -1,3 +1,4 @@
+import { IUser } from '@/modules/user';
 import { AuthActionTypes } from './auth-action-types.enum';
 import { AuthActions } from './auth-actions';
 
@@ -15,10 +16,7 @@ export interface AuthState {
 
   isAuthenticated: boolean;
 
-  authenticatedUser: {
-    name: string;
-    email: string;
-  } | null;
+  authenticatedUser?: IUser;
 }
 
 const initialState: AuthState = {

@@ -95,11 +95,11 @@ export const typography: IThemeTypography = {
   h3: 20,
   h4: 18,
   h5: 16,
-  h6: 15,
-  body: 14,
-  body2: 14,
-  subtitle: 13,
-  subtitle2: 13,
+  h6: 14.2,
+  body: 13.5,
+  body2: 13,
+  subtitle: 12,
+  subtitle2: 11.3,
 };
 
 /** Shape */
