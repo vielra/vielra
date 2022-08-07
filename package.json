@@ -8,6 +8,7 @@
     "start": "react-native start",
     "start-android-cmd": "SET ENVFILE=.env.development && react-native run-android",
     "codepush-android": "appcenter codepush release-react -a vielra/VielraDev -d Development",
+    "codepush-ios": "appcenter codepush release-react -a vielra/VielraiOSDev -d Development",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
