@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
 // React Navigation
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,6 +10,7 @@ import { RoutesConstant } from '@/constants';
 import { BottomTabNavigator } from './bottom-tab.navigator';
 import { AuthStackNavigator } from '@/modules/auth/navigators';
 import { SettingScreen } from '@/modules/settings/screens';
+import { useLocalization } from '@/modules/localization';
 
 // Hooks
 // import { useAuth } from '@/modules/auth/hooks';
@@ -20,10 +21,20 @@ export interface IRootStackParamList extends Record<string, object | undefined> 
   WelcomeScreen: undefined;
 }
 
+import i18n from '@/config/i18n.config';
+
 // Root Stack
 const RootStack = createNativeStackNavigator<IRootStackParamList>();
 
 export const RootStackNavigator: FC = () => {
+  const { language } = useLocalization();
+
+  useEffect(() => {
+    if (language.code !== i18n.language) {
+      i18n.changeLanguage(language.code);
+    }
+  }, [language.code]);
+
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
       <RootStack.Screen name={RoutesConstant.RootStack.BottomTabStack} component={BottomTabNavigator} />

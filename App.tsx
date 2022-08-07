@@ -23,10 +23,13 @@ import { StatusBar } from '@/components/shared';
 // CodePush
 import CodePush, { CodePushOptions } from 'react-native-code-push';
 
+// i18n
+import '@/config/i18n.config';
+
 enableScreens();
 
 const codePushOptions: CodePushOptions = {
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START,
   updateDialog: {
     appendReleaseDescription: true,
   },
