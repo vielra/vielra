@@ -1,4 +1,10 @@
-import { IRequestLogin, IRequestRegister } from '@/modules/auth/interfaces';
+import {
+  IRequestLogin,
+  IRequestLoginSocialAccount,
+  IRequestRegister,
+  SocialAccountProvider,
+} from '@/modules/auth/interfaces';
+import { IActionBooleanPayload } from '@/modules/common';
 import { IUser } from '@/modules/user';
 import { AuthActionTypes } from './auth-action-types.enum';
 
@@ -7,9 +13,8 @@ export interface IAuthLoginRequested {
   type: AuthActionTypes.LOGIN_REQUESTED;
   payload: IRequestLogin;
 }
-export interface IAuthLoginLoading {
+export interface IAuthLoginLoading extends IActionBooleanPayload {
   type: AuthActionTypes.LOGIN_LOADING;
-  payload: boolean;
 }
 export interface IAuthLoginFailure {
   type: AuthActionTypes.LOGIN_FAILURE;
@@ -23,18 +28,16 @@ export interface IAuthLoginSuccess {
   payload: IUser;
 }
 
-export interface ISetRegisterFormIsDirty {
+export interface ISetRegisterFormIsDirty extends IActionBooleanPayload {
   type: AuthActionTypes.SET_REGISTER_FORM_IS_DIRTY;
-  payload: boolean;
 }
 
 export interface IAuthRegisterRequested {
   type: AuthActionTypes.REGISTER_REQUESTED;
   payload: IRequestRegister;
 }
-export interface IAuthRegisterLoading {
+export interface IAuthRegisterLoading extends IActionBooleanPayload {
   type: AuthActionTypes.REGISTER_LOADING;
-  payload: boolean;
 }
 export interface IAuthRegisterFailure {
   type: AuthActionTypes.REGISTER_FAILURE;
@@ -43,10 +46,33 @@ export interface IAuthRegisterFailure {
     messages?: Array<string> | string | null;
   };
 }
-
 export interface IAuthRegisterSuccess {
   type: AuthActionTypes.REGISTER_SUCCESS;
   payload: IUser;
+}
+
+interface IPayloadLoginSocialAccount {
+  provider: SocialAccountProvider;
+  data: IRequestLoginSocialAccount;
+}
+
+export interface IAuthLoginWithSocialAccountRequested {
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_REQUESTED;
+  payload: IPayloadLoginSocialAccount;
+  navigate: (routeName: string) => void;
+}
+export interface IAuthLoginWithSocialAccountLoading extends IActionBooleanPayload {
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_LOADING;
+}
+export interface IAuthLoginWithSocialAccountFailure {
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_FAILURE;
+  payload: {
+    status: boolean;
+    messages?: Array<string> | string | null;
+  };
+}
+export interface IAuthLoginWithSocialAccountSuccess extends Omit<IAuthLoginSuccess, 'type'> {
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_SUCCESS;
 }
 
 // Union action types
@@ -59,7 +85,11 @@ export type AuthActions =
   | IAuthRegisterRequested
   | IAuthRegisterLoading
   | IAuthRegisterFailure
-  | IAuthRegisterSuccess;
+  | IAuthRegisterSuccess
+  | IAuthLoginWithSocialAccountRequested
+  | IAuthLoginWithSocialAccountLoading
+  | IAuthLoginWithSocialAccountFailure
+  | IAuthLoginWithSocialAccountSuccess;
 
 // Actions creators.
 export const auth_actionLogin = (payload: IRequestLogin): IAuthLoginRequested => ({
@@ -70,10 +100,9 @@ export const auth_actionLoginLoading = (payload: boolean): IAuthLoginLoading => 
   type: AuthActionTypes.LOGIN_LOADING,
   payload,
 });
-export const auth_actionLoginFailure = (
-  status: boolean,
-  messages?: Array<string> | string | null,
-): IAuthLoginFailure => ({
+
+// prettier-ignore
+export const auth_actionLoginFailure = (status: boolean, messages?: Array<string> | string | null): IAuthLoginFailure => ({
   type: AuthActionTypes.LOGIN_FAILURE,
   payload: { status, messages },
 });
@@ -98,15 +127,36 @@ export const auth_actionRegisterLoading = (payload: boolean): IAuthRegisterLoadi
   payload,
 });
 
-export const auth_actionRegisterFailure = (
-  status: boolean,
-  messages?: Array<string> | string | null,
-): IAuthRegisterFailure => ({
+// prettier-ignore
+export const auth_actionRegisterFailure = (status: boolean, messages?: Array<string> | string | null): IAuthRegisterFailure => ({
   type: AuthActionTypes.REGISTER_FAILURE,
   payload: { status, messages },
 });
 
 export const auth_actionRegisterSuccess = (payload: IUser): IAuthRegisterSuccess => ({
   type: AuthActionTypes.REGISTER_SUCCESS,
+  payload,
+});
+
+// prettier-ignore
+export const auth_actionLoginWithSocialAccount = (payload: IPayloadLoginSocialAccount, navigate: (routeName: string) => void): IAuthLoginWithSocialAccountRequested => ({
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_REQUESTED,
+  payload,
+  navigate,
+});
+
+export const auth_actionLoginWithSocialAccountLoading = (payload: boolean): IAuthLoginWithSocialAccountLoading => ({
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_LOADING,
+  payload,
+});
+
+// prettier-ignore
+export const auth_actionLoginWithSocialAccountFailure = (status: boolean, messages?: Array<string> | string | null): IAuthLoginWithSocialAccountFailure => ({
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_FAILURE,
+  payload: { status, messages },
+});
+
+export const auth_actionLoginWithSocialAccountSuccess = (payload: IUser): IAuthLoginWithSocialAccountSuccess => ({
+  type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_SUCCESS,
   payload,
 });

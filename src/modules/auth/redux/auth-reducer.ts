@@ -16,7 +16,7 @@ export interface AuthState {
 
   isAuthenticated: boolean;
 
-  authenticatedUser?: IUser;
+  authenticatedUser?: IUser | null;
 }
 
 const initialState: AuthState = {
@@ -84,6 +84,28 @@ export const authReducer = (state: AuthState = initialState, action: AuthActions
         ...state,
         register_isLoading: false,
         register_isError: false,
+        authenticatedUser: action.payload,
+        isAuthenticated: true,
+      };
+
+    case AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_LOADING:
+      return {
+        ...state,
+        login_isLoading: action.payload,
+      };
+
+    case AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        login_isError: action.payload.status,
+        login_errorMessage: action.payload.messages,
+      };
+
+    case AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        login_isLoading: false,
+        login_isError: false,
         authenticatedUser: action.payload,
         isAuthenticated: true,
       };

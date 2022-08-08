@@ -2,7 +2,14 @@
 import { http } from '@/utils';
 
 // Interfaces.
-import { IRequestLogin, IRequestRegister, ResponseLogin, ResponseRegister } from '@/modules/auth/interfaces';
+import {
+  IRequestLogin,
+  IRequestLoginSocialAccount,
+  IRequestRegister,
+  ResponseLogin,
+  ResponseRegister,
+  SocialAccountProvider,
+} from '@/modules/auth/interfaces';
 import { AxiosResponse } from 'axios';
 
 // Auth api endpoints
@@ -36,6 +43,17 @@ class AuthApiService {
    */
   revokeToken = async (): Promise<AxiosResponse<null>> => {
     return await http.post(AuthApiEndpoints.revokeToken);
+  };
+
+  /**
+   * @description - Login external with social account
+   * @param {SocialAccountProvider} provider
+   * @param {SocialAccountProvider} body
+   * @returns Promise<AxiosResponse<ResponseLogin>>
+   */
+  // prettier-ignore
+  loginSocialAccount = async (provider: SocialAccountProvider, body: IRequestLoginSocialAccount): Promise<AxiosResponse<ResponseLogin>> => {
+    return await http.post(`${AuthApiEndpoints.login}/${provider}`, body);
   };
 }
 
