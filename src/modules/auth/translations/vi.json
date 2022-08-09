@@ -2,6 +2,7 @@
   "auth": {
     "login": "Login",
     "register": "Register",
-    "logout": "Log out"
+    "logout": "Log out",
+    "login_with_google": "Đăng nhập với Google"
   }
 }

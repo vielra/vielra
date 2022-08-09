@@ -2,6 +2,7 @@
   "auth": {
     "login": "Masuk",
     "register": "Daftar",
-    "logout": "Keluar"
+    "logout": "Keluar",
+    "login_with_google": "Masuk dengan Google"
   }
 }
