@@ -28,6 +28,46 @@ class GoogleSignInService {
       return null;
     }
   };
+
+  getCurrentUserInfo = async (): Promise<void> => {
+    try {
+      const userInfo = await GoogleSignin.signInSilently();
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_REQUIRED) {
+        // user has not signed in yet
+      } else {
+        // some other error
+      }
+    }
+  };
+
+  isSignedIn = async (): Promise<boolean> => {
+    const isSignedIn = await GoogleSignin.isSignedIn();
+    return isSignedIn;
+  };
+
+  getCurrentUser = async (): Promise<any> => {
+    const currentUser = await GoogleSignin.getCurrentUser();
+    return currentUser;
+  };
+
+  signOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  revokeAccess = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      // Google Account disconnected from your app.
+      // Perform clean-up actions, such as deleting data associated with the disconnected account.
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
 
 export default new GoogleSignInService();

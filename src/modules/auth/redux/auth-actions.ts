@@ -25,7 +25,7 @@ export interface IAuthLoginFailure {
 }
 export interface IAuthLoginSuccess {
   type: AuthActionTypes.LOGIN_SUCCESS;
-  payload: IUser;
+  payload: { user: IUser; token: string };
 }
 
 export interface ISetRegisterFormIsDirty extends IActionBooleanPayload {
@@ -48,7 +48,7 @@ export interface IAuthRegisterFailure {
 }
 export interface IAuthRegisterSuccess {
   type: AuthActionTypes.REGISTER_SUCCESS;
-  payload: IUser;
+  payload: { user: IUser; token: string };
 }
 
 interface IPayloadLoginSocialAccount {
@@ -71,8 +71,33 @@ export interface IAuthLoginWithSocialAccountFailure {
     messages?: Array<string> | string | null;
   };
 }
-export interface IAuthLoginWithSocialAccountSuccess extends Omit<IAuthLoginSuccess, 'type'> {
+export interface IAuthLoginWithSocialAccountSuccess {
   type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_SUCCESS;
+  payload: {
+    user: IUser;
+    provider: SocialAccountProvider;
+    token: string;
+  };
+}
+
+export interface IAuthRevokeTokenRequested {
+  type: AuthActionTypes.REVOKE_TOKEN_REQUESTED;
+}
+
+export interface IAuthRevokeTokenLoading extends IActionBooleanPayload {
+  type: AuthActionTypes.REVOKE_TOKEN_LOADING;
+}
+
+export interface IAuthRevokeTokenFailure extends IActionBooleanPayload {
+  type: AuthActionTypes.REVOKE_TOKEN_FAILURE;
+}
+
+export interface IAuthRevokeTokenSuccess {
+  type: AuthActionTypes.REVOKE_TOKEN_SUCCESS;
+}
+
+export interface IAuthResetAuthState {
+  type: AuthActionTypes.RESET_AUTH_STATE;
 }
 
 // Union action types
@@ -89,7 +114,12 @@ export type AuthActions =
   | IAuthLoginWithSocialAccountRequested
   | IAuthLoginWithSocialAccountLoading
   | IAuthLoginWithSocialAccountFailure
-  | IAuthLoginWithSocialAccountSuccess;
+  | IAuthLoginWithSocialAccountSuccess
+  | IAuthRevokeTokenRequested
+  | IAuthRevokeTokenLoading
+  | IAuthRevokeTokenFailure
+  | IAuthRevokeTokenSuccess
+  | IAuthResetAuthState;
 
 // Actions creators.
 export const auth_actionLogin = (payload: IRequestLogin): IAuthLoginRequested => ({
@@ -107,9 +137,9 @@ export const auth_actionLoginFailure = (status: boolean, messages?: Array<string
   payload: { status, messages },
 });
 
-export const auth_actionLoginSuccess = (payload: IUser): IAuthLoginSuccess => ({
+export const auth_actionLoginSuccess = (user: IUser, token: string): IAuthLoginSuccess => ({
   type: AuthActionTypes.LOGIN_SUCCESS,
-  payload,
+  payload: { user, token },
 });
 
 export const auth_actionSetRegisterFormIsDirty = (payload: boolean): ISetRegisterFormIsDirty => ({
@@ -133,9 +163,9 @@ export const auth_actionRegisterFailure = (status: boolean, messages?: Array<str
   payload: { status, messages },
 });
 
-export const auth_actionRegisterSuccess = (payload: IUser): IAuthRegisterSuccess => ({
+export const auth_actionRegisterSuccess = (user: IUser, token: string): IAuthRegisterSuccess => ({
   type: AuthActionTypes.REGISTER_SUCCESS,
-  payload,
+  payload: { user, token },
 });
 
 // prettier-ignore
@@ -156,7 +186,31 @@ export const auth_actionLoginWithSocialAccountFailure = (status: boolean, messag
   payload: { status, messages },
 });
 
-export const auth_actionLoginWithSocialAccountSuccess = (payload: IUser): IAuthLoginWithSocialAccountSuccess => ({
+// prettier-ignore
+export const auth_actionLoginWithSocialAccountSuccess = (user: IUser, provider: SocialAccountProvider, token: string): IAuthLoginWithSocialAccountSuccess => ({
   type: AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_SUCCESS,
+  payload: { user, provider, token },
+});
+
+export const auth_actionRevokeToken = (): IAuthRevokeTokenRequested => ({
+  type: AuthActionTypes.REVOKE_TOKEN_REQUESTED,
+});
+
+export const auth_actionRevokeTokenLoading = (payload: boolean): IAuthRevokeTokenLoading => ({
+  type: AuthActionTypes.REVOKE_TOKEN_LOADING,
   payload,
+});
+
+// prettier-ignore
+export const auth_actionRevokeTokenFailure = (payload: boolean): IAuthRevokeTokenFailure => ({
+  type: AuthActionTypes.REVOKE_TOKEN_FAILURE,
+  payload,
+});
+
+export const auth_actionRevokeTokenSuccess = (): IAuthRevokeTokenSuccess => ({
+  type: AuthActionTypes.REVOKE_TOKEN_SUCCESS,
+});
+
+export const auth_actionResetAuthState = (): IAuthResetAuthState => ({
+  type: AuthActionTypes.RESET_AUTH_STATE,
 });

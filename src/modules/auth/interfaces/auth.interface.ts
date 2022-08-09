@@ -27,9 +27,9 @@ export interface IRequestLoginSocialAccount {
 
 // Login response
 export interface IResponseLogin {
-  success: boolean;
+  // success: boolean;
+  // token_type?: string;
   token: string;
-  token_type?: string;
   user: IUser;
 }
 

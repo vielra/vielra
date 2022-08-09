@@ -41,8 +41,8 @@ class AuthApiService {
    * @description - Revoking sanctum token from the server.
    * @returns Promise<AxiosResponse<null>>
    */
-  revokeToken = async (): Promise<AxiosResponse<null>> => {
-    return await http.post(AuthApiEndpoints.revokeToken);
+  revokeToken = async (currentAccessToken: string): Promise<AxiosResponse<null>> => {
+    return await http.post(AuthApiEndpoints.revokeToken, { currentAccessToken });
   };
 
   /**
