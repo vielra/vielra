@@ -234,3 +234,4 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 // React Native Vector Icons
 project.ext.vectoricons = [ iconFontNames: [ 'MaterialIcons.ttf', 'MaterialCommunityIcons.ttf', 'Ionicons.ttf'] ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+apply plugin: 'com.google.gms.google-services'
