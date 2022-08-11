@@ -9,11 +9,13 @@ import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 
 // Hooks.
 import { useAppSelector } from '@/store';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/modules/theme/hooks';
 import { useNavigation } from '@react-navigation/native';
 
 // Selectors.
-import { auth_rootSelector } from '@/modules/auth/redux';
+import { auth_actionLoginWithSocialAccount, auth_rootSelector } from '@/modules/auth/redux';
 
 // Constant
 import { RoutesConstant } from '@/constants';
@@ -39,14 +41,21 @@ import { red } from '@/modules/theme/libs';
 // Theme config
 import * as themeConfig from '@/modules/theme/config';
 
-type AuthStackNavigationProp = NativeStackNavigationProp<IAuthStackParamList, typeof RoutesConstant.Auth.LoginScreen>;
+// Google Signin
+import { GoogleSignInService } from '@/modules/auth/services';
+
+// prettier-ignore
+type AuthStackNavigationProp = NativeStackNavigationProp<IAuthStackParamList, typeof RoutesConstant.AuthStack.LoginScreen>;
 
 const IMAGE_SIZE = 84;
 
 export const LoginScreen: FC = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const navigation = useNavigation<AuthStackNavigationProp>();
   const { register_formIsDirty } = useAppSelector((s) => auth_rootSelector(s));
+
+  const { t } = useTranslation();
 
   // Bottom sheet ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -70,12 +79,10 @@ export const LoginScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   };
 
-  const renderBackdropBottomSheet = useCallback(
-    (props) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.45} pressBehavior="close" />
-    ),
-    [],
-  );
+  // prettier-ignore
+  const renderBackdropBottomSheet = useCallback((props) => (
+    <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.45} pressBehavior="close" />
+  ), []);
 
   /**
    * Handle press back button
@@ -86,7 +93,7 @@ export const LoginScreen: FC = () => {
         handleOpenBottomSheet();
       } else {
         handleCloseBottomSheet();
-        navigation.canGoBack() ? navigation.goBack() : navigation.replace(RoutesConstant.WelcomeScreen);
+        navigation.canGoBack() ? navigation.goBack() : navigation.navigate(RoutesConstant.BottomTab.HomeScreen);
       }
     },
     [register_formIsDirty, navigation],
@@ -99,6 +106,26 @@ export const LoginScreen: FC = () => {
     });
     return () => backHandler.remove();
   }, []);
+
+  /**
+   * Sign In with Google
+   */
+  const handleLoginWithGoogle = async () => {
+    const response = await GoogleSignInService.signIn();
+    if (response) {
+      const data = {
+        social_id: response.user.id,
+        social_name: (response.user.name as string) ?? (response.user.givenName as string),
+        social_email: response.user.email,
+        social_photo_url: response.user.photo,
+      };
+      // prettier-ignore
+      dispatch(auth_actionLoginWithSocialAccount(
+        { provider: 'google', data },
+        (routeName) => navigation.navigate(routeName)
+      ));
+    }
+  };
 
   return (
     <>
@@ -124,6 +151,16 @@ export const LoginScreen: FC = () => {
         </View>
 
         <LoginForm />
+
+        {/* --- Social auth ---*/}
+        <View style={styles.socialLogin_container}>
+          <Button
+            onPress={handleLoginWithGoogle}
+            variant="outlined"
+            title={t('auth.login_with_google')}
+            color="secondary"
+          />
+        </View>
       </AuthLayout>
 
       {/* Bottom sheet */}
@@ -196,6 +233,9 @@ const styles = StyleSheet.create({
     height: IMAGE_SIZE,
     resizeMode: 'contain',
     marginBottom: createSpacing(4),
+  },
+  socialLogin_container: {
+    paddingHorizontal: createSpacing(6),
   },
   bottomSheet_root: {
     flex: 1,

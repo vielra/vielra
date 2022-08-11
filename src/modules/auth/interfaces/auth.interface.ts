@@ -1,5 +1,8 @@
 import { IUser } from '@/modules/user';
 
+// Google SignIn
+import { User as ResponseReactNativeGoogleSignIn } from '@react-native-google-signin/google-signin';
+
 /** Request body for login user */
 export interface IRequestLogin {
   email: string;
@@ -14,13 +17,26 @@ export interface IRequestRegister {
   password_confirmation: string;
 }
 
+// Request body login with social account
+export interface IRequestLoginSocialAccount {
+  social_id: string;
+  social_name: string;
+  social_email: string;
+  social_photo_url?: string | null;
+}
+
 // Login response
 export interface IResponseLogin {
-  success: boolean;
+  // success: boolean;
+  // token_type?: string;
   token: string;
-  token_type?: string;
   user: IUser;
 }
+
+export type ResponseGoogleSignIn = ResponseReactNativeGoogleSignIn;
+
+export type SocialAccountProvider = 'google' | 'facebook';
+
 // Type alias
 export type ResponseLogin = IResponseLogin;
 
