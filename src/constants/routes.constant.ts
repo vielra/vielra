@@ -20,4 +20,10 @@ export const RoutesConstant = {
   ChatStack: {
     ChatScreen: 'ChatScreen',
   },
+
+  PhrasebookStack: {
+    PhraseCategoryScreen: 'PhraseCategoryScreen',
+    PhraseListScreen: 'PhraseListScreen',
+    AddPhraseScreen: 'AddPhraseScreen',
+  },
 };

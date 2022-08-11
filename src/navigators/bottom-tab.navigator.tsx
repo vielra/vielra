@@ -35,9 +35,11 @@ import * as themeConfig from '@/modules/theme/config';
 
 // Screen and Stacks.
 import { HomeScreen } from '@/modules/home/screens';
-import { PhraseCategoryScreen } from '@/modules/phrasebook/screens';
 import { ProfileScreen } from '@/modules/profile/screens';
 import { ChatStackNavigator } from '@/modules/chat/navigators';
+import { PhrasebookStackNavigator } from '@/modules/phrasebook';
+
+// Theme libs
 import { grey } from '@/modules/theme/libs';
 
 export interface IBottomTabParamList extends Record<string, object | undefined> {
@@ -224,7 +226,7 @@ export const BottomTabNavigator: FC = () => {
         <TabStack.Screen
           options={{ tabBarLabel: 'Phrase' }}
           name={RoutesConstant.BottomTab.Phrasebook}
-          component={PhraseCategoryScreen}
+          component={PhrasebookStackNavigator}
         />
         <TabStack.Screen
           options={{ tabBarLabel: 'Chat' }}
