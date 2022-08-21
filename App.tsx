@@ -18,7 +18,7 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 // Components.
 import { Toast } from '@/components/core/toast';
-import { StatusBar } from '@/components/shared';
+import { BottomSheetWarningAuthRequired, StatusBar } from '@/components/shared';
 
 // CodePush
 import CodePush, { CodePushOptions } from 'react-native-code-push';
@@ -44,8 +44,9 @@ const App: FC = () => {
             <SafeAreaProvider>
               <BottomSheetModalProvider>
                 <StatusBar translucent backgroundColor="transparent" />
-                <Toast />
                 <RootStackNavigator />
+                <Toast />
+                <BottomSheetWarningAuthRequired />
               </BottomSheetModalProvider>
             </SafeAreaProvider>
           </GestureHandlerRootView>

@@ -10,10 +10,11 @@ import { RoutesConstant } from '@/constants';
 import { BottomTabNavigator } from './bottom-tab.navigator';
 import { AuthStackNavigator } from '@/modules/auth/navigators';
 import { SettingScreen } from '@/modules/settings/screens';
-import { useLocalization } from '@/modules/localization';
+import { AddPhraseScreen } from '@/modules/phrasebook';
 
 // Hooks
 // import { useAuth } from '@/modules/auth/hooks';
+import { useLocalization } from '@/modules/localization';
 
 // Interface
 export interface IRootStackParamList extends Record<string, object | undefined> {
@@ -36,10 +37,13 @@ export const RootStackNavigator: FC = () => {
   }, [language.code]);
 
   return (
-    <RootStack.Navigator screenOptions={{ headerShown: false }}>
-      <RootStack.Screen name={RoutesConstant.RootStack.BottomTabStack} component={BottomTabNavigator} />
-      <RootStack.Screen name={RoutesConstant.RootStack.AuthStack} component={AuthStackNavigator} />
-      <RootStack.Screen name={RoutesConstant.RootStack.SettingsScreen} component={SettingScreen} />
-    </RootStack.Navigator>
+    <>
+      <RootStack.Navigator screenOptions={{ headerShown: false }}>
+        <RootStack.Screen name={RoutesConstant.RootStack.BottomTabStack} component={BottomTabNavigator} />
+        <RootStack.Screen name={RoutesConstant.RootStack.AuthStack} component={AuthStackNavigator} />
+        <RootStack.Screen name={RoutesConstant.RootStack.SettingsScreen} component={SettingScreen} />
+        <RootStack.Screen name={RoutesConstant.RootStack.AddPhraseScreen} component={AddPhraseScreen} />
+      </RootStack.Navigator>
+    </>
   );
 };

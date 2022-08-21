@@ -35,7 +35,7 @@ import { IServerValidationError } from '@/modules/common/interfaces/server-valid
 
 // Utils.
 import { removeToken, saveToken } from '@/utils';
-import { ISagaEffectWithNavigation } from '@/modules/common';
+import { ISagaEffectWithNavigateFunction } from '@/modules/common';
 import { RoutesConstant } from '@/constants';
 import { AuthState } from '@/modules/auth/redux';
 import { RootState } from '@/store/root-reducer';
@@ -158,7 +158,7 @@ function* saga_login({ payload }: LoginEffect): SagaIterator {
 }
 
 // prettier-ignore
-type LoginSocialAccountEffect = ISagaEffectWithNavigation<typeof AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_REQUESTED, { provider: SocialAccountProvider; data: IRequestLoginSocialAccount }>;
+type LoginSocialAccountEffect = ISagaEffectWithNavigateFunction<typeof AuthActionTypes.LOGIN_SOCIAL_ACCOUNT_REQUESTED, { provider: SocialAccountProvider; data: IRequestLoginSocialAccount }>;
 function* saga_loginSocialAccount(params: LoginSocialAccountEffect) {
   const { payload, navigate } = params;
   yield put(auth_actionLoginWithSocialAccountLoading(true));

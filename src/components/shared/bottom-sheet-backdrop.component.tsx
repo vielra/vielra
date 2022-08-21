@@ -17,7 +17,7 @@ export const BottomSheetBackdropComponent: FC<Props> = (props) => {
 };
 
 BottomSheetBackdropComponent.defaultProps = {
-  opacity: 0.45,
+  opacity: 0.6,
 };
 
 const styles = StyleSheet.create({
