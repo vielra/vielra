@@ -18,15 +18,18 @@ import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 // Components.
 import { Toast } from '@/components/core/toast';
-import { StatusBar } from '@/components/shared';
+import { BottomSheetWarningAuthRequired, StatusBar } from '@/components/shared';
 
 // CodePush
 import CodePush, { CodePushOptions } from 'react-native-code-push';
 
+// i18n
+import '@/config/i18n.config';
+
 enableScreens();
 
 const codePushOptions: CodePushOptions = {
-  checkFrequency: CodePush.CheckFrequency.ON_APP_RESUME,
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START,
   updateDialog: {
     appendReleaseDescription: true,
   },
@@ -41,8 +44,9 @@ const App: FC = () => {
             <SafeAreaProvider>
               <BottomSheetModalProvider>
                 <StatusBar translucent backgroundColor="transparent" />
-                <Toast />
                 <RootStackNavigator />
+                <Toast />
+                <BottomSheetWarningAuthRequired />
               </BottomSheetModalProvider>
             </SafeAreaProvider>
           </GestureHandlerRootView>

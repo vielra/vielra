@@ -5,5 +5,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "cSpell.ignoreWords": ["Vielra"]
+  "cSpell.ignoreWords": ["Pressable", "Vielra"]
 }

@@ -2,6 +2,9 @@ import { ITheme, PaletteMode } from '@/modules/theme/interfaces';
 import { paletteBase, paletteDark, paletteLight, typography, shape, SPACING } from '@/modules/theme/config';
 import { IThemePalette } from '@/modules/theme/interfaces';
 
+// Color utils
+import JiaminghiColor from '@jiaminghi/color';
+
 /**
  * Create theme
  *
@@ -159,4 +162,24 @@ export const getContrastTextColor = (color: keyof IThemePalette, palette: ITheme
   } else {
     return palette.common.white;
   }
+};
+
+/**
+ * @description Lighten color
+ * @param {String} color Hex|Rgb|Rgba color or color keyword
+ * @return {Number} Percent of brighten (1-100)
+ * @return {String|Boolean} Rgba color (Invalid input will return false)
+ */
+export const lighten = (color: string, opacity: number): string => {
+  return JiaminghiColor.lighten(color, opacity);
+};
+
+/**
+ * @description Darken color
+ * @param {String} color Hex|Rgb|Rgba color or color keyword
+ * @return {Number} Percent of brighten (1-100)
+ * @return {String|Boolean} Rgba color (Invalid input will return false)
+ */
+export const darken = (color: string, opacity: number): string => {
+  return JiaminghiColor.darken(color, opacity);
 };

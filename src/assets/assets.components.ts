@@ -6,3 +6,12 @@ export const WavyBackgroundPortrait = require('./images/15273828_5568579_portrai
 export const WavyBackgroundLandScapeDark = require('./images/15273828_5568579_landscape_dark.jpg');
 export const WavyBackgroundPortraitDark = require('./images/15273828_5568579_portrait_dark.jpg');
 export const AvatarSample = require('./images/sample-avatar.jpg');
+export const AvatarSquareBlue = require('./images/avatar_square_blue_512dp.png');
+
+// flags
+export const FlagUS = require('./images/flags/united-states.png');
+export const FlagIndonesia = require('./images/flags/indonesia.png');
+export const FlagVietnam = require('./images/flags/vietnam.png');
+
+// Icons
+export const InboxIcon = require('./images/icons/inbox.png');

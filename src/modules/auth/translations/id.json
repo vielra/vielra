@@ -1,0 +1,8 @@
+{
+  "auth": {
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar",
+    "login_with_google": "Masuk dengan Google"
+  }
+}

@@ -3,6 +3,7 @@ export const RoutesConstant = {
     BottomTabStack: 'BottomTabStack',
     AuthStack: 'AuthStack',
     SettingsScreen: 'SettingsScreen',
+    AddPhraseScreen: 'AddPhraseScreen',
   },
 
   AuthStack: {
@@ -19,5 +20,11 @@ export const RoutesConstant = {
 
   ChatStack: {
     ChatScreen: 'ChatScreen',
+  },
+
+  PhrasebookStack: {
+    PhraseCategoryScreen: 'PhraseCategoryScreen',
+    PhraseListScreen: 'PhraseListScreen',
+    // AddPhraseScreen: 'AddPhraseScreen',
   },
 };

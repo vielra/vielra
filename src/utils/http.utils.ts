@@ -14,21 +14,21 @@ const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig
 };
 
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     console.error(`❌❌❌ Request error -> ${JSON.stringify(error)}`);
   }
   return Promise.reject(error);
 };
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     console.log('💚💚💚 Response success ->', response);
   }
   return response;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     if ((error.response?.status as number) === 403) {
       console.log('Error');
     }
