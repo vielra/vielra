@@ -23,7 +23,7 @@ import { usePhrasebook } from '../hooks';
 import { useTheme } from '@/modules/theme/hooks';
 
 // Utils
-import { isSmallScreen } from '@/utils';
+import { isIOS, isSmallScreen } from '@/utils';
 import { createSpacing } from '@/modules/theme/utils';
 
 // Theme config
@@ -35,7 +35,7 @@ import { UUID } from '@/modules/common';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('screen');
-const HEADER_HEIGHT = 84;
+const HEADER_HEIGHT = isIOS ? 100 : 90;
 
 type Props = NativeStackScreenProps<IPhrasebookStackParamList, 'PhraseListScreen'>;
 
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
     paddingLeft: createSpacing(3),
     paddingRight: createSpacing(5),
     alignItems: 'center',
+    paddingBottom: createSpacing(isIOS ? 4 : 1),
   },
   headerLeftContent: {
     flex: 1,
