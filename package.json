@@ -2,10 +2,6 @@
   "name": "vielra",
   "version": "0.0.1",
   "private": true,
-  "author": {
-    "name": "hiriski",
-    "email": "hiriski@outlook.com"
-  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
