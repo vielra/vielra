@@ -8,30 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* VielraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* VielraTests.m */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		0BACD16D2ADBA0DE00D5F8D4 /* Jost-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD15B2ADBA0DD00D5F8D4 /* Jost-SemiBoldItalic.ttf */; };
+		0BACD16E2ADBA0DE00D5F8D4 /* Jost-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD15C2ADBA0DD00D5F8D4 /* Jost-LightItalic.ttf */; };
+		0BACD1702ADBA0DE00D5F8D4 /* Jost-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD15E2ADBA0DD00D5F8D4 /* Jost-Bold.ttf */; };
+		0BACD1712ADBA0DE00D5F8D4 /* Jost-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD15F2ADBA0DE00D5F8D4 /* Jost-ExtraLight.ttf */; };
+		0BACD1722ADBA0DE00D5F8D4 /* Jost-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1602ADBA0DE00D5F8D4 /* Jost-BoldItalic.ttf */; };
+		0BACD1732ADBA0DE00D5F8D4 /* Jost-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1612ADBA0DE00D5F8D4 /* Jost-SemiBold.ttf */; };
+		0BACD1772ADBA0DE00D5F8D4 /* Jost-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1652ADBA0DE00D5F8D4 /* Jost-ExtraLightItalic.ttf */; };
+		0BACD1792ADBA0DE00D5F8D4 /* Jost-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1672ADBA0DE00D5F8D4 /* Jost-Light.ttf */; };
+		0BACD17A2ADBA0DE00D5F8D4 /* Jost-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1682ADBA0DE00D5F8D4 /* Jost-MediumItalic.ttf */; };
+		0BACD17B2ADBA0DE00D5F8D4 /* Jost-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1692ADBA0DE00D5F8D4 /* Jost-Regular.ttf */; };
+		0BACD17C2ADBA0DE00D5F8D4 /* Jost-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD16A2ADBA0DE00D5F8D4 /* Jost-Italic.ttf */; };
+		0BACD17E2ADBA0DE00D5F8D4 /* Jost-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD16C2ADBA0DE00D5F8D4 /* Jost-Medium.ttf */; };
+		0BACD1852ADBA13B00D5F8D4 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD17F2ADBA13B00D5F8D4 /* Octicons.ttf */; };
+		0BACD1862ADBA13B00D5F8D4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1802ADBA13B00D5F8D4 /* Zocial.ttf */; };
+		0BACD1872ADBA13B00D5F8D4 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1812ADBA13B00D5F8D4 /* MaterialCommunityIcons.ttf */; };
+		0BACD1882ADBA13B00D5F8D4 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1822ADBA13B00D5F8D4 /* Ionicons.ttf */; };
+		0BACD1892ADBA13B00D5F8D4 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1832ADBA13B00D5F8D4 /* Feather.ttf */; };
+		0BACD18A2ADBA13B00D5F8D4 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0BACD1842ADBA13B00D5F8D4 /* MaterialIcons.ttf */; };
+		0C80B921A6F3F58F76C31292 /* libPods-Vielra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-Vielra.a */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		6172F2D35A4C3AA820D92908 /* libPods-Vielra.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-Vielra.a */; };
-		711F53F828978A4600F17A60 /* BeVietnamPro-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53E628978A3B00F17A60 /* BeVietnamPro-BoldItalic.ttf */; };
-		711F53F928978A4600F17A60 /* BeVietnamPro-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53E728978A3C00F17A60 /* BeVietnamPro-BlackItalic.ttf */; };
-		711F53FA28978A4600F17A60 /* BeVietnamPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53E828978A3D00F17A60 /* BeVietnamPro-SemiBold.ttf */; };
-		711F53FB28978A4600F17A60 /* BeVietnamPro-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53E928978A3D00F17A60 /* BeVietnamPro-ExtraBoldItalic.ttf */; };
-		711F53FC28978A4600F17A60 /* BeVietnamPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53EA28978A3E00F17A60 /* BeVietnamPro-Regular.ttf */; };
-		711F53FD28978A4600F17A60 /* BeVietnamPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53EB28978A3E00F17A60 /* BeVietnamPro-Black.ttf */; };
-		711F53FE28978A4600F17A60 /* BeVietnamPro-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53EC28978A3F00F17A60 /* BeVietnamPro-Italic.ttf */; };
-		711F53FF28978A4600F17A60 /* BeVietnamPro-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53ED28978A3F00F17A60 /* BeVietnamPro-ThinItalic.ttf */; };
-		711F540028978A4600F17A60 /* BeVietnamPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53EE28978A4000F17A60 /* BeVietnamPro-Medium.ttf */; };
-		711F540128978A4600F17A60 /* BeVietnamPro-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53EF28978A4000F17A60 /* BeVietnamPro-ExtraBold.ttf */; };
-		711F540228978A4600F17A60 /* BeVietnamPro-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F028978A4100F17A60 /* BeVietnamPro-Light.ttf */; };
-		711F540328978A4600F17A60 /* BeVietnamPro-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F128978A4100F17A60 /* BeVietnamPro-SemiBoldItalic.ttf */; };
-		711F540428978A4600F17A60 /* BeVietnamPro-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F228978A4200F17A60 /* BeVietnamPro-MediumItalic.ttf */; };
-		711F540528978A4600F17A60 /* BeVietnamPro-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F328978A4200F17A60 /* BeVietnamPro-LightItalic.ttf */; };
-		711F540628978A4600F17A60 /* BeVietnamPro-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F428978A4300F17A60 /* BeVietnamPro-ExtraLightItalic.ttf */; };
-		711F540728978A4600F17A60 /* BeVietnamPro-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F528978A4400F17A60 /* BeVietnamPro-Thin.ttf */; };
-		711F540828978A4600F17A60 /* BeVietnamPro-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F628978A4500F17A60 /* BeVietnamPro-ExtraLight.ttf */; };
-		711F540928978A4600F17A60 /* BeVietnamPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711F53F728978A4500F17A60 /* BeVietnamPro-Bold.ttf */; };
-		71E36CAA28A156EA00E14802 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 71E36CA928A156EA00E14802 /* GoogleService-Info.plist */; };
-		7EF68E3733C33B6898317E18 /* libPods-Vielra-VielraTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-Vielra-VielraTests.a */; };
+		7699B88040F8A987B510C191 /* libPods-Vielra-VielraTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Vielra-VielraTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -49,45 +48,37 @@
 		00E356EE1AD99517003FC87E /* VielraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VielraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* VielraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VielraTests.m; sourceTree = "<group>"; };
+		0BACD15B2ADBA0DD00D5F8D4 /* Jost-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Jost/Jost-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		0BACD15C2ADBA0DD00D5F8D4 /* Jost-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-LightItalic.ttf"; path = "../src/assets/fonts/Jost/Jost-LightItalic.ttf"; sourceTree = "<group>"; };
+		0BACD15E2ADBA0DD00D5F8D4 /* Jost-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Bold.ttf"; path = "../src/assets/fonts/Jost/Jost-Bold.ttf"; sourceTree = "<group>"; };
+		0BACD15F2ADBA0DE00D5F8D4 /* Jost-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-ExtraLight.ttf"; path = "../src/assets/fonts/Jost/Jost-ExtraLight.ttf"; sourceTree = "<group>"; };
+		0BACD1602ADBA0DE00D5F8D4 /* Jost-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-BoldItalic.ttf"; path = "../src/assets/fonts/Jost/Jost-BoldItalic.ttf"; sourceTree = "<group>"; };
+		0BACD1612ADBA0DE00D5F8D4 /* Jost-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-SemiBold.ttf"; path = "../src/assets/fonts/Jost/Jost-SemiBold.ttf"; sourceTree = "<group>"; };
+		0BACD1652ADBA0DE00D5F8D4 /* Jost-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-ExtraLightItalic.ttf"; path = "../src/assets/fonts/Jost/Jost-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		0BACD1672ADBA0DE00D5F8D4 /* Jost-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Light.ttf"; path = "../src/assets/fonts/Jost/Jost-Light.ttf"; sourceTree = "<group>"; };
+		0BACD1682ADBA0DE00D5F8D4 /* Jost-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-MediumItalic.ttf"; path = "../src/assets/fonts/Jost/Jost-MediumItalic.ttf"; sourceTree = "<group>"; };
+		0BACD1692ADBA0DE00D5F8D4 /* Jost-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Regular.ttf"; path = "../src/assets/fonts/Jost/Jost-Regular.ttf"; sourceTree = "<group>"; };
+		0BACD16A2ADBA0DE00D5F8D4 /* Jost-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Italic.ttf"; path = "../src/assets/fonts/Jost/Jost-Italic.ttf"; sourceTree = "<group>"; };
+		0BACD16C2ADBA0DE00D5F8D4 /* Jost-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Jost-Medium.ttf"; path = "../src/assets/fonts/Jost/Jost-Medium.ttf"; sourceTree = "<group>"; };
+		0BACD17F2ADBA13B00D5F8D4 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		0BACD1802ADBA13B00D5F8D4 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		0BACD1812ADBA13B00D5F8D4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		0BACD1822ADBA13B00D5F8D4 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		0BACD1832ADBA13B00D5F8D4 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		0BACD1842ADBA13B00D5F8D4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Vielra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vielra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Vielra/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Vielra/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Vielra/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Vielra/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Vielra/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Vielra/main.m; sourceTree = "<group>"; };
-		1D0AE47A65C8663E3B452821 /* Pods-Vielra-VielraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.release.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.release.xcconfig"; sourceTree = "<group>"; };
-		6423831EA8574132BED9D8CC /* libPods-Vielra.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C97AB639B58BBB4B15BBE30 /* Pods-Vielra-VielraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.debug.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.debug.xcconfig"; sourceTree = "<group>"; };
-		711F53E528978A1900F17A60 /* ios */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ios; sourceTree = "<group>"; };
-		711F53E628978A3B00F17A60 /* BeVietnamPro-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-BoldItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-BoldItalic.ttf"; sourceTree = "<group>"; };
-		711F53E728978A3C00F17A60 /* BeVietnamPro-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-BlackItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-BlackItalic.ttf"; sourceTree = "<group>"; };
-		711F53E828978A3D00F17A60 /* BeVietnamPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-SemiBold.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-SemiBold.ttf"; sourceTree = "<group>"; };
-		711F53E928978A3D00F17A60 /* BeVietnamPro-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-ExtraBoldItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		711F53EA28978A3E00F17A60 /* BeVietnamPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Regular.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Regular.ttf"; sourceTree = "<group>"; };
-		711F53EB28978A3E00F17A60 /* BeVietnamPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Black.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Black.ttf"; sourceTree = "<group>"; };
-		711F53EC28978A3F00F17A60 /* BeVietnamPro-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Italic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Italic.ttf"; sourceTree = "<group>"; };
-		711F53ED28978A3F00F17A60 /* BeVietnamPro-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-ThinItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-ThinItalic.ttf"; sourceTree = "<group>"; };
-		711F53EE28978A4000F17A60 /* BeVietnamPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Medium.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Medium.ttf"; sourceTree = "<group>"; };
-		711F53EF28978A4000F17A60 /* BeVietnamPro-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-ExtraBold.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-ExtraBold.ttf"; sourceTree = "<group>"; };
-		711F53F028978A4100F17A60 /* BeVietnamPro-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Light.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Light.ttf"; sourceTree = "<group>"; };
-		711F53F128978A4100F17A60 /* BeVietnamPro-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-SemiBoldItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		711F53F228978A4200F17A60 /* BeVietnamPro-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-MediumItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-MediumItalic.ttf"; sourceTree = "<group>"; };
-		711F53F328978A4200F17A60 /* BeVietnamPro-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-LightItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-LightItalic.ttf"; sourceTree = "<group>"; };
-		711F53F428978A4300F17A60 /* BeVietnamPro-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-ExtraLightItalic.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		711F53F528978A4400F17A60 /* BeVietnamPro-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Thin.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Thin.ttf"; sourceTree = "<group>"; };
-		711F53F628978A4500F17A60 /* BeVietnamPro-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-ExtraLight.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-ExtraLight.ttf"; sourceTree = "<group>"; };
-		711F53F728978A4500F17A60 /* BeVietnamPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "BeVietnamPro-Bold.ttf"; path = "../src/assets/fonts/BeVietnamPro/BeVietnamPro-Bold.ttf"; sourceTree = "<group>"; };
-		71BE1E4527DBC9F9008BD140 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-		71BE1E4627DBCA01008BD140 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		71BE1E4727DBCA0D008BD140 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		71E36C9328A130AA00E14802 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
-		71E36C9528A130D800E14802 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		71E36C9728A130EE00E14802 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		71E36CA928A156EA00E14802 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		19F6CBCC0A4E27FBF8BF4A61 /* libPods-Vielra-VielraTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra-VielraTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B4392A12AC88292D35C810B /* Pods-Vielra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra.debug.xcconfig"; path = "Target Support Files/Pods-Vielra/Pods-Vielra.debug.xcconfig"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-Vielra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra.release.xcconfig"; path = "Target Support Files/Pods-Vielra/Pods-Vielra.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-Vielra-VielraTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.debug.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5DCACB8F33CDC322A6C60F78 /* libPods-Vielra.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Vielra/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		ABFE59519B596E51CEFDCCC0 /* libPods-Vielra-VielraTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vielra-VielraTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0A881CF5CF3F2B244570E2A /* Pods-Vielra.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra.debug.xcconfig"; path = "Target Support Files/Pods-Vielra/Pods-Vielra.debug.xcconfig"; sourceTree = "<group>"; };
-		D00AAFFCFCFDA5787532823F /* Pods-Vielra.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra.release.xcconfig"; path = "Target Support Files/Pods-Vielra/Pods-Vielra.release.xcconfig"; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-Vielra-VielraTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vielra-VielraTests.release.xcconfig"; path = "Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -96,7 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EF68E3733C33B6898317E18 /* libPods-Vielra-VielraTests.a in Frameworks */,
+				7699B88040F8A987B510C191 /* libPods-Vielra-VielraTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6172F2D35A4C3AA820D92908 /* libPods-Vielra.a in Frameworks */,
+				0C80B921A6F3F58F76C31292 /* libPods-Vielra.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,17 +119,41 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0BACD15A2ADBA0A700D5F8D4 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0BACD1832ADBA13B00D5F8D4 /* Feather.ttf */,
+				0BACD1822ADBA13B00D5F8D4 /* Ionicons.ttf */,
+				0BACD1812ADBA13B00D5F8D4 /* MaterialCommunityIcons.ttf */,
+				0BACD1842ADBA13B00D5F8D4 /* MaterialIcons.ttf */,
+				0BACD17F2ADBA13B00D5F8D4 /* Octicons.ttf */,
+				0BACD1802ADBA13B00D5F8D4 /* Zocial.ttf */,
+				0BACD15E2ADBA0DD00D5F8D4 /* Jost-Bold.ttf */,
+				0BACD1602ADBA0DE00D5F8D4 /* Jost-BoldItalic.ttf */,
+				0BACD15F2ADBA0DE00D5F8D4 /* Jost-ExtraLight.ttf */,
+				0BACD1652ADBA0DE00D5F8D4 /* Jost-ExtraLightItalic.ttf */,
+				0BACD16A2ADBA0DE00D5F8D4 /* Jost-Italic.ttf */,
+				0BACD1672ADBA0DE00D5F8D4 /* Jost-Light.ttf */,
+				0BACD15C2ADBA0DD00D5F8D4 /* Jost-LightItalic.ttf */,
+				0BACD16C2ADBA0DE00D5F8D4 /* Jost-Medium.ttf */,
+				0BACD1682ADBA0DE00D5F8D4 /* Jost-MediumItalic.ttf */,
+				0BACD1692ADBA0DE00D5F8D4 /* Jost-Regular.ttf */,
+				0BACD1612ADBA0DE00D5F8D4 /* Jost-SemiBold.ttf */,
+				0BACD15B2ADBA0DD00D5F8D4 /* Jost-SemiBoldItalic.ttf */,
+			);
+			name = fonts;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* Vielra */ = {
 			isa = PBXGroup;
 			children = (
-				71BE1E4427DBC929008BD140 /* Fonts */,
+				0BACD15A2ADBA0A700D5F8D4 /* fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				71E36CA928A156EA00E14802 /* GoogleService-Info.plist */,
 			);
 			name = Vielra;
 			sourceTree = "<group>";
@@ -146,43 +161,11 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				71E36C9728A130EE00E14802 /* SystemConfiguration.framework */,
-				71E36C9528A130D800E14802 /* SafariServices.framework */,
-				71E36C9328A130AA00E14802 /* AddressBook.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				6423831EA8574132BED9D8CC /* libPods-Vielra.a */,
-				ABFE59519B596E51CEFDCCC0 /* libPods-Vielra-VielraTests.a */,
+				5DCACB8F33CDC322A6C60F78 /* libPods-Vielra.a */,
+				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Vielra-VielraTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		71BE1E4427DBC929008BD140 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				711F53EB28978A3E00F17A60 /* BeVietnamPro-Black.ttf */,
-				711F53E728978A3C00F17A60 /* BeVietnamPro-BlackItalic.ttf */,
-				711F53F728978A4500F17A60 /* BeVietnamPro-Bold.ttf */,
-				711F53E628978A3B00F17A60 /* BeVietnamPro-BoldItalic.ttf */,
-				711F53EF28978A4000F17A60 /* BeVietnamPro-ExtraBold.ttf */,
-				711F53E928978A3D00F17A60 /* BeVietnamPro-ExtraBoldItalic.ttf */,
-				711F53F628978A4500F17A60 /* BeVietnamPro-ExtraLight.ttf */,
-				711F53F428978A4300F17A60 /* BeVietnamPro-ExtraLightItalic.ttf */,
-				711F53EC28978A3F00F17A60 /* BeVietnamPro-Italic.ttf */,
-				711F53F028978A4100F17A60 /* BeVietnamPro-Light.ttf */,
-				711F53F328978A4200F17A60 /* BeVietnamPro-LightItalic.ttf */,
-				711F53EE28978A4000F17A60 /* BeVietnamPro-Medium.ttf */,
-				711F53F228978A4200F17A60 /* BeVietnamPro-MediumItalic.ttf */,
-				711F53EA28978A3E00F17A60 /* BeVietnamPro-Regular.ttf */,
-				711F53E828978A3D00F17A60 /* BeVietnamPro-SemiBold.ttf */,
-				711F53F128978A4100F17A60 /* BeVietnamPro-SemiBoldItalic.ttf */,
-				711F53F528978A4400F17A60 /* BeVietnamPro-Thin.ttf */,
-				711F53ED28978A3F00F17A60 /* BeVietnamPro-ThinItalic.ttf */,
-				711F53E528978A1900F17A60 /* ios */,
-				71BE1E4627DBCA01008BD140 /* MaterialIcons.ttf */,
-				71BE1E4727DBCA0D008BD140 /* Ionicons.ttf */,
-				71BE1E4527DBC9F9008BD140 /* MaterialCommunityIcons.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -200,7 +183,7 @@
 				00E356EF1AD99517003FC87E /* VielraTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				E233CBF5F47BEE60B243DCF8 /* Pods */,
+				BBD78D7AC51CEA395F1C20DB /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -216,13 +199,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E233CBF5F47BEE60B243DCF8 /* Pods */ = {
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C0A881CF5CF3F2B244570E2A /* Pods-Vielra.debug.xcconfig */,
-				D00AAFFCFCFDA5787532823F /* Pods-Vielra.release.xcconfig */,
-				6C97AB639B58BBB4B15BBE30 /* Pods-Vielra-VielraTests.debug.xcconfig */,
-				1D0AE47A65C8663E3B452821 /* Pods-Vielra-VielraTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-Vielra.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-Vielra.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-Vielra-VielraTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-Vielra-VielraTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -234,12 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "VielraTests" */;
 			buildPhases = (
-				A130D646172E58E1D159D8F2 /* [CP] Check Pods Manifest.lock */,
+				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				077E01280D4B4AD18B2E1770 /* [CP] Embed Pods Frameworks */,
-				4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */,
+				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
+				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,14 +238,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Vielra" */;
 			buildPhases = (
-				3E482C27206C4DEF2FE45063 /* [CP] Check Pods Manifest.lock */,
+				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */,
-				ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */,
+				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
+				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -321,27 +304,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				711F53FD28978A4600F17A60 /* BeVietnamPro-Black.ttf in Resources */,
-				711F53FB28978A4600F17A60 /* BeVietnamPro-ExtraBoldItalic.ttf in Resources */,
-				711F53FE28978A4600F17A60 /* BeVietnamPro-Italic.ttf in Resources */,
-				711F540928978A4600F17A60 /* BeVietnamPro-Bold.ttf in Resources */,
-				711F540328978A4600F17A60 /* BeVietnamPro-SemiBoldItalic.ttf in Resources */,
-				711F53F928978A4600F17A60 /* BeVietnamPro-BlackItalic.ttf in Resources */,
-				711F540128978A4600F17A60 /* BeVietnamPro-ExtraBold.ttf in Resources */,
-				711F53FC28978A4600F17A60 /* BeVietnamPro-Regular.ttf in Resources */,
-				711F540728978A4600F17A60 /* BeVietnamPro-Thin.ttf in Resources */,
-				711F540828978A4600F17A60 /* BeVietnamPro-ExtraLight.ttf in Resources */,
-				711F540428978A4600F17A60 /* BeVietnamPro-MediumItalic.ttf in Resources */,
-				711F540628978A4600F17A60 /* BeVietnamPro-ExtraLightItalic.ttf in Resources */,
-				711F53FF28978A4600F17A60 /* BeVietnamPro-ThinItalic.ttf in Resources */,
-				711F540228978A4600F17A60 /* BeVietnamPro-Light.ttf in Resources */,
+				0BACD1772ADBA0DE00D5F8D4 /* Jost-ExtraLightItalic.ttf in Resources */,
+				0BACD1872ADBA13B00D5F8D4 /* MaterialCommunityIcons.ttf in Resources */,
+				0BACD1882ADBA13B00D5F8D4 /* Ionicons.ttf in Resources */,
+				0BACD18A2ADBA13B00D5F8D4 /* MaterialIcons.ttf in Resources */,
+				0BACD1712ADBA0DE00D5F8D4 /* Jost-ExtraLight.ttf in Resources */,
+				0BACD1792ADBA0DE00D5F8D4 /* Jost-Light.ttf in Resources */,
+				0BACD16D2ADBA0DE00D5F8D4 /* Jost-SemiBoldItalic.ttf in Resources */,
+				0BACD1892ADBA13B00D5F8D4 /* Feather.ttf in Resources */,
+				0BACD17A2ADBA0DE00D5F8D4 /* Jost-MediumItalic.ttf in Resources */,
+				0BACD1862ADBA13B00D5F8D4 /* Zocial.ttf in Resources */,
+				0BACD1732ADBA0DE00D5F8D4 /* Jost-SemiBold.ttf in Resources */,
+				0BACD1722ADBA0DE00D5F8D4 /* Jost-BoldItalic.ttf in Resources */,
+				0BACD1852ADBA13B00D5F8D4 /* Octicons.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				711F53F828978A4600F17A60 /* BeVietnamPro-BoldItalic.ttf in Resources */,
-				711F53FA28978A4600F17A60 /* BeVietnamPro-SemiBold.ttf in Resources */,
+				0BACD17C2ADBA0DE00D5F8D4 /* Jost-Italic.ttf in Resources */,
+				0BACD17E2ADBA0DE00D5F8D4 /* Jost-Medium.ttf in Resources */,
+				0BACD1702ADBA0DE00D5F8D4 /* Jost-Bold.ttf in Resources */,
+				0BACD17B2ADBA0DE00D5F8D4 /* Jost-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				711F540028978A4600F17A60 /* BeVietnamPro-Medium.ttf in Resources */,
-				711F540528978A4600F17A60 /* BeVietnamPro-LightItalic.ttf in Resources */,
-				71E36CAA28A156EA00E14802 /* GoogleService-Info.plist in Resources */,
+				0BACD16E2ADBA0DE00D5F8D4 /* Jost-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,71 +336,34 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/.xcode.env.local",
+				"$(SRCROOT)/.xcode.env",
 			);
 			name = "Bundle React Native code and images";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		077E01280D4B4AD18B2E1770 /* [CP] Embed Pods Frameworks */ = {
+		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3E482C27206C4DEF2FE45063 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Vielra-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4E62BDF20514810D028A5FBF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A130D646172E58E1D159D8F2 /* [CP] Check Pods Manifest.lock */ = {
+		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -440,7 +385,46 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		ADC9DDC32298B72B3CF5DC8E /* [CP] Copy Pods Resources */ = {
+		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Vielra-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -457,21 +441,21 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C8AC78B0264D0F9F6F6D630E /* [CP] Embed Pods Frameworks */ = {
+		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra/Pods-Vielra-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vielra-VielraTests/Pods-Vielra-VielraTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -508,7 +492,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,7 +510,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C97AB639B58BBB4B15BBE30 /* Pods-Vielra-VielraTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Vielra-VielraTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -534,7 +518,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = VielraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,7 +529,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hiriski.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vielra.app/Vielra";
 			};
@@ -553,12 +537,12 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D0AE47A65C8663E3B452821 /* Pods-Vielra-VielraTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-Vielra-VielraTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = VielraTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,7 +553,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hiriski.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vielra.app/Vielra";
 			};
@@ -577,7 +561,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C0A881CF5CF3F2B244570E2A /* Pods-Vielra.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Vielra.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -588,12 +572,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hiriski.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Vielra;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -603,7 +588,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D00AAFFCFCFDA5787532823F /* Pods-Vielra.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Vielra.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -613,12 +598,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.hiriski.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Vielra;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -630,7 +616,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -658,7 +644,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -666,6 +652,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -674,7 +661,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -686,6 +673,19 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -695,7 +695,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -723,16 +723,20 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -743,6 +747,19 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-DFOLLY_NO_CONFIG",
+					"-DFOLLY_MOBILE=1",
+					"-DFOLLY_USE_LIBCPP=1",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
