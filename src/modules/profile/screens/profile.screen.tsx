@@ -1,74 +1,56 @@
-import React, { FC } from 'react';
-import { ScrollView, View } from 'react-native';
+import { useCallback } from 'react';
 
-// Core components
-import { Button, Typography } from '@/components/core';
-
-// Components
-import { SafeAreaView } from '@/components/shared';
-
-// Constants
-import { RoutesConstant } from '@/constants';
-
-// Hooks
+// hooks
 import { useAuth } from '@/modules/auth/hooks';
+import { useTheme } from '@/modules/theme/hooks';
 
-// Utils
-import { createSpacing } from '@/modules/theme/utils';
+// components
+import { Screen } from '@/components/core';
+import { GuestInfo, ProfileInfo } from '../components';
+import { BottomSheetConfirmLogout } from '@/modules/auth/components';
+import { useFocusEffect } from '@react-navigation/native';
+import { useAppDispatch } from '@/plugins/redux';
 
-// Interfaces
-import { IBottomTabParamList } from '@/navigators/bottom-tab.navigator';
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useDispatch } from 'react-redux';
-import { auth_actionRevokeToken, GoogleSignInService } from '@/modules/auth';
+const ProfileScreen = () => {
+  const theme = useTheme();
+  const dispatch = useAppDispatch();
+  const { isAuthenticated, auth_getUser, auth_setUser } = useAuth();
 
-type Props = BottomTabScreenProps<IBottomTabParamList, typeof RoutesConstant.BottomTab.Profile>;
-
-export const ProfileScreen: FC<Props> = (props) => {
-  const { isLoggedIn, authenticatedUser: user, authProvider } = useAuth();
-  const dispatch = useDispatch();
-
-  const handleLogOut = (): void => {
-    dispatch(auth_actionRevokeToken());
+  /**
+   * check authenticated user
+   */
+  const checkAuthenticatedUser = async (): Promise<void> => {
+    try {
+      const response = await auth_getUser(undefined);
+      if (response?.isSuccess) {
+        dispatch(auth_setUser(response.data));
+      }
+    } catch (e) {}
   };
 
-  const getGoogleUser = async () => {
-    const googleUser = await GoogleSignInService.getCurrentUser();
-    console.log('googleUser', googleUser);
-  };
+  useFocusEffect(
+    useCallback(() => {
+      if (isAuthenticated) {
+        checkAuthenticatedUser();
+      }
+    }, [isAuthenticated]),
+  );
 
   return (
-    <SafeAreaView>
-      <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {isLoggedIn ? (
-          <>
-            <Typography>Hello,</Typography>
-            <Typography variant="h2">{user?.name}</Typography>
-          </>
-        ) : (
-          <View>
-            <Typography style={{ marginBottom: createSpacing(4) }}>You are not logged in</Typography>
-            <Button
-              variant="outlined"
-              title="Login in"
-              style={{ marginBottom: createSpacing(6) }}
-              onPress={() =>
-                props.navigation.navigate(RoutesConstant.RootStack.AuthStack, {
-                  screen: RoutesConstant.AuthStack.LoginScreen,
-                })
-              }
-            />
-
-            <Button onPress={handleLogOut} variant="outlined" title="Log Out" />
-            {authProvider === 'google' && <Button onPress={getGoogleUser} variant="outlined" title="Get google user" />}
-          </View>
-        )}
-        <Button
-          onPress={() => props.navigation.navigate(RoutesConstant.BottomTab.HomeScreen)}
-          variant="text"
-          title="Go to home"
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <>
+      <Screen
+        preset='fixed'
+        statusBarStyle='dark-content'
+        title='Profile'
+        titleSize='small'
+        backgroundColor={theme.palette.background.default}
+        headerBackgroundColor={theme.palette.background.default}
+        style={{ paddingHorizontal: theme.horizontalSpacing }}>
+        {isAuthenticated ? <ProfileInfo /> : <GuestInfo />}
+      </Screen>
+      <BottomSheetConfirmLogout />
+    </>
   );
 };
+
+export default ProfileScreen;

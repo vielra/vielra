@@ -1,33 +1,23 @@
-import React, { FC, useRef, useCallback, useMemo, useEffect } from 'react';
+import React, { FC, useRef, useCallback, useState, useMemo, useEffect } from 'react';
 import { Image, StyleSheet, View, BackHandler } from 'react-native';
 
 // Core components.
 import { Typography, Button, IconButton } from '@/components/core';
 
 // Bottom sheet
-import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdropProps, BottomSheetModal } from '@gorhom/bottom-sheet';
 
 // Hooks.
-import { useAppSelector } from '@/store';
 import { useTheme } from '@/modules/theme/hooks';
 import { useNavigation } from '@react-navigation/native';
 
-// Selectors.
-import { auth_rootSelector } from '@/modules/auth/redux';
-
-// Constant
-import { RoutesConstant } from '@/constants';
-
 // Utils
-import { createSpacing } from '@/modules/theme/utils';
-import { isSmallScreen } from '@/utils';
+import { createSpacing } from '@/modules/theme/utilities';
 
 // Interfaces
-import { IAuthStackParamList } from '@/modules/auth/navigators';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 // Assets
-import { LogoPrimary } from '@/assets';
+import { Assets } from '@/assets';
 
 // Components.
 import { Ionicons } from '@/components/icons';
@@ -37,28 +27,25 @@ import { AuthLayout, RegisterForm } from '@/modules/auth/components';
 import { red } from '@/modules/theme/libs';
 
 // Theme config
-import * as themeConfig from '@/modules/theme/config';
+import { themeConfig } from '@/modules/theme/configs';
 
-type AuthStackNavigationProp = NativeStackNavigationProp<IAuthStackParamList, typeof RoutesConstant.Auth.LoginScreen>;
+// utils
+import { screenUtils } from '@/modules/app/utilities';
+import { NavigationProps } from '@/navigators';
+import { BottomSheetBackdrop } from '@/components/shared';
 
 const IMAGE_SIZE = 84;
 
-export const RegisterScreen: FC = () => {
+const RegisterScreen: FC = () => {
   const theme = useTheme();
-  const navigation = useNavigation<AuthStackNavigationProp>();
-  const { register_formIsDirty } = useAppSelector((s) => auth_rootSelector(s));
+  const navigation = useNavigation<NavigationProps>();
+  const [formIsDirty, setFormIsDirty] = useState(false);
 
   // Bottom sheet ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   /** @var snapPoints - Bottom sheet snap points */
   const snapPoints = useMemo(() => [272], []);
-
-  /** Handle when bottom sheet has changes */
-  // const handleSheetChanges = useCallback((index: number): void => {
-  //   // console.log('handleSheetChanges', index);
-  //   null;
-  // }, []);
 
   /** Handle open bottom sheet */
   const handleOpenBottomSheet = (): void => {
@@ -70,9 +57,9 @@ export const RegisterScreen: FC = () => {
     bottomSheetModalRef.current?.dismiss();
   };
 
-  const renderBackdropBottomSheet = useCallback(
-    (props) => (
-      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} opacity={0.45} pressBehavior="close" />
+  const renderBackdrop = useCallback(
+    (props: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop {...props} disappearsOnIndex={-1} appearsOnIndex={0} pressBehavior='close' />
     ),
     [],
   );
@@ -82,14 +69,14 @@ export const RegisterScreen: FC = () => {
    */
   const handlePressBack = useCallback(
     (shouldConfirm?: boolean) => {
-      if (shouldConfirm && register_formIsDirty) {
+      if (shouldConfirm && formIsDirty) {
         handleOpenBottomSheet();
       } else {
         handleCloseBottomSheet();
-        navigation.canGoBack() ? navigation.goBack() : navigation.replace(RoutesConstant.WelcomeScreen);
+        navigation.canGoBack() ? navigation.goBack() : navigation.replace('bottom_tab_stack');
       }
     },
-    [register_formIsDirty, navigation],
+    [formIsDirty, navigation],
   );
 
   useEffect(() => {
@@ -97,6 +84,7 @@ export const RegisterScreen: FC = () => {
       handlePressBack(true);
       return true;
     });
+    7;
     return () => backHandler.remove();
   }, []);
 
@@ -104,32 +92,26 @@ export const RegisterScreen: FC = () => {
     <>
       <AuthLayout>
         {/* Back button */}
-
         <View style={styles.backButtonContainer}>
-          <IconButton
-            size="large"
-            icon="ios-arrow-back"
-            iconType="ionicons"
-            onPress={() => handlePressBack(true)}
-            iconStyle={{ color: theme.palette.secondary.main }}
-          />
+          <IconButton size='large' icon='arrow-back' iconType='ionicons' onPress={() => handlePressBack(true)} />
         </View>
 
         <View style={styles.header}>
-          <Image source={LogoPrimary} style={styles.imageStyle} />
-          <Typography variant="h1" style={{ marginBottom: createSpacing(2) }}>
-            Register new account
+          <Image source={Assets.logoPrimary} style={styles.imageStyle} />
+          <Typography variant='h2' fontWeight='bold'>
+            Hi, there 👋
           </Typography>
-          <Typography>Create your Vielra account</Typography>
+          <Typography color='text.secondary' variant='h4' fontWeight='bold'>
+            Let's create your vielra account
+          </Typography>
         </View>
-
         <RegisterForm />
       </AuthLayout>
 
       {/* Bottom sheet */}
       <BottomSheetModal
         ref={bottomSheetModalRef}
-        backdropComponent={renderBackdropBottomSheet}
+        backdropComponent={renderBackdrop}
         enableDismissOnClose={true}
         index={0}
         snapPoints={snapPoints}
@@ -145,26 +127,26 @@ export const RegisterScreen: FC = () => {
         <View style={styles.bottomSheet_contentContainer}>
           <View>
             <View style={{ marginBottom: createSpacing(8) }}>
-              <Ionicons name="close-circle-outline" size={54} color={red[500]} />
-              <Typography variant="h2" style={{ marginBottom: createSpacing(2), marginTop: createSpacing(2) }}>
+              <Ionicons name='close-circle-outline' size={54} color={red[500]} />
+              <Typography variant='h2' style={{ marginBottom: createSpacing(2), marginTop: createSpacing(2) }}>
                 Are you sure ?
               </Typography>
-              <Typography variant="body">Do you want to cancel register ?</Typography>
+              <Typography>Do you want to cancel register ?</Typography>
             </View>
             <View style={styles.bottomSheet_buttonContainer}>
-              <Button variant="text" color="secondary" title="No, Stay Here" onPress={handleCloseBottomSheet} />
+              <Button variant='text' color='secondary' title='No, Stay Here' onPress={handleCloseBottomSheet} />
               <Button
-                variant="contained"
-                color="error"
-                title="Yes, cancel"
+                variant='contained'
+                color='error'
+                title='Yes, cancel'
                 onPress={() => {
                   handleCloseBottomSheet();
                   setTimeout(() => {
                     handlePressBack(false);
                   }, 300);
                 }}
-                startIcon="close-circle-outline"
-                iconType="ionicons"
+                startIcon='close-circle-outline'
+                iconType='ionicons'
               />
             </View>
           </View>
@@ -182,14 +164,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backButtonContainer: {
-    height: isSmallScreen ? 54 : 64,
-    marginLeft: createSpacing(isSmallScreen ? 3 : 4),
-    marginTop: createSpacing(isSmallScreen ? 2 : 3),
+    height: screenUtils.isSmallScreen ? 54 : 64,
+    marginLeft: createSpacing(screenUtils.isSmallScreen ? 3 : 4),
+    marginTop: createSpacing(screenUtils.isSmallScreen ? 2 : 3),
   },
   header: {
     alignItems: 'center',
-    marginBottom: isSmallScreen ? createSpacing(5) : createSpacing(8),
-    paddingHorizontal: createSpacing(isSmallScreen ? 6 : 10),
+    marginBottom: screenUtils.isSmallScreen ? createSpacing(5) : createSpacing(8),
+    paddingHorizontal: createSpacing(screenUtils.isSmallScreen ? 6 : 10),
   },
   imageStyle: {
     width: IMAGE_SIZE,
@@ -203,7 +185,7 @@ const styles = StyleSheet.create({
   bottomSheet_contentContainer: {
     flex: 1,
     marginBottom: createSpacing(4),
-    paddingHorizontal: createSpacing(isSmallScreen ? 7 : 10),
+    paddingHorizontal: createSpacing(screenUtils.isSmallScreen ? 7 : 10),
   },
   bottomSheet_backgroundStyle: { borderRadius: themeConfig.shape.borderRadius * 3 },
   bottomSheet_handleIndicatorStyle: { height: 2, width: 32 },
@@ -212,3 +194,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+export default RegisterScreen;

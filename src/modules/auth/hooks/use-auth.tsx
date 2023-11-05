@@ -1,21 +1,43 @@
-import { useAppSelector } from '@/store';
 import { useMemo } from 'react';
-import { AuthState, auth_rootSelector } from '@/modules/auth/redux';
+import { useAppSelector } from '@/plugins/redux';
 
-export interface IUseAuth extends AuthState {
-  isLoggedIn: boolean;
-}
+// app slice
+import { auth_selector, auth_reducerActions, authApi } from '@/modules/auth/redux';
 
-export const useAuth = (): IUseAuth => {
-  const { authenticatedUser, isAuthenticated, accessToken, ...rest } = useAppSelector((s) => auth_rootSelector(s));
+// utils
+import { authUtils } from '@/modules/auth/utilities';
 
-  const isLoggedIn = useMemo(() => {
-    if (isAuthenticated && authenticatedUser !== null && accessToken) {
-      return true;
-    } else {
-      return false;
-    }
-  }, [isAuthenticated, authenticatedUser]);
+export const useAuth = () => {
+  const authState = useAppSelector(auth_selector);
 
-  return { ...rest, isLoggedIn, authenticatedUser, isAuthenticated, accessToken };
+  const isAuthenticated = useMemo(() => {
+    return Boolean(authState.user) && Boolean(authUtils.getToken());
+  }, [authState?.user?.id]);
+
+  const [auth_getUser, { isLoading: auth_getUserIsLoading }] = authApi.useLazyGetAuthenticatedUserQuery();
+
+  // prettier-ignore
+  const [auth_login, { isLoading: auth_loginIsLoading, error: auth_loginError }] = authApi.useLoginWithEmailAndPasswordMutation();
+
+  // prettier-ignore
+  const [auth_register, { isLoading: auth_registerIsLoading }] = authApi.useRegisterWithEmailAndPasswordMutation();
+
+  // prettier-ignore
+  const [auth_revokeToken, { isLoading: auth_revokeTokenIsLoading }] = authApi.useRevokeTokenMutation();
+
+  return {
+    isAuthenticated,
+    isLoggedIn: isAuthenticated,
+    ...authState,
+    ...auth_reducerActions,
+    auth_getUser,
+    auth_getUserIsLoading,
+    auth_login,
+    auth_loginIsLoading,
+    auth_loginError,
+    auth_register,
+    auth_registerIsLoading,
+    auth_revokeToken,
+    auth_revokeTokenIsLoading,
+  };
 };

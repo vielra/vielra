@@ -1,34 +1,30 @@
-import { Button, Typography } from '@/components/core';
-import React, { FC, useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-// Constants
-import { RoutesConstant } from '@/constants';
 
 // CodePush
 import CodePush, { SyncStatusChangedCallback } from 'react-native-code-push';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { createSpacing } from '@/modules/theme/utils';
+import BottomSheet, { BottomSheetBackdropProps } from '@gorhom/bottom-sheet';
+import { createSpacing } from '@/modules/theme/utilities';
 
 // Theme config.
-import * as themeConfig from '@/modules/theme/config';
+import { themeConfig } from '@/modules/theme/configs';
 
 // Hooks
 import { useTheme } from '@/modules/theme/hooks';
 
-// Components
+// components
 import { BottomSheetLanguage } from '@/modules/settings/components';
-import { BottomSheetBackdropComponent } from '@/components/shared';
-import { Ionicons } from '@/components/icons';
+import { BottomSheetBackdrop } from '@/components/shared/bottom-sheet';
+import { Button, Screen, Typography, Ionicon } from '@/components/core';
 
 // Theme lib
 import { blue, green, grey, red } from '@/modules/theme/libs';
+import { screenUtils } from '@/modules/app/utilities';
 
 // Utils
-import { isSmallScreen } from '@/utils';
+// import { isSmallScreen } from '@/utils';
 
-export const SettingScreen: FC = (props) => {
+const SettingsScreen = () => {
   const theme = useTheme();
 
   const [codePushSyncStatusText, setCodePushSyncStatusText] = useState<string | undefined>('');
@@ -46,12 +42,11 @@ export const SettingScreen: FC = (props) => {
   const handleSheetChanges = useCallback((index: number): void => {
     if (index === 0) {
       // 0 is appear
-
       CodePush.sync(
         {
           // updateDialog: false, // jika di set ke false download akan dilakukan secara diam-diam
           updateDialog: {
-            title: 'Update tersedia',
+            title: 'Update available',
           },
           installMode: CodePush.InstallMode.IMMEDIATE,
         },
@@ -126,7 +121,9 @@ export const SettingScreen: FC = (props) => {
   };
 
   const renderBackdropBottomSheet = useCallback(
-    (backdropProps) => <BottomSheetBackdropComponent {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} />,
+    (backdropProps: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop {...backdropProps} disappearsOnIndex={-1} appearsOnIndex={0} />
+    ),
     [],
   );
 
@@ -135,8 +132,8 @@ export const SettingScreen: FC = (props) => {
     switch (status) {
       case CodePush.SyncStatus.SYNC_IN_PROGRESS:
         return (
-          <Ionicons
-            name="sync-circle"
+          <Ionicon
+            name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -144,8 +141,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
         return (
-          <Ionicons
-            name="sync-circle"
+          <Ionicon
+            name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -153,8 +150,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
         return (
-          <Ionicons
-            name="cloud-download"
+          <Ionicon
+            name='cloud-download'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -162,8 +159,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.UPDATE_INSTALLED:
         return (
-          <Ionicons
-            name="checkmark-circle"
+          <Ionicon
+            name='checkmark-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -171,8 +168,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.UNKNOWN_ERROR:
         return (
-          <Ionicons
-            name="cloud-offline"
+          <Ionicon
+            name='cloud-offline'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: grey[400] }])}
           />
@@ -180,8 +177,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.INSTALLING_UPDATE:
         return (
-          <Ionicons
-            name="sync-circle"
+          <Ionicon
+            name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -189,8 +186,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.AWAITING_USER_ACTION:
         return (
-          <Ionicons
-            name="time"
+          <Ionicon
+            name='time'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
           />
@@ -198,8 +195,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.UPDATE_IGNORED:
         return (
-          <Ionicons
-            name="close-circle"
+          <Ionicon
+            name='close-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: red[500] }])}
           />
@@ -207,8 +204,8 @@ export const SettingScreen: FC = (props) => {
 
       case CodePush.SyncStatus.UP_TO_DATE:
         return (
-          <Ionicons
-            name="checkmark-done-circle"
+          <Ionicon
+            name='checkmark-done-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: green[600] }])}
           />
@@ -220,40 +217,37 @@ export const SettingScreen: FC = (props) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Typography>Settings</Typography>
+    <>
+      <Screen title='Settings'>
+        <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          <Typography>Settings</Typography>
 
-        <Button
-          onPress={() => props.navigation.navigate(RoutesConstant.BottomTab.Phrasebook)}
-          variant="text"
-          title="Go to phaasebook screen"
-        />
+          <Button variant='text' title='Go to phaasebook screen' />
 
-        {/* Check for update */}
-        <Button
-          variant="contained"
-          color="secondary"
-          onPress={handleSyncUpdate}
-          title="Sync Update"
-          style={{ marginBottom: createSpacing(3) }}
-        />
-        <Button
-          variant="contained"
-          color="primary"
-          onPress={handleCheckForUpdates}
-          title="Check for updates"
-          style={{ marginBottom: createSpacing(4) }}
-        />
-
-        <Button
-          variant="outlined"
-          color="secondary"
-          onPress={() => setBottomSheetLanguageIndex(0)}
-          title="Change Language"
-          rounded
-        />
-      </ScrollView>
+          {/* Check for update */}
+          <Button
+            variant='contained'
+            color='secondary'
+            onPress={handleSyncUpdate}
+            title='Sync Update'
+            style={{ marginBottom: createSpacing(3) }}
+          />
+          <Button
+            variant='contained'
+            color='primary'
+            onPress={handleCheckForUpdates}
+            title='Check for updates'
+            style={{ marginBottom: createSpacing(4) }}
+          />
+          <Button
+            variant='outlined'
+            color='secondary'
+            onPress={() => setBottomSheetLanguageIndex(0)}
+            title='Change Language'
+            rounded
+          />
+        </ScrollView>
+      </Screen>
 
       {/* Bottom sheet language */}
       <BottomSheetLanguage index={bottomSheetLanguageIndex} setIndex={(index) => setBottomSheetLanguageIndex(index)} />
@@ -290,7 +284,7 @@ export const SettingScreen: FC = (props) => {
           </Typography>
         </View>
       </BottomSheet>
-    </SafeAreaView>
+    </>
   );
 };
 
@@ -304,9 +298,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: createSpacing(isSmallScreen ? 4 : 6),
+    marginBottom: createSpacing(screenUtils.isSmallScreen ? 4 : 6),
   },
 
   codePush_syncIcon: { marginBottom: createSpacing(2) },
   codePush_syncStatusText: { fontSize: 16, fontWeight: '600' },
 });
+
+export default SettingsScreen;

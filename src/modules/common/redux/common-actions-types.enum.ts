@@ -1,3 +1,0 @@
-export enum CommonActionTypes {
-  SET_BOTTOM_SHEET_WARNING_AUTH_REQUIRED = '@common/SET_BOTTOM_SHEET_WARNING_AUTH_REQUIRED',
-}

@@ -1,3 +1,4 @@
-export * from './login-form.component';
-export * from './register-form.component';
-export * from './auth-layout.component';
+export { default as LoginForm } from './login-form';
+export { default as RegisterForm } from './register-form';
+export { default as AuthLayout } from './auth-layout';
+export { default as BottomSheetConfirmLogout } from './bottom-sheet-confirm-logout';

@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["Ionicons", "Jost"]
+  "cSpell.words": [
+    "Ionicons",
+    "Jost",
+    "middlewares",
+    "MMKV",
+    "persistor",
+    "Pressable",
+    "reduxjs",
+    "signin",
+    "Vielra"
+  ]
 }

@@ -2,14 +2,10 @@ import React, { FC, useCallback, useMemo, useState } from 'react';
 import { ActivityIndicator, Dimensions, ListRenderItem, Pressable, FlatList, StyleSheet, View } from 'react-native';
 
 // Core components
-import { IconButton, Typography } from '@/components/core';
+import { IconButton, Screen, Typography } from '@/components/core';
 
 // Shared component
-import { EmptyState, StatusBar } from '@/components/shared';
-import { IPhrasebookStackParamList } from '../navigators';
-
-// Action creators
-import { phrasebook_actionFetchPhraseList } from '@/modules/phrasebook/redux';
+import { EmptyState } from '@/components/shared';
 
 // Components
 import { Ionicons } from '@/components/icons';
@@ -18,55 +14,80 @@ import { BottomSheetOptionsMenuPhraseList, PhraseCardItem } from '@/modules/phra
 // Hooks
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
-import { usePhrasebook } from '../hooks';
+import { usePhrasebook } from '@/modules/phrasebook/hooks';
 import { useTheme } from '@/modules/theme/hooks';
 
 // Utils
-import { isIOS, isSmallScreen } from '@/utils';
-import { createSpacing } from '@/modules/theme/utils';
+// import { isIOS, isSmallScreen } from '@/utils';
+import { createSpacing } from '@/modules/theme/utilities';
 
 // Theme config
-import * as themeConfig from '@/modules/theme/config';
+import { themeConfig } from '@/modules/theme/configs';
 
 // Interfaces
-import { IPhrase } from '@/modules/phrasebook/interfaces';
-import { UUID } from '@/modules/common';
+import { IPhrase, IPhraseCategory } from '@/modules/phrasebook/interfaces';
+import { UUID } from '@/modules/common/interfaces';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { platformUtils, screenUtils } from '@/modules/app/utilities';
+import { NavigationProps, NavigatorParamList } from '@/navigators';
+import { useAppDispatch } from '@/plugins/redux';
+import { useToast } from '@/modules/app/hooks';
+import { paletteLibs } from '@/modules/theme/libs';
+import FloatingButtonAddPhrase from '../components/floating-button-add-phrase';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('screen');
-const HEADER_HEIGHT = isIOS ? 100 : 90;
+type Props = NativeStackScreenProps<NavigatorParamList, 'phrase_list_screen'>;
 
-type Props = NativeStackScreenProps<IPhrasebookStackParamList, 'PhraseListScreen'>;
+const HEADER_HEIGHT = 60;
 
-export const PhraseListScreen: FC<Props> = (props) => {
+const PhraseListScreen = ({ route }: Props) => {
   const theme = useTheme();
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const { showToast } = useToast();
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<NavigationProps>();
 
-  const { route } = props;
-  const { top: safeAreaInsetsTop } = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   const paramsCategory = route.params.category;
 
-  const { phraseList_data, phraseList_isLoading } = usePhrasebook();
+  const {
+    listPhrasebook,
+    listCategories,
+    phrasebook_getListPhrase,
+    phrasebook_getListPhraseIsLoading,
+    phrasebook_setListPhrasebook,
+  } = usePhrasebook();
 
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = useState<Array<UUID>>([]);
+
+  const listPhases = useMemo(() => {
+    return listPhrasebook?.[paramsCategory.id]?.phrases ?? [];
+  }, [paramsCategory.id, listPhrasebook.length]);
 
   /**
    * Get phrase by category
    * @param {string} category
    * @return {void}
    */
-  const fetchPhraseList = (category: string): void => {
-    dispatch(phrasebook_actionFetchPhraseList(category));
+  const getPhraseListByCategory = async (category: IPhraseCategory): Promise<void> => {
+    try {
+      const result = await phrasebook_getListPhrase({ category: category.slug, limit: null });
+      if (result.isSuccess) {
+        dispatch(phrasebook_setListPhrasebook(result.data));
+      }
+    } catch (e) {
+      showToast({
+        position: 'top',
+        variant: 'filled',
+        text1: 'Failed to get phrases',
+      });
+    }
   };
 
   useFocusEffect(
     useCallback(() => {
       if (paramsCategory) {
-        fetchPhraseList(paramsCategory.slug);
+        getPhraseListByCategory(paramsCategory);
       }
     }, []),
   );
@@ -78,18 +99,18 @@ export const PhraseListScreen: FC<Props> = (props) => {
   /**
    *  Phrase list by category
    */
-  const phraseList = useMemo<IPhrase[]>(() => {
-    if (phraseList_data?.[paramsCategory.slug]) {
-      return phraseList_data[paramsCategory.slug];
-    }
-    return [];
-  }, [phraseList_data]);
+  // const phraseList = useMemo<IPhrase[]>(() => {
+  //   if (phraseList_data?.[paramsCategory.slug]) {
+  //     return phraseList_data[paramsCategory.slug];
+  //   }
+  //   return [];
+  // }, [phraseList_data]);
 
-  const handleSelect = useCallback(
-    (selectedPhraseId: UUID) => {
-      setSelectedItems([...selectedItems, selectedPhraseId]);
+  const onSelectItem = useCallback(
+    (id: UUID) => {
+      setSelectedItems([...selectedItems, id]);
     },
-    [selectedItems],
+    [selectedItems.length],
   );
 
   const isSelectionMode = useMemo<boolean>(() => {
@@ -100,56 +121,53 @@ export const PhraseListScreen: FC<Props> = (props) => {
     <PhraseCardItem
       item={item}
       isSelected={Boolean(selectedItems.find((x) => x === item.id))}
-      onSelect={handleSelect}
+      onSelect={onSelectItem}
       isSelectionMode={isSelectionMode}
     />
   );
 
-  const getHeaderBackgroundColor = useMemo(() => {
+  const headerBackground = useMemo(() => {
     if (isSelectionMode) {
-      return theme.palette.secondary.main;
+      return paletteLibs.green[600];
     } else {
       return paramsCategory.color || theme.palette.primary.main;
     }
   }, [isSelectionMode, paramsCategory]);
 
   return (
-    <>
-      <StatusBar barStyle="light-content" translucent />
-      <View style={{ backgroundColor: phraseList_isLoading ? 'transparent' : theme.palette.background.default }}>
-        <View
-          style={StyleSheet.flatten([styles.absoluteBackgroundHeader, { backgroundColor: getHeaderBackgroundColor }])}
-        />
-
+    <Screen
+      preset='fixed'
+      statusBarStyle='light-content'
+      backgroundColor={theme.palette.background.paper}
+      headerBackgroundColor={headerBackground}>
+      <View
+        style={{
+          backgroundColor: phrasebook_getListPhraseIsLoading ? 'transparent' : theme.palette.background.default,
+        }}>
+        <View style={StyleSheet.flatten([styles.absoluteBackgroundHeader, { backgroundColor: headerBackground }])} />
         {isSelectionMode ? (
           <View style={styles.selectedModeHeaderRoot}>
-            <View
-              style={StyleSheet.flatten([
-                styles.headerContainer,
-                {
-                  marginTop: safeAreaInsetsTop + createSpacing(2),
-                },
-              ])}>
+            <View style={StyleSheet.flatten([styles.headerContainer])}>
               <IconButton
-                icon="close"
-                iconType="ionicons"
+                icon='close'
+                iconType='ionicons'
                 onPress={() => setSelectedItems([])}
                 iconStyle={{ color: theme.palette.common.white }}
               />
-              <Typography variant="h5" style={styles.textSelectionMode}>
+              <Typography variant='h5' style={styles.textSelectionMode}>
                 {selectedItems.length} Selected
               </Typography>
 
               <View style={styles.selectionRightContent}>
                 <IconButton
-                  icon="trash-outline"
-                  iconType="ionicons"
+                  icon='trash-outline'
+                  iconType='ionicons'
                   onPress={() => setSelectedItems([])}
                   iconStyle={{ color: theme.palette.common.white }}
                 />
                 <IconButton
-                  icon="heart-outline"
-                  iconType="ionicons"
+                  icon='heart-outline'
+                  iconType='ionicons'
                   onPress={() => setSelectedItems([])}
                   iconStyle={{ color: theme.palette.common.white }}
                 />
@@ -158,13 +176,7 @@ export const PhraseListScreen: FC<Props> = (props) => {
           </View>
         ) : (
           <View style={StyleSheet.flatten([styles.headerRoot])}>
-            <View
-              style={StyleSheet.flatten([
-                styles.headerContainer,
-                {
-                  marginTop: safeAreaInsetsTop + createSpacing(2),
-                },
-              ])}>
+            <View style={StyleSheet.flatten([styles.headerContainer])}>
               <View style={styles.headerLeftContent}>
                 <Pressable onPress={() => setShowOptionsMenu(true)} style={styles.headerLeftContentPressable}>
                   {({ pressed }) => (
@@ -177,12 +189,12 @@ export const PhraseListScreen: FC<Props> = (props) => {
                           }),
                         },
                       ])}>
-                      <Ionicons name="ios-bookmarks-outline" size={28} style={StyleSheet.flatten([styles.iconStyle])} />
+                      <Ionicons name='bookmarks-outline' size={28} style={StyleSheet.flatten([styles.iconStyle])} />
                       <View style={styles.headerTextContainer}>
-                        <Typography variant="h5" style={styles.headerText} numberOfLines={1}>
+                        <Typography variant='h5' fontWeight='bold' style={styles.headerText} numberOfLines={1}>
                           {paramsCategory.name.en}
                         </Typography>
-                        <Typography variant="subtitle2" style={StyleSheet.flatten([styles.textCount])}>
+                        <Typography variant='subtitle2' style={StyleSheet.flatten([styles.textCount])}>
                           {paramsCategory.phrases_count + ' phrases'}
                         </Typography>
                       </View>
@@ -193,14 +205,14 @@ export const PhraseListScreen: FC<Props> = (props) => {
               <View style={styles.headerRightContent}>
                 <View style={styles.headerRightContentContainer}>
                   <IconButton
-                    icon="heart"
-                    iconType="ionicons"
+                    icon='heart'
+                    iconType='ionicons'
                     iconStyle={{ color: theme.palette.primary.contrastText }}
                     onPress={() => navigation.goBack()}
                   />
                   <IconButton
-                    icon="more-vert"
-                    iconType="material-icons"
+                    icon='more-vert'
+                    iconType='material-icons'
                     iconStyle={{ color: theme.palette.primary.contrastText }}
                     onPress={() => setShowOptionsMenu(true)}
                   />
@@ -210,42 +222,49 @@ export const PhraseListScreen: FC<Props> = (props) => {
           </View>
         )}
 
-        {phraseIsEmpty && (
+        {phraseIsEmpty ? (
           <View style={StyleSheet.flatten([styles.boxEmptyState])}>
-            <EmptyState style={{ backgroundColor: theme.palette.background.paper }} height={200} />
-          </View>
-        )}
-
-        {phraseList_isLoading ? (
-          <View
-            style={StyleSheet.flatten([
-              styles.loadingBox,
-              {
-                backgroundColor: theme.palette.background.paper,
-              },
-            ])}>
-            <ActivityIndicator size="large" color={theme.palette.secondary.main} />
+            <EmptyState
+              style={{ backgroundColor: theme.palette.background.paper, borderRadius: theme.shape.borderRadius }}
+              height={200}
+            />
           </View>
         ) : (
           <>
-            {phraseList.length > 0 && (
-              <FlatList
-                showsVerticalScrollIndicator={false}
-                data={phraseList}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-                style={styles.flatListStyle}
-                contentContainerStyle={{
-                  paddingHorizontal: createSpacing(4),
-                  paddingTop: createSpacing(2),
-                }}
-              />
+            {phrasebook_getListPhraseIsLoading ? (
+              <View
+                style={StyleSheet.flatten([
+                  styles.loadingBox,
+                  {
+                    backgroundColor: theme.palette.background.paper,
+                  },
+                ])}>
+                <ActivityIndicator size='large' color={theme.palette.secondary.main} />
+              </View>
+            ) : (
+              <>
+                {listPhases.length > 0 && (
+                  <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={listPhases}
+                    keyExtractor={(item) => String(item.id)}
+                    renderItem={renderItem}
+                    style={styles.flatListStyle}
+                    contentContainerStyle={{
+                      paddingHorizontal: createSpacing(4),
+                      paddingTop: createSpacing(2),
+                    }}
+                  />
+                )}
+              </>
             )}
           </>
         )}
       </View>
       <BottomSheetOptionsMenuPhraseList show={showOptionsMenu} onClose={() => setShowOptionsMenu(false)} />
-    </>
+
+      <FloatingButtonAddPhrase />
+    </Screen>
   );
 };
 
@@ -256,7 +275,7 @@ const styles = StyleSheet.create({
     height: 160,
     top: 0,
     left: 0,
-    width: SCREEN_WIDTH,
+    width: screenUtils.width,
   },
   headerRoot: {
     zIndex: 2,
@@ -267,7 +286,7 @@ const styles = StyleSheet.create({
     paddingLeft: createSpacing(3),
     paddingRight: createSpacing(5),
     alignItems: 'center',
-    paddingBottom: createSpacing(isIOS ? 4 : 1),
+    // paddingBottom: createSpacing(platformUtils.isIOS ? 4 : 1),
   },
   headerLeftContent: {
     flex: 1,
@@ -335,9 +354,11 @@ const styles = StyleSheet.create({
   },
   boxEmptyState: {
     height: 200,
-    paddingHorizontal: createSpacing(isSmallScreen ? 4 : 6),
+    paddingHorizontal: themeConfig.horizontalSpacing,
     zIndex: 3,
-    borderRadius: themeConfig.shape.borderRadius,
+    borderRadius: 10,
     marginTop: createSpacing(3),
   },
 });
+
+export default PhraseListScreen;

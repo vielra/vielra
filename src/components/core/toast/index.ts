@@ -1,1 +1,2 @@
-export * from './toast.component';
+export { default as Toast } from './toast';
+export * from './toast';

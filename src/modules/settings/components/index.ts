@@ -1,1 +1,1 @@
-export * from './bottom-sheet-language.component';
+export { default as BottomSheetLanguage } from './bottom-sheet-language';

@@ -1,10 +1,18 @@
-import { SocialAccountProvider } from '@/modules/auth';
+import { SocialAccountProvider } from '@/modules/auth/interfaces';
 
 export interface IUser {
+  id: string;
   name: string;
-  username: string;
   email: string;
-  availableStatusText: 'available' | 'away' | 'do not disturb' | 'offline';
+  username: string;
+  photo_url: string | null;
+  gender: string | null;
+  mobile_phone: string | null;
+  birthday: string | null;
+  about: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  status: 'active' | 'inactive';
   social_account: ISocialAccount | null;
 }
 

@@ -9,3 +9,10 @@ export interface ISagaEffectWithNavigateFunction<T = any, P = any> {
   payload: P;
   navigate: (routeName?: string, params?: any) => void;
 }
+
+export interface IDropdown<T> {
+  value: T;
+  label: string;
+}
+
+export interface IDropdownValue<T> extends IDropdown<T> {}

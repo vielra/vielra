@@ -1,1 +1,2 @@
-export * from './theme-colors';
+export * from './palette';
+export * from './palette.lib';

@@ -1,1 +1,1 @@
-export * from './assets.components';
+export * from './assets';

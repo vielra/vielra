@@ -1,1 +1,2 @@
-export * from './root-stack.navigator';
+export * from './navigation.type';
+export * from './navigation.util';

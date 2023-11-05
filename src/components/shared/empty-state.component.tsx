@@ -5,10 +5,10 @@ import { Image, StyleSheet, View, ViewStyle } from 'react-native';
 import { Typography } from '@/components/core';
 
 // Assets
-import { InboxIcon } from '@/assets';
+import { Assets } from '@/assets';
 
 // Utils
-import { createSpacing } from '@/modules/theme/utils';
+import { createSpacing } from '@/modules/theme/utilities';
 
 interface Props {
   title?: string;
@@ -28,7 +28,7 @@ export const EmptyState: FC<Props> = (props) => {
           ...style,
         },
       ])}>
-      <Image source={InboxIcon} style={styles.icon} />
+      <Image source={Assets.inboxIcon} style={styles.icon} />
       <Typography style={styles.textTitle} numberOfLines={1}>
         {title}
       </Typography>

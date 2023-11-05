@@ -61,7 +61,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
-    ReactFontManager.getInstance().addCustomFont(this, "Be Vietnam Pro", R.font.be_vietnam_pro);
+    ReactFontManager.getInstance().addCustomFont(this, "Plus Jakarta Sans", R.font.plus_jakarta_sans);
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       DefaultNewArchitectureEntryPoint.load();

@@ -1,110 +1,108 @@
 import React, { FC, useCallback } from 'react';
 import { ActivityIndicator, ListRenderItem, StyleSheet, View, FlatList } from 'react-native';
 
-// Core components
-import { IconButton } from '@/components/core';
+// cpre components
+import { Screen } from '@/components/core';
 
-// Component
-import { SafeAreaView, ScreenTitle } from '@/components/shared';
+// component
 import { PhraseCategoryItem } from '@/modules/phrasebook/components';
 
-// Constants
-import { RoutesConstant } from '@/constants';
-
 // Hooks
-import { useAuth } from '@/modules/auth';
-import { useDispatch } from 'react-redux';
-// import { useTheme } from '@/modules/theme/hooks';
+import { useAuth } from '@/modules/auth/hooks';
 import { usePhrasebook } from '@/modules/phrasebook/hooks';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
-// Action creators
-import { phrasebook_actionFetchPraseCategory } from '@/modules/phrasebook/redux';
-import { common_actionSetBottomSheetAuthRequired } from '@/modules/common/redux';
+// import { phrasebook_actionFetchPraseCategory } from '@/modules/phrasebook/redux';
+// import { common_actionSetBottomSheetAuthRequired } from '@/modules/common/redux';
 
 // Utils
-import { createSpacing } from '@/modules/theme/utils';
-import { isSmallScreen } from '@/utils';
+import { createSpacing } from '@/modules/theme/utilities';
 
 // Theme config
-import * as themeConfig from '@/modules/theme/config';
+import { themeConfig } from '@/modules/theme/configs';
 
 // Interfaces
 import { IPhraseCategory } from '@/modules/phrasebook/interfaces';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { IPhrasebookStackParamList } from '@/modules/phrasebook/navigators';
+import { useTheme } from '@/modules/theme/hooks';
+import { NavigationProps } from '@/navigators';
+import { uiConfig } from '@/modules/app/configs/ui.config';
+import { useAppDispatch } from '@/plugins/redux';
+import { screenUtils } from '@/modules/app/utilities';
 
-type AuthStackNavigationProp = NativeStackNavigationProp<
-  IPhrasebookStackParamList,
-  typeof RoutesConstant.PhrasebookStack.PhraseCategoryScreen
->;
+const PhraseCategoryScreen: FC = () => {
+  const theme = useTheme();
+  const navigation = useNavigation<NavigationProps>();
+  const dispatch = useAppDispatch();
 
-export const PhraseCategoryScreen: FC = () => {
-  const navigation = useNavigation<AuthStackNavigationProp>();
+  const { isAuthenticated } = useAuth();
 
-  const { isLoggedIn } = useAuth();
-
-  const dispatch = useDispatch();
-  const { phraseCategory_data, phraseCategory_isLoading } = usePhrasebook();
+  const {
+    listCategories,
+    phrasebook_setListCategories,
+    phrasebook_getListCategory,
+    phrasebook_getListCategoryIsLoading,
+    phrasebook_getListCategoryData,
+  } = usePhrasebook();
 
   /**
    * Handle press icon button add new phrase
    */
   const handlePressAddPhrase = (): void => {
-    if (isLoggedIn) {
-      navigation.navigate(RoutesConstant.RootStack.AddPhraseScreen);
+    if (isAuthenticated) {
+      // navigation.navigate(RoutesConstant.RootStack.AddPhraseScreen);
     } else {
-      dispatch(common_actionSetBottomSheetAuthRequired(true));
+      // dispatch(common_actionSetBottomSheetAuthRequired(true));
     }
   };
 
-  const fetchPhrasebookCategory = (): void => {
-    dispatch(phrasebook_actionFetchPraseCategory());
+  const getPhraseCategories = async (): Promise<void> => {
+    try {
+      const response = await phrasebook_getListCategory(undefined);
+      if (response.isSuccess) {
+        dispatch(phrasebook_setListCategories(response.data));
+      }
+    } catch (e) {}
   };
 
   useFocusEffect(
     useCallback(() => {
-      if (!phraseCategory_data.length) {
-        fetchPhrasebookCategory();
-      }
-    }, [phraseCategory_data]),
+      getPhraseCategories();
+    }, []),
   );
 
   const renderItem: ListRenderItem<IPhraseCategory> = ({ item }) => <PhraseCategoryItem item={item} />;
 
   return (
-    <SafeAreaView>
-      <ScreenTitle
-        title="Phrasebook"
-        titleSize="medium"
-        renderRightContent={<IconButton onPress={handlePressAddPhrase} iconType="ionicons" icon="add" />}
-      />
-      {phraseCategory_isLoading ? (
+    <Screen
+      preset='fixed'
+      statusBarStyle='light-content'
+      title='Phrasebook'
+      backgroundColor={theme.palette.background.paper}
+      style={{ paddingTop: 12 }}>
+      {phrasebook_getListCategoryIsLoading ? (
         <View style={styles.loadingBox}>
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size='large' />
         </View>
       ) : (
-        <>
-          {phraseCategory_data && (
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              data={phraseCategory_data}
-              keyExtractor={(item) => item.id}
-              renderItem={renderItem}
-              style={styles.flatList}
-              contentContainerStyle={{ paddingHorizontal: createSpacing(isSmallScreen ? 4 : 6) }}
-            />
-          )}
-        </>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={listCategories}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={renderItem}
+          style={styles.flatList}
+          contentContainerStyle={{
+            // paddingHorizontal: theme.horizontalSpacing,
+            paddingBottom: uiConfig.bottomTabHeight,
+          }}
+        />
       )}
-    </SafeAreaView>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
   flatList: {
     flex: 1,
-    marginTop: createSpacing(4),
   },
   loadingBox: {
     borderRadius: themeConfig.shape.borderRadius,
@@ -112,7 +110,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 20,
     marginTop: createSpacing(3),
-    height: 180,
+    height: screenUtils.height - uiConfig.bottomTabHeight,
     zIndex: 3,
   },
 });
+
+export default PhraseCategoryScreen;

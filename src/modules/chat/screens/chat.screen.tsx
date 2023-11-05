@@ -1,27 +1,33 @@
-import React, { FC } from 'react';
+import { View } from 'react-native';
 
-import { ScrollView } from 'react-native';
+// components
+import { Button, Screen, Typography } from '@/components/core';
 
-// Core component
-import { Button, Typography } from '@/components/core';
+// hooks
+import { useTheme } from '@/modules/theme/hooks';
+import { useNavigation } from '@react-navigation/native';
 
-// Shared component
-import { SafeAreaView } from '@/components/shared';
+// interfaces
+import { NavigationProps } from '@/navigators';
 
-// Constants
-import { RoutesConstant } from '@/constants';
+const ChatScreen = (): JSX.Element => {
+  const theme = useTheme();
+  const nav = useNavigation<NavigationProps>();
 
-export const ChatScreen: FC = (props) => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Typography>Chat</Typography>
-        <Button
-          onPress={() => props.navigation.navigate(RoutesConstant.BottomTab.HomeScreen)}
-          variant="text"
-          title="Go to home"
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <Screen
+      preset='fixed'
+      statusBarStyle='light-content'
+      backgroundColor={theme.palette.background.paper}
+      style={{ paddingTop: 12, paddingHorizontal: theme.horizontalSpacing }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Typography color='text.disabled' style={{ textAlign: 'center' }} gutterBottom={2}>
+          Chat Screen
+        </Typography>
+        <Button title='Go to settings' onPress={() => nav.navigate('settings_screen')} />
+      </View>
+    </Screen>
   );
 };
+
+export default ChatScreen;
