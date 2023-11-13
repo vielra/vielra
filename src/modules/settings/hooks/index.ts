@@ -1,1 +1,1 @@
-export * from './use-settings.hook'
+export * from './use-settings.hook';

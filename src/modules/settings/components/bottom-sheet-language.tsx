@@ -80,6 +80,9 @@ const BottomSheetLanguage: FC<Props> = ({ index, setIndex }) => {
         variant: 'filled',
         text1: `Language set to ${lang.name}`,
       });
+      setTimeout(() => {
+        bottomSheetRef.current?.close();
+      }, 500);
     }
   };
 

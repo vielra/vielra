@@ -268,7 +268,8 @@ const SettingsScreen = () => {
           styles.bottomSheet_handleIndicatorStyle,
           { backgroundColor: theme.palette.divider },
         ])}
-        onChange={handleSheetChanges}>
+        onChange={handleSheetChanges}
+      >
         <View style={styles.bottomSheet_content}>
           {renderCodePushSyncStatusIcon(codePushSyncStatus as CodePush.SyncStatus)}
           <Typography
@@ -279,7 +280,8 @@ const SettingsScreen = () => {
                   color: green[600],
                 }),
               },
-            ])}>
+            ])}
+          >
             {codePushSyncStatusText}
           </Typography>
         </View>
