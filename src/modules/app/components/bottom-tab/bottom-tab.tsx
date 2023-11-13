@@ -42,7 +42,7 @@ const TAB_ITEMS: Array<TabItem> = [
   },
   {
     path: 'phrase_category_screen',
-    label: 'Layouts',
+    label: 'Phrasebook',
     icon: 'book-outline',
     focusIcon: 'book',
     iconProvider: 'ionicons',
@@ -138,7 +138,7 @@ const BottomTab: FC<Props> = (props) => {
                 />
                 {state.index === index && (
                   <View style={StyleSheet.flatten([{}])}>
-                    <Typography variant='subtitle2' style={styles.tabItemLabel}>
+                    <Typography style={styles.tabItemLabel} numberOfLines={1}>
                       {x.label}
                     </Typography>
                   </View>
@@ -185,6 +185,8 @@ const styles = StyleSheet.create({
   },
   tabItemLabel: {
     color: '#ffffff',
+    fontSize: 10,
+    fontWeight: '600',
   },
   tabBarAvatar: {
     width: 22,
