@@ -8,7 +8,7 @@ import { BaseButton, BaseButtonProps } from '@/components/base';
 import { common, grey } from '@/modules/theme/libs/palette';
 
 // icon components.
-import { FeatherIcon, Ionicon, MaterialCommunityIcon, MaterialIcon } from '@/components/core/icons';
+import { FeatherIcon, Ionicons, MaterialCommunityIcon, MaterialIcon } from '@/components/core/icons';
 
 // utils
 import { themeUtils } from '@/modules/theme/utilities';
@@ -86,9 +86,9 @@ const Button: FC<CoreButtonProps> = (props): JSX.Element => {
       }
       return 18;
     };
-    if (iconType === 'ionicons') {
+    if (iconType === 'Ioniconss') {
       return (
-        <Ionicon
+        <Ionicons
           name={String(placement === 'start' ? startIcon : endIcon)}
           size={getIconSize()}
           color={

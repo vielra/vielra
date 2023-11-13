@@ -5,7 +5,7 @@ import { Image, ImageSourcePropType, StyleSheet, View, ViewStyle } from 'react-n
 import { Typography } from '@/components/core';
 
 // icons components
-import { Ionicon } from '@/components/core/icons';
+import { Ionicons } from '@/components/core/icons';
 
 // interfaces
 import { ThemeSize } from '@/modules/theme/interfaces';
@@ -117,7 +117,7 @@ const Avatar: FC<AvatarProps> = (props) => {
           {text.length > 3 ? commonUtils.getInitialsName(text, true) : text}
         </Typography>
       ) : (
-        <Ionicon name='person' size={22} color={theme_paletteBase.secondary.contrastText} />
+        <Ionicons name='person' size={22} color={theme_paletteBase.secondary.contrastText} />
       )}
     </View>
   );

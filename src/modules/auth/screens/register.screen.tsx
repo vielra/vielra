@@ -20,7 +20,7 @@ import { createSpacing } from '@/modules/theme/utilities';
 import { Assets } from '@/assets';
 
 // Components.
-import { Ionicons } from '@/components/icons';
+import { Ionicons } from '@/components/core';
 import { AuthLayout, RegisterForm } from '@/modules/auth/components';
 
 // Libs

@@ -10,7 +10,7 @@ import { MenuItem } from '@/components/core';
 
 // Components
 import { BottomSheetBackdrop } from '@/components/shared/bottom-sheet';
-import { Ionicons } from '@/components/icons';
+import { Ionicons } from '@/components/core';
 
 // Hooks
 import { useTheme } from '@/modules/theme/hooks';
