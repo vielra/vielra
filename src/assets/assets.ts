@@ -1,7 +1,13 @@
 export const Assets = {
-  logoPrimary: require('./images/logo-primary.png'),
-  logoPrimaryVerticalLookup: require('./images/logo-primary-vertical-lookup.png'),
-  logoSecondaryVerticalLookup: require('./images/logo-secondary-vertical-lookup.png'),
+  logoPrimary: require('./images/logo/logo_primary.png'),
+  logoPrimary_xs: require('./images/logo/logo_primary_xs.png'),
+  logoSecondary: require('./images/logo/logo_secondary.png'),
+  logoSecondary_xs: require('./images/logo/logo_secondary_xs.png'),
+  logoPrimaryVerticalLookup: require('./images/logo/logo-primary-vertical-lookup.png'),
+  logoPrimaryVerticalLookup_xs: require('./images/logo/logo-primary-vertical-lookup_xs.png'),
+  logoSecondaryVerticalLookup: require('./images/logo/logo-secondary-vertical-lookup.png'),
+  logoSecondaryVerticalLookup_xs: require('./images/logo/logo-secondary-vertical-lookup_xs.png'),
+
   wavyBackgroundLandScape: require('./images/15273828_5568579_landscape.jpg'),
   wavyBackgroundPortrait: require('./images/15273828_5568579_portrait.jpg'),
   wavyBackgroundLandScapeDark: require('./images/15273828_5568579_landscape_dark.jpg'),
