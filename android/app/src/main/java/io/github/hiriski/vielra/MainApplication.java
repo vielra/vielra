@@ -1,4 +1,4 @@
-package me.riski.vielra;
+package io.github.hiriski.vielra;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
