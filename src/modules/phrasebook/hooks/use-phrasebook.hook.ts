@@ -16,7 +16,8 @@ export const usePhrasebook = () => {
     { isLoading: phrasebook_getListPhraseIsLoading, data: phrasebook_getListPhraseData },
   ] = phrasebookApi.useLazyGetListPhraseQuery();
 
-  const [phrasebook_create, { isLoading: phrasebook_createIsLoading }] = phrasebookApi.useCreatePhraseMutation();
+  const [phrasebook_create, { isLoading: phrasebook_createIsLoading, error: phrasebook_createError }] =
+    phrasebookApi.useCreatePhraseMutation();
 
   return {
     ...appState,
@@ -30,5 +31,6 @@ export const usePhrasebook = () => {
     phrasebook_getListPhraseData,
     phrasebook_create,
     phrasebook_createIsLoading,
+    phrasebook_createError,
   };
 };

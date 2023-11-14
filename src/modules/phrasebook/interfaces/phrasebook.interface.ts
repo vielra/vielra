@@ -1,7 +1,7 @@
 import { UUID } from '@/modules/common/interfaces';
 
 export interface IRequestCreatePhrase {
-  category_id: IPhraseCategory['id'];
+  category_ids: Array<IPhraseCategory['id']>;
   text_en: string;
   text_id?: string;
   text_vi?: string;

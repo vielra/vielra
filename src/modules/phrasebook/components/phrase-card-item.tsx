@@ -12,7 +12,7 @@ import { createSpacing } from '@/modules/theme/utilities';
 
 // Components
 // import DropShadow from 'react-native-drop-shadow';
-import { Ionicons } from '@/components/icons';
+import { Ionicons } from '@/components/core';
 
 // Assets components
 import { Assets } from '@/assets';
@@ -27,12 +27,14 @@ import { paletteLibs } from '@/modules/theme/libs';
 import { themeConfig } from '@/modules/theme/configs';
 
 // Hooks.
-import { useDispatch } from 'react-redux';
 import { useTheme } from '@/modules/theme/hooks';
+import { useAppDispatch } from '@/plugins/redux';
+import { usePhrasebook } from '@/modules/phrasebook/hooks';
 
 // Interface
 import { IPhrase } from '@/modules/phrasebook/interfaces';
 import { AppLanguageCode } from '@/modules/app/interfaces';
+import { batch } from 'react-redux';
 
 const SelectionBadge = () => {
   const theme = useTheme();
@@ -53,11 +55,11 @@ interface Props {
 }
 export const PhraseCardItem: FC<Props> = memo((props) => {
   const { item, isSelected, onSelect, isSelectionMode } = props;
-
-  const dispatch = useDispatch();
   const theme = useTheme();
+  const dispatch = useAppDispatch();
 
-  const [expanded, setExpanded] = useState<boolean>(false);
+  const { phrasebook_setSnapIndexBottomSheetDetail, phrasebook_setBottomSheetDetailData, snapIndexBottomSheetDetail } =
+    usePhrasebook();
 
   const handlePress = useCallback(() => {
     if (isSelectionMode) {
@@ -67,9 +69,12 @@ export const PhraseCardItem: FC<Props> = memo((props) => {
         onSelect(item.id);
       }
     } else {
-      setExpanded(!expanded);
+      batch(() => {
+        dispatch(phrasebook_setSnapIndexBottomSheetDetail(0));
+        dispatch(phrasebook_setBottomSheetDetailData(item));
+      });
     }
-  }, [isSelectionMode]);
+  }, [isSelectionMode, snapIndexBottomSheetDetail]);
 
   const handleLongPress = (): void => {
     onSelect(item.id);
@@ -100,21 +105,7 @@ export const PhraseCardItem: FC<Props> = memo((props) => {
   };
 
   return (
-    <View
-      style={StyleSheet.flatten([
-        styles.root,
-        {
-          backgroundColor: theme.palette.background.paper,
-          ...(expanded && {
-            shadowOffset: {
-              width: 0,
-              height: 5,
-            },
-            shadowOpacity: 0.1,
-            shadowRadius: 12,
-          }),
-        },
-      ])}>
+    <View style={StyleSheet.flatten([styles.root, { backgroundColor: theme.palette.background.paper }])}>
       {isSelected && <SelectionBadge />}
       <Pressable
         onPress={handlePress}
@@ -128,51 +119,45 @@ export const PhraseCardItem: FC<Props> = memo((props) => {
             },
           ])
         }>
-        {({ pressed }) => (
-          <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-              <View style={StyleSheet.flatten([styles.phraseTextContainer])}>
-                {renderIconFlag('vi')}
-                <Typography style={StyleSheet.flatten([styles.phraseText, { fontWeight: '600' }])}>
-                  {item.text.vi}
-                </Typography>
-              </View>
-              <View style={styles.phraseTextContainer}>
-                {renderIconFlag('id')}
-                <Typography style={StyleSheet.flatten([styles.phraseText])}>{item.text.id}</Typography>
-              </View>
-
-              <View style={styles.phraseTextContainer}>
-                {renderIconFlag('en')}
-                <Typography style={StyleSheet.flatten([styles.phraseText])}>{item.text.en}</Typography>
-              </View>
-
-              {expanded && (
-                <View>
-                  <View
-                    style={StyleSheet.flatten([
-                      styles.hiddenFooter,
-                      {
-                        borderTopColor: theme.palette.divider,
-                      },
-                    ])}>
-                    <View style={styles.hiddenFooterLeftContent}>
-                      <IconButton
-                        onPress={handleDelete}
-                        icon='trash'
-                        iconType='ionicons'
-                        iconStyle={{ color: theme.palette.text.disabled }}
-                      />
-                    </View>
-                    <View style={styles.hiddenFooterRightContent}>
-                      <IconButton icon='heart' iconType='ionicons' iconStyle={{ color: theme.palette.text.disabled }} />
-                    </View>
-                  </View>
+        <View style={styles.container}>
+          <View style={{ flex: 1 }}>
+            <View style={StyleSheet.flatten([styles.phraseTextContainer])}>
+              {renderIconFlag('vi')}
+              <Typography style={StyleSheet.flatten([styles.phraseText, { fontWeight: '600' }])}>
+                {item.text.vi}
+              </Typography>
+            </View>
+            <View style={styles.phraseTextContainer}>
+              {renderIconFlag('id')}
+              <Typography style={StyleSheet.flatten([styles.phraseText])}>{item.text.id}</Typography>
+            </View>
+            <View style={styles.phraseTextContainer}>
+              {renderIconFlag('en')}
+              <Typography style={StyleSheet.flatten([styles.phraseText])}>{item.text.en}</Typography>
+            </View>
+            <View>
+              <View
+                style={StyleSheet.flatten([
+                  styles.hiddenFooter,
+                  {
+                    borderTopColor: theme.palette.divider,
+                  },
+                ])}>
+                <View style={styles.hiddenFooterLeftContent}>
+                  <IconButton
+                    onPress={handleDelete}
+                    icon='trash'
+                    iconType='ionicons'
+                    iconStyle={{ color: theme.palette.text.disabled }}
+                  />
                 </View>
-              )}
+                <View style={styles.hiddenFooterRightContent}>
+                  <IconButton icon='heart' iconType='ionicons' iconStyle={{ color: theme.palette.text.disabled }} />
+                </View>
+              </View>
             </View>
           </View>
-        )}
+        </View>
       </Pressable>
     </View>
   );

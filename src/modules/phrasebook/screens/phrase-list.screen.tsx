@@ -8,8 +8,13 @@ import { IconButton, Screen, Typography } from '@/components/core';
 import { EmptyState } from '@/components/shared';
 
 // Components
-import { Ionicons } from '@/components/icons';
-import { BottomSheetOptionsMenuPhraseList, PhraseCardItem } from '@/modules/phrasebook/components';
+import { Ionicons } from '@/components/core';
+import {
+  BottomSheetOptionsMenuPhraseList,
+  BottomSheetPhraseDetail,
+  BottomSheetPhrasebookCategoryList,
+  PhraseCardItem,
+} from '@/modules/phrasebook/components';
 
 // Hooks
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -51,10 +56,11 @@ const PhraseListScreen = ({ route }: Props) => {
 
   const {
     listPhrasebook,
-    listCategories,
     phrasebook_getListPhrase,
     phrasebook_getListPhraseIsLoading,
     phrasebook_setListPhrasebook,
+    snapIndexBottomSheetCategoryList,
+    phrasebook_setSnapIndexBottomSheetCategoryList,
   } = usePhrasebook();
 
   const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
@@ -62,7 +68,7 @@ const PhraseListScreen = ({ route }: Props) => {
 
   const listPhases = useMemo(() => {
     return listPhrasebook?.[paramsCategory.id]?.phrases ?? [];
-  }, [paramsCategory.id, listPhrasebook.length]);
+  }, [paramsCategory, listPhrasebook]);
 
   /**
    * Get phrase by category
@@ -71,6 +77,7 @@ const PhraseListScreen = ({ route }: Props) => {
    */
   const getPhraseListByCategory = async (category: IPhraseCategory): Promise<void> => {
     try {
+      console.log('CALL ME ->');
       const result = await phrasebook_getListPhrase({ category: category.slug, limit: null });
       if (result.isSuccess) {
         dispatch(phrasebook_setListPhrasebook(result.data));
@@ -88,11 +95,14 @@ const PhraseListScreen = ({ route }: Props) => {
     useCallback(() => {
       if (paramsCategory) {
         getPhraseListByCategory(paramsCategory);
+
+        // for close bottom sheet category
+        dispatch(phrasebook_setSnapIndexBottomSheetCategoryList(-1));
       }
     }, []),
   );
 
-  const phraseIsEmpty = useMemo(() => {
+  const isEmpty = useMemo(() => {
     return paramsCategory.phrases_count === 0;
   }, [paramsCategory.phrases_count]);
 
@@ -126,6 +136,12 @@ const PhraseListScreen = ({ route }: Props) => {
     />
   );
 
+  const onPressHeaderTitle = useCallback(() => {
+    dispatch(phrasebook_setSnapIndexBottomSheetCategoryList(0));
+  }, [snapIndexBottomSheetCategoryList]);
+
+  // console.log('snapIndexBottomSheetCategoryList', snapIndexBottomSheetCategoryList);
+
   const headerBackground = useMemo(() => {
     if (isSelectionMode) {
       return paletteLibs.green[600];
@@ -135,136 +151,132 @@ const PhraseListScreen = ({ route }: Props) => {
   }, [isSelectionMode, paramsCategory]);
 
   return (
-    <Screen
-      preset='fixed'
-      statusBarStyle='light-content'
-      backgroundColor={theme.palette.background.paper}
-      headerBackgroundColor={headerBackground}>
-      <View
-        style={{
-          backgroundColor: phrasebook_getListPhraseIsLoading ? 'transparent' : theme.palette.background.default,
-        }}>
-        <View style={StyleSheet.flatten([styles.absoluteBackgroundHeader, { backgroundColor: headerBackground }])} />
-        {isSelectionMode ? (
-          <View style={styles.selectedModeHeaderRoot}>
-            <View style={StyleSheet.flatten([styles.headerContainer])}>
-              <IconButton
-                icon='close'
-                iconType='ionicons'
-                onPress={() => setSelectedItems([])}
-                iconStyle={{ color: theme.palette.common.white }}
-              />
-              <Typography variant='h5' style={styles.textSelectionMode}>
-                {selectedItems.length} Selected
-              </Typography>
+    <>
+      <Screen
+        preset='fixed'
+        statusBarStyle='light-content'
+        backgroundColor={theme.palette.background.paper}
+        headerBackgroundColor={headerBackground}>
+        <View
+          style={{
+            backgroundColor: phrasebook_getListPhraseIsLoading ? 'transparent' : theme.palette.background.default,
+          }}>
+          <View style={StyleSheet.flatten([styles.absoluteBackgroundHeader, { backgroundColor: headerBackground }])} />
+          {isSelectionMode ? (
+            <View style={styles.selectedModeHeaderRoot}>
+              <View style={StyleSheet.flatten([styles.headerContainer])}>
+                <IconButton
+                  icon='close'
+                  iconType='ionicons'
+                  onPress={() => setSelectedItems([])}
+                  iconStyle={{ color: theme.palette.common.white }}
+                />
+                <Typography variant='h5' style={styles.textSelectionMode}>
+                  {selectedItems.length} Selected
+                </Typography>
 
-              <View style={styles.selectionRightContent}>
-                <IconButton
-                  icon='trash-outline'
-                  iconType='ionicons'
-                  onPress={() => setSelectedItems([])}
-                  iconStyle={{ color: theme.palette.common.white }}
-                />
-                <IconButton
-                  icon='heart-outline'
-                  iconType='ionicons'
-                  onPress={() => setSelectedItems([])}
-                  iconStyle={{ color: theme.palette.common.white }}
-                />
-              </View>
-            </View>
-          </View>
-        ) : (
-          <View style={StyleSheet.flatten([styles.headerRoot])}>
-            <View style={StyleSheet.flatten([styles.headerContainer])}>
-              <View style={styles.headerLeftContent}>
-                <Pressable onPress={() => setShowOptionsMenu(true)} style={styles.headerLeftContentPressable}>
-                  {({ pressed }) => (
-                    <View
-                      style={StyleSheet.flatten([
-                        styles.headerLeftContentInner,
-                        {
-                          ...(pressed && {
-                            backgroundColor: 'rgba(0,0,0,0.1)',
-                          }),
-                        },
-                      ])}>
-                      <Ionicons name='bookmarks-outline' size={28} style={StyleSheet.flatten([styles.iconStyle])} />
-                      <View style={styles.headerTextContainer}>
-                        <Typography variant='h5' fontWeight='bold' style={styles.headerText} numberOfLines={1}>
-                          {paramsCategory.name.en}
-                        </Typography>
-                        <Typography variant='subtitle2' style={StyleSheet.flatten([styles.textCount])}>
-                          {paramsCategory.phrases_count + ' phrases'}
-                        </Typography>
-                      </View>
-                    </View>
-                  )}
-                </Pressable>
-              </View>
-              <View style={styles.headerRightContent}>
-                <View style={styles.headerRightContentContainer}>
+                <View style={styles.selectionRightContent}>
                   <IconButton
-                    icon='heart'
+                    icon='trash-outline'
                     iconType='ionicons'
-                    iconStyle={{ color: theme.palette.primary.contrastText }}
-                    onPress={() => navigation.goBack()}
+                    onPress={() => setSelectedItems([])}
+                    iconStyle={{ color: theme.palette.common.white }}
                   />
                   <IconButton
-                    icon='more-vert'
-                    iconType='material-icons'
-                    iconStyle={{ color: theme.palette.primary.contrastText }}
-                    onPress={() => setShowOptionsMenu(true)}
+                    icon='heart-outline'
+                    iconType='ionicons'
+                    onPress={() => setSelectedItems([])}
+                    iconStyle={{ color: theme.palette.common.white }}
                   />
                 </View>
               </View>
             </View>
-          </View>
-        )}
-
-        {phraseIsEmpty ? (
-          <View style={StyleSheet.flatten([styles.boxEmptyState])}>
-            <EmptyState
-              style={{ backgroundColor: theme.palette.background.paper, borderRadius: theme.shape.borderRadius }}
-              height={200}
-            />
-          </View>
-        ) : (
-          <>
-            {phrasebook_getListPhraseIsLoading ? (
-              <View
-                style={StyleSheet.flatten([
-                  styles.loadingBox,
-                  {
-                    backgroundColor: theme.palette.background.paper,
-                  },
-                ])}>
-                <ActivityIndicator size='large' color={theme.palette.secondary.main} />
+          ) : (
+            <View style={StyleSheet.flatten([styles.headerRoot])}>
+              <View style={StyleSheet.flatten([styles.headerContainer])}>
+                <View style={styles.headerLeftContent}>
+                  <Pressable onPress={onPressHeaderTitle} style={styles.headerLeftContentPressable}>
+                    {({ pressed }) => (
+                      <View
+                        style={StyleSheet.flatten([
+                          styles.headerLeftContentInner,
+                          {
+                            ...(pressed && {
+                              backgroundColor: 'rgba(0,0,0,0.1)',
+                            }),
+                          },
+                        ])}>
+                        <Ionicons name='bookmarks-outline' size={28} style={StyleSheet.flatten([styles.iconStyle])} />
+                        <View style={styles.headerTextContainer}>
+                          <Typography variant='h5' fontWeight='bold' style={styles.headerText} numberOfLines={1}>
+                            {paramsCategory.name.en}
+                          </Typography>
+                          <Typography variant='subtitle2' style={StyleSheet.flatten([styles.textCount])}>
+                            {paramsCategory.phrases_count + ' phrases'}
+                          </Typography>
+                        </View>
+                      </View>
+                    )}
+                  </Pressable>
+                </View>
+                <View style={styles.headerRightContent}>
+                  <View style={styles.headerRightContentContainer}>
+                    <IconButton
+                      icon='close'
+                      iconType='ionicons'
+                      iconStyle={{ color: theme.palette.primary.contrastText }}
+                      onPress={() => navigation.goBack()}
+                    />
+                  </View>
+                </View>
               </View>
-            ) : (
-              <>
-                {listPhases.length > 0 && (
-                  <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={listPhases}
-                    keyExtractor={(item) => String(item.id)}
-                    renderItem={renderItem}
-                    style={styles.flatListStyle}
-                    contentContainerStyle={{
-                      paddingHorizontal: createSpacing(4),
-                      paddingTop: createSpacing(2),
-                    }}
-                  />
-                )}
-              </>
-            )}
-          </>
-        )}
-      </View>
-      <BottomSheetOptionsMenuPhraseList show={showOptionsMenu} onClose={() => setShowOptionsMenu(false)} />
-
+            </View>
+          )}
+          {isEmpty ? (
+            <View style={StyleSheet.flatten([styles.boxEmptyState])}>
+              <EmptyState
+                style={{ backgroundColor: theme.palette.background.paper, borderRadius: theme.shape.borderRadius }}
+                height={200}
+              />
+            </View>
+          ) : (
+            <>
+              {phrasebook_getListPhraseIsLoading && listPhases.length === 0 ? (
+                <View
+                  style={StyleSheet.flatten([
+                    styles.loadingBox,
+                    {
+                      backgroundColor: theme.palette.background.paper,
+                    },
+                  ])}>
+                  <ActivityIndicator size='large' color={theme.palette.secondary.main} />
+                </View>
+              ) : (
+                <>
+                  {listPhases.length > 0 && (
+                    <FlatList
+                      showsVerticalScrollIndicator={false}
+                      data={listPhases}
+                      keyExtractor={(item) => String(item.id)}
+                      renderItem={renderItem}
+                      style={styles.flatListStyle}
+                      contentContainerStyle={{
+                        paddingHorizontal: createSpacing(4),
+                        paddingTop: createSpacing(2),
+                      }}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </View>
+      </Screen>
+      {/* <BottomSheetOptionsMenuPhraseList show={showOptionsMenu} onClose={() => setShowOptionsMenu(false)} /> */}
       <FloatingButtonAddPhrase />
-    </Screen>
+      <BottomSheetPhraseDetail />
+      <BottomSheetPhrasebookCategoryList />
+    </>
   );
 };
 

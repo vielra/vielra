@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { ActivityIndicator, ListRenderItem, StyleSheet, View, FlatList } from 'react-native';
 
 // cpre components
@@ -10,7 +10,7 @@ import { PhraseCategoryItem } from '@/modules/phrasebook/components';
 // Hooks
 import { useAuth } from '@/modules/auth/hooks';
 import { usePhrasebook } from '@/modules/phrasebook/hooks';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 // import { phrasebook_actionFetchPraseCategory } from '@/modules/phrasebook/redux';
 // import { common_actionSetBottomSheetAuthRequired } from '@/modules/common/redux';
@@ -24,14 +24,14 @@ import { themeConfig } from '@/modules/theme/configs';
 // Interfaces
 import { IPhraseCategory } from '@/modules/phrasebook/interfaces';
 import { useTheme } from '@/modules/theme/hooks';
-import { NavigationProps } from '@/navigators';
+// import { NavigationProps } from '@/navigators';
 import { uiConfig } from '@/modules/app/configs/ui.config';
 import { useAppDispatch } from '@/plugins/redux';
 import { screenUtils } from '@/modules/app/utilities';
 
 const PhraseCategoryScreen: FC = () => {
   const theme = useTheme();
-  const navigation = useNavigation<NavigationProps>();
+
   const dispatch = useAppDispatch();
 
   const { isAuthenticated } = useAuth();
@@ -41,8 +41,11 @@ const PhraseCategoryScreen: FC = () => {
     phrasebook_setListCategories,
     phrasebook_getListCategory,
     phrasebook_getListCategoryIsLoading,
-    phrasebook_getListCategoryData,
   } = usePhrasebook();
+
+  const isFirstLoading = useMemo<boolean>(() => {
+    return listCategories.length === 0 && phrasebook_getListCategoryIsLoading;
+  }, [phrasebook_getListCategoryIsLoading, listCategories.length]);
 
   /**
    * Handle press icon button add new phrase
@@ -75,11 +78,10 @@ const PhraseCategoryScreen: FC = () => {
   return (
     <Screen
       preset='fixed'
-      statusBarStyle='light-content'
       title='Phrasebook'
       backgroundColor={theme.palette.background.paper}
       style={{ paddingTop: 12 }}>
-      {phrasebook_getListCategoryIsLoading ? (
+      {isFirstLoading ? (
         <View style={styles.loadingBox}>
           <ActivityIndicator size='large' />
         </View>

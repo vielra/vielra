@@ -34,7 +34,9 @@ const Splash: FC<Props> = ({ isLoading }) => {
         </View>
       </View>
       <View style={StyleSheet.flatten([styles.footer, { marginBottom: insets.bottom + 32 }])}>
-        <Typography color='text.secondary'>{appConfig.appDescription}</Typography>
+        <Typography color='text.secondary' gutterBottom={2}>
+          {appConfig.appDescription}
+        </Typography>
       </View>
     </>
   );

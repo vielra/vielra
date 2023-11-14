@@ -15,11 +15,13 @@ import { useTheme } from '@/modules/theme/hooks';
 // components
 import { BottomSheetLanguage } from '@/modules/settings/components';
 import { BottomSheetBackdrop } from '@/components/shared/bottom-sheet';
-import { Button, Screen, Typography, Ionicon } from '@/components/core';
+import { Button, Screen, Typography, Ionicons } from '@/components/core';
 
 // Theme lib
 import { blue, green, grey, red } from '@/modules/theme/libs';
 import { screenUtils } from '@/modules/app/utilities';
+import { ENV } from '@env';
+import { appConfig } from '@/modules/app/configs';
 
 // Utils
 // import { isSmallScreen } from '@/utils';
@@ -132,7 +134,7 @@ const SettingsScreen = () => {
     switch (status) {
       case CodePush.SyncStatus.SYNC_IN_PROGRESS:
         return (
-          <Ionicon
+          <Ionicons
             name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -141,7 +143,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
         return (
-          <Ionicon
+          <Ionicons
             name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -150,7 +152,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
         return (
-          <Ionicon
+          <Ionicons
             name='cloud-download'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -159,7 +161,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.UPDATE_INSTALLED:
         return (
-          <Ionicon
+          <Ionicons
             name='checkmark-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -168,7 +170,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.UNKNOWN_ERROR:
         return (
-          <Ionicon
+          <Ionicons
             name='cloud-offline'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: grey[400] }])}
@@ -177,7 +179,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.INSTALLING_UPDATE:
         return (
-          <Ionicon
+          <Ionicons
             name='sync-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -186,7 +188,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.AWAITING_USER_ACTION:
         return (
-          <Ionicon
+          <Ionicons
             name='time'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: blue[500] }])}
@@ -195,7 +197,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.UPDATE_IGNORED:
         return (
-          <Ionicon
+          <Ionicons
             name='close-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: red[500] }])}
@@ -204,7 +206,7 @@ const SettingsScreen = () => {
 
       case CodePush.SyncStatus.UP_TO_DATE:
         return (
-          <Ionicon
+          <Ionicons
             name='checkmark-done-circle'
             size={iconSize}
             style={StyleSheet.flatten([styles.codePush_syncIcon, { color: green[600] }])}
@@ -221,7 +223,9 @@ const SettingsScreen = () => {
       <Screen title='Settings'>
         <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
           <Typography>Settings</Typography>
-
+          <Typography variant='subtitle2' color='text.secondary' style={{ fontWeight: '600' }}>
+            {appConfig.apiBaseUrl}
+          </Typography>
           <Button variant='text' title='Go to phaasebook screen' />
 
           {/* Check for update */}
@@ -268,8 +272,7 @@ const SettingsScreen = () => {
           styles.bottomSheet_handleIndicatorStyle,
           { backgroundColor: theme.palette.divider },
         ])}
-        onChange={handleSheetChanges}
-      >
+        onChange={handleSheetChanges}>
         <View style={styles.bottomSheet_content}>
           {renderCodePushSyncStatusIcon(codePushSyncStatus as CodePush.SyncStatus)}
           <Typography
@@ -280,8 +283,7 @@ const SettingsScreen = () => {
                   color: green[600],
                 }),
               },
-            ])}
-          >
+            ])}>
             {codePushSyncStatusText}
           </Typography>
         </View>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { Pressable, StyleSheet, View, ListRenderItem, FlatList } from 'react-native';
 
 // Hook from
@@ -25,17 +25,17 @@ import { usePhrasebook } from '@/modules/phrasebook/hooks';
 
 // Interfaces
 import { IPhraseCategory } from '@/modules/phrasebook/interfaces';
-import { Ionicons } from '@/components/icons';
+import { Ionicons } from '@/components/core';
 import { NavigationProps } from '@/navigators';
 
 // Validation schema
 const phraseFormSchema = yup.object().shape({
-  category_id: yup.string().required('Category is required'),
+  // category_ids: yup.array().required('Category is required'),
   text_vi: yup.string().required('Field text vietnamese is required').max(255, 'Field name is too long'),
 });
 
 type FormValues = {
-  category_id: string;
+  category_ids: Array<string>;
   text_id: string;
   text_en: string;
   text_vi: string;
@@ -48,10 +48,10 @@ export const PhraseForm: FC = () => {
 
   const navigation = useNavigation<NavigationProps>();
 
-  const { listCategories, phrasebook_createIsLoading, phrasebook_create } = usePhrasebook();
+  const { listCategories, phrasebook_createIsLoading, phrasebook_create, phrasebook_createError } = usePhrasebook();
 
   const defaultValues = {
-    category_id: '',
+    category_ids: [],
     text_id: '',
     text_en: '',
     text_vi: '',
@@ -62,6 +62,9 @@ export const PhraseForm: FC = () => {
     control,
     handleSubmit,
     formState: { errors },
+    getValues,
+    setValue,
+    reset,
   } = useForm<FormValues>({
     defaultValues,
     resolver: yupResolver(phraseFormSchema),
@@ -70,9 +73,11 @@ export const PhraseForm: FC = () => {
   const onSubmit: SubmitHandler<FormValues> = async (values): Promise<void> => {
     console.log('values', values);
     try {
-      const response = await phrasebook_create(values);
-      console.log('response', response);
-      if (response) {
+      const response = await phrasebook_create(values).unwrap();
+      console.log('responseresponseresponseresponse', response);
+      if (response?.id) {
+        reset();
+        navigation.navigate('bottom_tab_stack');
       }
     } catch (e) {}
     // dispatch(
@@ -87,14 +92,33 @@ export const PhraseForm: FC = () => {
     return errorFields;
   };
 
+  const onChangeCategory = useCallback(
+    (id: IPhraseCategory['id']) => {
+      const currentSelected = getValues('category_ids');
+      if (currentSelected.length > 0) {
+        if (currentSelected.includes(id)) {
+          setValue(
+            'category_ids',
+            currentSelected.filter((x) => x !== id),
+          );
+        } else {
+          setValue('category_ids', [...currentSelected, id]);
+        }
+      } else {
+        setValue('category_ids', [id]);
+      }
+    },
+    [getValues('category_ids')],
+  );
+
   const renderCategoryItem: ListRenderItem<IPhraseCategory> = ({ item, index }) => {
     return (
       <Controller
         control={control}
-        name='category_id'
+        name='category_ids'
         render={({ field: { onChange, value } }) => (
           <Pressable
-            onPress={() => onChange(item.id)}
+            onPress={() => onChangeCategory(item.id)}
             style={StyleSheet.flatten([
               styles.categoryItemStyle,
               {
@@ -103,7 +127,7 @@ export const PhraseForm: FC = () => {
                 ...(index === 0 && {
                   marginLeft: createSpacing(4),
                 }),
-                ...(item.id === value && {
+                ...(getValues('category_ids').includes(item.id) && {
                   backgroundColor: item.color || theme.palette.secondary.main,
                 }),
               },
@@ -114,14 +138,14 @@ export const PhraseForm: FC = () => {
               style={StyleSheet.flatten([
                 styles.iconStyle,
                 {
-                  color: item.id === value ? '#ffffff' : item.color,
+                  color: getValues('category_ids').includes(item.id) ? '#ffffff' : item.color,
                 },
               ])}
             />
             <Typography
               style={{
                 color: item.color || theme.palette.text.primary,
-                ...(item.id === value && {
+                ...(getValues('category_ids').includes(item.id) && {
                   color: item.color ? theme.palette.primary.contrastText : theme.palette.text.primary,
                 }),
               }}>
@@ -135,6 +159,7 @@ export const PhraseForm: FC = () => {
 
   return (
     <View style={styles.root}>
+      {phrasebook_createError && <Typography>{JSON.stringify(phrasebook_createError)}</Typography>}
       <View style={styles.formInner}>
         {/* List phrase category */}
         <View style={styles.categoryListRoot}>
@@ -164,10 +189,10 @@ export const PhraseForm: FC = () => {
               contentContainerStyle={{}}
             />
 
-            {errors?.category_id && (
+            {errors?.category_ids && (
               <View style={{ marginLeft: createSpacing(4) }}>
                 <Typography variant='subtitle2' style={{ color: 'red' }}>
-                  {errors?.category_id?.message || 'Category is required'}
+                  {errors?.category_ids?.message || 'Category is required'}
                 </Typography>
               </View>
             )}

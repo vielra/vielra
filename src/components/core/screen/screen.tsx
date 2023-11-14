@@ -1,6 +1,6 @@
-import React, { Ref, ReactNode } from 'react';
+import React, { Ref, ReactNode, useMemo } from 'react';
 
-import { Dimensions, KeyboardAvoidingView, Platform, ScrollView, View, ViewStyle } from 'react-native';
+import { Dimensions, KeyboardAvoidingView, ScrollView, View, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ColorValue, StatusBarStyle, StyleProp } from 'react-native';
 
@@ -190,6 +190,10 @@ function ScreenWithoutScrolling(props: ScreenProps) {
 
   const insetStyle = { paddingBottom: 0 } as ViewStyle;
 
+  const statusBarStyle = useMemo<StatusBarStyle>(() => {
+    return props.statusBarStyle ?? theme.palette.mode === 'dark' ? 'light-content' : 'dark-content';
+  }, [props.statusBarStyle, theme.palette.mode]);
+
   return (
     <KeyboardAvoidingView
       style={[preset.outer, backgroundStyle]}
@@ -201,7 +205,7 @@ function ScreenWithoutScrolling(props: ScreenProps) {
           backgroundColor: props.headerBackgroundColor ?? 'transparent',
         }}
       />
-      <StatusBar barStyle={props.statusBarStyle || 'light-content'} translucent />
+      <StatusBar barStyle={statusBarStyle} translucent />
       {props.title && (
         <ScreenTitle
           title={props.title as string}
@@ -230,6 +234,10 @@ function ScreenWithScrolling(props: ScreenProps) {
     backgroundColor: props.backgroundColor ?? theme.palette.background.default,
   };
   const insetStyle = { paddingBottom: 0 } as ViewStyle;
+
+  const statusBarStyle = useMemo<StatusBarStyle>(() => {
+    return props.statusBarStyle ?? theme.palette.mode === 'dark' ? 'light-content' : 'dark-content';
+  }, [props.statusBarStyle, theme.palette.mode]);
 
   // The followings for <Screen preset='auto'/>
   // This will automatically disables scrolling if content fits the screen.
@@ -279,7 +287,7 @@ function ScreenWithScrolling(props: ScreenProps) {
       style={[preset.outer, backgroundStyle]}
       behavior={platformUtils.isIOS ? 'padding' : undefined}
       keyboardVerticalOffset={offsets[props.keyboardOffset || 'none']}>
-      <StatusBar barStyle={props.statusBarStyle || 'light-content'} translucent />
+      <StatusBar barStyle={statusBarStyle} translucent />
       <View
         style={{
           height: insets.top,

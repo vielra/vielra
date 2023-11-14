@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 // core components.
@@ -13,7 +13,7 @@ import { NavigationProps } from '@/navigators';
 import { IPhraseCategory } from '@/modules/phrasebook/interfaces';
 
 // components
-import { Ionicons } from '@/components/icons';
+import { Ionicons } from '@/components/core';
 
 // theme config
 import { themeConfig } from '@/modules/theme/configs';
@@ -23,15 +23,20 @@ import { useTheme } from '@/modules/theme/hooks';
 
 interface Props {
   item: IPhraseCategory;
+  onPress?: (item: IPhraseCategory) => void;
 }
-export const PhraseCategoryItem: FC<Props> = ({ item }) => {
+export const PhraseCategoryItem: FC<Props> = ({ item, onPress }) => {
   const theme = useTheme();
 
   const navigation = useNavigation<NavigationProps>();
 
-  const handlePress = (): void => {
-    navigation.navigate('phrase_list_screen', { category: item });
-  };
+  const handlePress = useCallback(() => {
+    if (typeof onPress === 'function') {
+      onPress(item);
+    } else {
+      navigation.navigate('phrase_list_screen', { category: item });
+    }
+  }, [item]);
 
   return (
     <View style={StyleSheet.flatten([styles.root, { backgroundColor: theme.palette.background.paper }])}>
@@ -97,16 +102,7 @@ export const PhraseCategoryItem: FC<Props> = ({ item }) => {
 
 const styles = StyleSheet.create({
   root: {
-    marginBottom: createSpacing(3),
-
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 3,
-    // },
-    // shadowOpacity: 0.3,
-    // shadowRadius: 5,
-    // elevation: 5,
-    // shadowColor: 'rgba(0,0,0,0.2)',
+    // marginBottom: createSpacing(3),
   },
   pressable: {
     // borderRadius: themeConfig.shape.borderRadius,

@@ -19,10 +19,10 @@ import {
 import rootReducer, { RootState } from './root-reducer';
 
 // redux flipper
-// import reduxFlipper from 'redux-flipper';
+import reduxFlipper from 'redux-flipper';
 
 // emv
-import { NODE_ENV } from '@env';
+// import { NODE_ENV } from '@env';
 
 // storage
 import { persistStorage } from './persist-storage';
@@ -59,10 +59,8 @@ const store = configureStore({
       .concat([baseApi.middleware, authApi.middleware, appApi.middleware, phrasebookApi.middleware]);
 
     // flipper debugger (for development purpose only)
-    if (NODE_ENV !== 'test' && NODE_ENV === 'development') {
-      // const createDebugger = require('redux-flipper').default;
-      // middlewares.push(createDebugger());
-      // middlewares.push(reduxFlipper());
+    if (__DEV__) {
+      middlewares.push(reduxFlipper());
     }
 
     return middlewares;
