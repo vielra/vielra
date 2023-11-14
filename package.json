@@ -11,7 +11,13 @@
     "codepush-ios": "appcenter codepush release-react -a vielra/VielraiOSDev -d Development",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"**/*.{js,ts,tsx}\" --cache"
+    "format": "prettier --write \"**/*.{js,ts,tsx}\" --cache",
+    "android:staging": "react-native run-android --variant=stagingdebug",
+    "android:staging-release": "react-native run-android --variant=stagingrelease",
+    "android:dev": "react-native run-android --variant=developmentdebug",
+    "android:dev-release": "react-native run-android --variant=developmentrelease",
+    "android:prod": "react-native run-android --variant=productiondebug",
+    "android:prod-release": "react-native run-android --variant=productionrelease"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "4.5.1",
