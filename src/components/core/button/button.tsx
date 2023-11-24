@@ -86,7 +86,7 @@ const Button: FC<CoreButtonProps> = (props): JSX.Element => {
       }
       return 18;
     };
-    if (iconType === 'Ioniconss') {
+    if (iconType === 'ionicons') {
       return (
         <Ionicons
           name={String(placement === 'start' ? startIcon : endIcon)}
