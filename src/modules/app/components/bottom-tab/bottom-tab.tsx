@@ -10,13 +10,12 @@ import { useTheme } from '@/modules/theme/hooks';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // interfaces
-import { RNVectorIconProvider } from '@/modules/app/interfaces';
 import { BottomTabNavigatorParamList, NavigatorParamList } from '@/navigators/navigation.type';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 // config
 import { uiConfig } from '@/modules/app/configs';
-import { themeConfig } from '@/modules/theme/configs';
+import { themeConfig, theme_paletteBase } from '@/modules/theme/configs';
 
 // utils
 import { screenUtils } from '@/modules/app/utilities';
@@ -24,45 +23,46 @@ import { screenUtils } from '@/modules/app/utilities';
 // fast image
 // import FastImage from 'react-native-fast-image';
 
+import HomeIcon from '@/assets/svg/home-smile-angle-bold-duotone.svg';
+import BookIcon from '@/assets/svg/notebook-bold-duotone.svg';
+import ChatIcon from '@/assets/svg/chat-round-call-bold-duotone.svg';
+import UserIcon from '@/assets/svg/user-bold-duotone.svg';
+
 type TabItem = {
   path: keyof BottomTabNavigatorParamList;
   label: string;
-  icon: string;
-  focusIcon: string;
-  iconProvider: RNVectorIconProvider;
+  icon: any;
+  focusIcon: any;
 };
+
+const ICON_SIZE = 26;
 
 const TAB_ITEMS: Array<TabItem> = [
   {
     path: 'dashboard_screen',
     label: 'Home',
-    icon: 'layers-outline',
-    focusIcon: 'layers',
-    iconProvider: 'ionicons',
+    icon: <HomeIcon color={theme_paletteBase.primary.main} height={ICON_SIZE} width={ICON_SIZE} />,
+    focusIcon: <HomeIcon color='#ffffff' height={ICON_SIZE} width={ICON_SIZE} />,
   },
   {
     path: 'phrase_category_screen',
     label: 'Phrasebook',
-    icon: 'book-outline',
-    focusIcon: 'book',
-    iconProvider: 'ionicons',
+    icon: <BookIcon color={theme_paletteBase.primary.main} height={ICON_SIZE} width={ICON_SIZE} />,
+    focusIcon: <BookIcon color='#ffffff' height={ICON_SIZE} width={ICON_SIZE} />,
   },
   {
     path: 'chat_screen',
     label: 'Chat',
-    icon: 'chatbubble-outline',
-    focusIcon: 'chatbubble',
-    iconProvider: 'ionicons',
+    icon: <ChatIcon color={theme_paletteBase.primary.main} height={ICON_SIZE} width={ICON_SIZE} />,
+    focusIcon: <ChatIcon color='#ffffff' height={ICON_SIZE} width={ICON_SIZE} />,
   },
   {
     path: 'profile_screen',
     label: 'Profile',
-    icon: 'person-circle-outline',
-    focusIcon: 'person-circle',
-    iconProvider: 'ionicons',
+    icon: <UserIcon color={theme_paletteBase.primary.main} height={ICON_SIZE} width={ICON_SIZE} />,
+    focusIcon: <UserIcon color='#ffffff' height={ICON_SIZE} width={ICON_SIZE} />,
   },
 ];
-
 const TAB_WIDTH = screenUtils.width;
 const TAB_HEIGH = uiConfig.bottomTabHeight;
 
@@ -130,19 +130,24 @@ const BottomTab: FC<Props> = (props) => {
               disabled={state.index === index}
               style={StyleSheet.flatten([styles.tabItem, { ...(state.index === index && styles.tabItemFocused) }])}>
               <View style={StyleSheet.flatten([styles.tabItemInner])}>
-                <Icon
-                  size={22}
-                  name={state.index === index ? x.focusIcon : x.icon}
-                  provider={x.iconProvider}
-                  color={state.index === index ? theme.palette.background.paper : theme.palette.primary.main}
-                />
-                {state.index === index && (
-                  <View style={StyleSheet.flatten([{}])}>
-                    <Typography style={styles.tabItemLabel} numberOfLines={1}>
-                      {x.label}
-                    </Typography>
-                  </View>
-                )}
+                {state.index === index ? x.focusIcon : x.icon}
+                <View style={StyleSheet.flatten([{}])}>
+                  <Typography
+                    style={StyleSheet.flatten([
+                      styles.tabItemLabel,
+                      {
+                        ...(state.index === index
+                          ? {
+                              color: '#ffffff',
+                            }
+                          : {
+                              color: theme.palette.text.secondary,
+                            }),
+                      },
+                    ])}>
+                    {x.label}
+                  </Typography>
+                </View>
               </View>
             </TouchableOpacity>
           ))}
@@ -169,7 +174,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   tabItem: {
-    height: TAB_HEIGH - 18,
+    height: TAB_HEIGH - 14,
     width: TAB_WIDTH / 4 - 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -187,11 +192,6 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 10,
     fontWeight: '600',
-  },
-  tabBarAvatar: {
-    width: 22,
-    height: 22,
-    borderRadius: 22,
   },
 });
 
