@@ -25,6 +25,7 @@ import { useNavigation } from '@react-navigation/native';
 
 // interfaces
 import { NavigationProps } from '@/navigators';
+import { IResponseLoginError } from '../redux';
 
 // validation schema
 const loginFormSchema = yup.object().shape({
@@ -38,11 +39,11 @@ type FormValues = {
 };
 
 const LoginForm: FC = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
   const navigation = useNavigation<NavigationProps>();
   const dispatch = useAppDispatch();
   const { showToast } = useToast();
-  const { auth_login, auth_loginIsLoading, auth_setUser } = useAuth();
+  const { auth_login, auth_loginIsLoading, persistedAuth_setUser } = useAuth();
 
   const defaultValues = {
     email: '',
@@ -62,7 +63,7 @@ const LoginForm: FC = () => {
     try {
       const response = await auth_login(values).unwrap();
       if (response.token && response.user) {
-        dispatch(auth_setUser(response.user));
+        dispatch(persistedAuth_setUser(response.user));
         authUtils.saveToken(response.token);
         navigation.navigate('dashboard_screen');
       } else {
@@ -72,12 +73,21 @@ const LoginForm: FC = () => {
           text1: 'Invalid credentials',
         });
       }
-    } catch (e) {
-      showToast({
-        position: 'bottom',
-        type: 'error',
-        text1: 'Login failed',
-      });
+    } catch (_error) {
+      const e: IResponseLoginError = _error as IResponseLoginError;
+      if (e.status === 400) {
+        showToast({
+          position: 'bottom',
+          type: 'error',
+          text1: 'Invalid credentials',
+        });
+      } else {
+        showToast({
+          position: 'bottom',
+          type: 'error',
+          text1: 'Login failed',
+        });
+      }
     }
   };
 

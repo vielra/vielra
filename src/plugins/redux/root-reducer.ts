@@ -4,7 +4,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import { baseApi } from '@/plugins/redux/base.api';
 import { appApi, appSlice } from '@/modules/app/redux';
 import { settingsSlice } from '@/modules/settings/redux';
-import { authApi, authSlice } from '@/modules/auth/redux';
+import { authApi, authSlice, persistedAuthSlice } from '@/modules/auth/redux';
 import { phrasebookApi, phrasebookSlice } from '@/modules/phrasebook/redux';
 
 const rootReducer = combineReducers({
@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
   [appSlice.name]: appSlice.reducer,
   [appApi.reducerPath]: appApi.reducer,
   [authSlice.name]: authSlice.reducer,
+  [persistedAuthSlice.name]: persistedAuthSlice.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [settingsSlice.name]: settingsSlice.reducer,
   [phrasebookSlice.name]: phrasebookSlice.reducer,
