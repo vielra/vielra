@@ -1,10 +1,17 @@
 import { useAppSelector } from '@/plugins/redux';
 
 // app slice
-import { phrasebook_selector, phrasebook_reducerActions, phrasebookApi } from '@/modules/phrasebook/redux';
+import {
+  phrasebook_selector,
+  phrasebook_reducerActions,
+  phrasebookApi,
+  phrasebookPersisted_selector,
+  phrasebookPersisted_reducerActions,
+} from '@/modules/phrasebook/redux';
 
 export const usePhrasebook = () => {
-  const appState = useAppSelector(phrasebook_selector);
+  const phrasebookState = useAppSelector(phrasebook_selector);
+  const phrasebookPersistedState = useAppSelector(phrasebookPersisted_selector);
 
   const [
     phrasebook_getListCategory,
@@ -20,8 +27,10 @@ export const usePhrasebook = () => {
     phrasebookApi.useCreatePhraseMutation();
 
   return {
-    ...appState,
+    ...phrasebookState,
     ...phrasebook_reducerActions,
+    ...phrasebookPersistedState,
+    ...phrasebookPersisted_reducerActions,
     phrasebook_getListCategory,
     phrasebook_getListCategoryData,
     phrasebook_getListCategoryIsLoading,

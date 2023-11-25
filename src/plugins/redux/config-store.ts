@@ -30,6 +30,8 @@ import { persistStorage } from './persist-storage';
 // reducers
 import { appApi } from '@/modules/app/redux';
 import { baseApi } from '@/plugins/redux/base.api';
+import { authApi, authSlice } from '@/modules/auth/redux';
+import { phrasebookApi, phrasebookPersistedSlice } from '@/modules/phrasebook/redux';
 import { authApi, persistedAuthSlice } from '@/modules/auth/redux';
 import { phrasebookApi, phrasebookSlice } from '@/modules/phrasebook/redux';
 
@@ -37,7 +39,7 @@ import { phrasebookApi, phrasebookSlice } from '@/modules/phrasebook/redux';
 const persistConfig: PersistConfig<RootState> = {
   key: '@ROOT',
   storage: persistStorage,
-  whitelist: [persistedAuthSlice.name, phrasebookSlice.name],
+  whitelist: [persistedAuthSlice.name, phrasebookSlice.name, phrasebookPersistedSlice.name],
 };
 
 // make persisted store

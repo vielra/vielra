@@ -38,7 +38,7 @@ const PhraseCategoryScreen: FC = () => {
 
   const {
     listCategories,
-    phrasebook_setListCategories,
+    phrasebookPersisted_setListCategories,
     phrasebook_getListCategory,
     phrasebook_getListCategoryIsLoading,
   } = usePhrasebook();
@@ -62,7 +62,7 @@ const PhraseCategoryScreen: FC = () => {
     try {
       const response = await phrasebook_getListCategory(undefined);
       if (response.isSuccess) {
-        dispatch(phrasebook_setListCategories(response.data));
+        dispatch(phrasebookPersisted_setListCategories(response.data));
       }
     } catch (e) {}
   };
