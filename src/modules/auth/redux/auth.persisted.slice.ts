@@ -18,7 +18,7 @@ export const persistedAuth_initialState: PersistedAuthSliceState = {
 };
 
 export const persistedAuthSlice = createSlice({
-  name: 'persisted_auth',
+  name: 'auth.persisted',
   initialState: persistedAuth_initialState,
   reducers: {
     persistedAuth_setUser(state, action: PayloadAction<IUser | null>) {
@@ -33,4 +33,4 @@ export const persistedAuthSlice = createSlice({
 
 export const persistedAuth_reducerActions = persistedAuthSlice.actions;
 
-export const persistedAuth_selector = (state: RootState): PersistedAuthSliceState => state.persisted_auth;
+export const persistedAuth_selector = (state: RootState): PersistedAuthSliceState => state['auth.persisted'];
