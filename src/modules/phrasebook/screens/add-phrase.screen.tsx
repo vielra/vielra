@@ -24,13 +24,14 @@ const { width: SCREEN_WIDTH } = Dimensions.get('screen');
 const AddPhraseScreen: FC = () => {
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { listCategories, phrasebook_getListCategory, phrasebook_setListCategories } = usePhrasebook();
+  const { listCategories, phrasebook_getListCategory, phrasebookPersisted_setListCategories } = usePhrasebook();
   const navigation = useNavigation<NavigationProps>();
+
   const fetchPhrasebookCategory = async (): Promise<void> => {
     try {
       const response = await phrasebook_getListCategory(undefined);
       if (response.isSuccess) {
-        dispatch(phrasebook_setListCategories(response.data));
+        dispatch(phrasebookPersisted_setListCategories(response.data));
       }
     } catch (e) {
       console.log('e', e);

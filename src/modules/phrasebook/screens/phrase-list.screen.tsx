@@ -1,5 +1,5 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
-import { ActivityIndicator, Dimensions, ListRenderItem, Pressable, FlatList, StyleSheet, View } from 'react-native';
+import React, { useCallback, useMemo, useState } from 'react';
+import { ActivityIndicator, ListRenderItem, Pressable, FlatList, StyleSheet, View } from 'react-native';
 
 // Core components
 import { IconButton, Screen, Typography } from '@/components/core';
@@ -9,15 +9,10 @@ import { EmptyState } from '@/components/shared';
 
 // Components
 import { Ionicons } from '@/components/core';
-import {
-  BottomSheetOptionsMenuPhraseList,
-  BottomSheetPhraseDetail,
-  BottomSheetPhrasebookCategoryList,
-  PhraseCardItem,
-} from '@/modules/phrasebook/components';
+import { BottomSheetPhrasebookCategoryList, PhraseCardItem } from '@/modules/phrasebook/components';
 
 // Hooks
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+// import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { usePhrasebook } from '@/modules/phrasebook/hooks';
 import { useTheme } from '@/modules/theme/hooks';
@@ -33,12 +28,12 @@ import { themeConfig } from '@/modules/theme/configs';
 import { IPhrase, IPhraseCategory } from '@/modules/phrasebook/interfaces';
 import { UUID } from '@/modules/common/interfaces';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { platformUtils, screenUtils } from '@/modules/app/utilities';
+import { screenUtils } from '@/modules/app/utilities';
 import { NavigationProps, NavigatorParamList } from '@/navigators';
 import { useAppDispatch } from '@/plugins/redux';
 import { useToast } from '@/modules/app/hooks';
 import { paletteLibs } from '@/modules/theme/libs';
-import FloatingButtonAddPhrase from '../components/floating-button-add-phrase';
+import { FloatingButtonAddPhrase, BottomSheetPhraseDetail } from '@/modules/phrasebook/components';
 
 type Props = NativeStackScreenProps<NavigatorParamList, 'phrase_list_screen'>;
 
@@ -50,7 +45,7 @@ const PhraseListScreen = ({ route }: Props) => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation<NavigationProps>();
 
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   const paramsCategory = route.params.category;
 
@@ -58,12 +53,11 @@ const PhraseListScreen = ({ route }: Props) => {
     listPhrasebook,
     phrasebook_getListPhrase,
     phrasebook_getListPhraseIsLoading,
-    phrasebook_setListPhrasebook,
+    phrasebookPersisted_setListPhrasebook,
     snapIndexBottomSheetCategoryList,
     phrasebook_setSnapIndexBottomSheetCategoryList,
   } = usePhrasebook();
 
-  const [showOptionsMenu, setShowOptionsMenu] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState<Array<UUID>>([]);
 
   const listPhases = useMemo(() => {
@@ -77,10 +71,9 @@ const PhraseListScreen = ({ route }: Props) => {
    */
   const getPhraseListByCategory = async (category: IPhraseCategory): Promise<void> => {
     try {
-      console.log('CALL ME ->');
       const result = await phrasebook_getListPhrase({ category: category.slug, limit: null });
       if (result.isSuccess) {
-        dispatch(phrasebook_setListPhrasebook(result.data));
+        dispatch(phrasebookPersisted_setListPhrasebook(result.data));
       }
     } catch (e) {
       showToast({
