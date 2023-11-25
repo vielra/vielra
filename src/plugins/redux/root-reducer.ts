@@ -5,8 +5,7 @@ import { baseApi } from '@/plugins/redux/base.api';
 import { appApi, appSlice } from '@/modules/app/redux';
 import { settingsSlice } from '@/modules/settings/redux';
 import { authApi, authSlice, persistedAuthSlice } from '@/modules/auth/redux';
-import { phrasebookApi, phrasebookSlice } from '@/modules/phrasebook/redux';
-import { phrasebookPersistedSlice } from '@/modules/phrasebook/redux/phrasebook.persisted.slice';
+import { phrasebookApi, phrasebookSlice, phrasebookPersistedSlice } from '@/modules/phrasebook/redux';
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
