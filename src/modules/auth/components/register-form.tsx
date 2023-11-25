@@ -54,7 +54,7 @@ const RegisterForm: FC = () => {
   const theme = useTheme();
   const [currentStep, setCurrentStep] = useState<number>(1);
   const { showToast } = useToast();
-  const { auth_register, auth_setUser } = useAuth();
+  const { auth_register, persistedAuth_setUser } = useAuth();
 
   const defaultValues = {
     name: '',
@@ -80,7 +80,7 @@ const RegisterForm: FC = () => {
       const response = await auth_register(values).unwrap();
       console.log('RESPONSE ->', response);
       if (response.token && response.user) {
-        dispatch(auth_setUser(response.user));
+        dispatch(persistedAuth_setUser(response.user));
         authUtils.saveToken(response.token);
         navigation.navigate('dashboard_screen');
       } else {

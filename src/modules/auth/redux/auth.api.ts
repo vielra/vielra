@@ -2,7 +2,7 @@
 import { IUser } from '@/modules/user/interfaces';
 
 // rtk
-import { RootState } from '@/plugins/redux';
+// import { RootState } from '@/plugins/redux';
 
 // utils
 import { authUtils } from '@/modules/auth/utilities';
@@ -52,6 +52,11 @@ interface IResponseResetPassword extends IResponseUserWithToken {}
 
 interface IResponseSendLinkResetPassword {
   success: boolean;
+}
+
+export interface IResponseLoginError {
+  message: string;
+  status: number;
 }
 
 export const authApi = createApi({

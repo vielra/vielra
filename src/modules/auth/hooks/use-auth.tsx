@@ -2,17 +2,24 @@ import { useMemo } from 'react';
 import { useAppSelector } from '@/plugins/redux';
 
 // app slice
-import { auth_selector, auth_reducerActions, authApi } from '@/modules/auth/redux';
+import {
+  auth_selector,
+  auth_reducerActions,
+  authApi,
+  persistedAuth_selector,
+  persistedAuth_reducerActions,
+} from '@/modules/auth/redux';
 
 // utils
-import { authUtils } from '@/modules/auth/utilities';
+// import { authUtils } from '@/modules/auth/utilities';
 
 export const useAuth = () => {
   const authState = useAppSelector(auth_selector);
+  const persistedAuthState = useAppSelector(persistedAuth_selector);
 
   const isAuthenticated = useMemo(() => {
-    return Boolean(authState.user) && Boolean(authUtils.getToken());
-  }, [authState?.user?.id]);
+    return Boolean(persistedAuthState.user);
+  }, [persistedAuthState?.user]);
 
   const [auth_getUser, { isLoading: auth_getUserIsLoading }] = authApi.useLazyGetAuthenticatedUserQuery();
 
@@ -30,6 +37,8 @@ export const useAuth = () => {
     isLoggedIn: isAuthenticated,
     ...authState,
     ...auth_reducerActions,
+    ...persistedAuthState,
+    ...persistedAuth_reducerActions,
     auth_getUser,
     auth_getUserIsLoading,
     auth_login,
