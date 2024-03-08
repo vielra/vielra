@@ -1,5 +1,5 @@
 // redux tookit
-import { setupListeners } from '@reduxjs/toolkit/dist/query';
+// import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { configureStore, createListenerMiddleware } from '@reduxjs/toolkit';
 
 // redux persist
@@ -68,7 +68,7 @@ const store = configureStore({
 });
 
 // setup listeners to make use of feature inside RTK
-setupListeners(store.dispatch);
+// setupListeners(store.dispatch);
 
 // store that persisted
 const persistor = persistStore(store);

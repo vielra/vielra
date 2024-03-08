@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-// apply plugin: "com.google.gms.google-services"
+apply plugin: "com.google.gms.google-services"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 project.ext.envConfigFiles = [
@@ -81,9 +82,11 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 
 android {
     ndkVersion rootProject.ext.ndkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-     // add this block
+    namespace "io.github.hiriski.vielra"
+
     flavorDimensions "default"
     productFlavors {
         production {
@@ -91,23 +94,26 @@ android {
             applicationId "io.github.hiriski.vielra"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "io.github.hiriski.vielra"
+            versionCode 1
+            versionName ANDROID_BUILD_VERSION_NAME
         }
         staging {
             minSdkVersion rootProject.ext.minSdkVersion
-            applicationId "io.github.hiriski.vielra.staging"
+            applicationId "io.github.hiriski.vielrastg"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "io.github.hiriski.vielra"
+            versionCode 1
+            versionName ANDROID_BUILD_VERSION_NAME
         }
         development {
             minSdkVersion rootProject.ext.minSdkVersion
-            applicationId "io.github.hiriski.vielra.development"
+            applicationId "io.github.hiriski.vielradev"
             targetSdkVersion rootProject.ext.targetSdkVersion
             resValue "string", "build_config_package", "io.github.hiriski.vielra"
+            versionCode 1
+            versionName ANDROID_BUILD_VERSION_NAME
         }
     }
-
-    namespace "io.github.hiriski.vielra"
-
     defaultConfig {
         applicationId "io.github.hiriski.vielra"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -126,7 +132,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            matchingFallbacks = ['debug', 'release'] // <- add this line
+            matchingFallbacks = ['debug', 'release']
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -141,21 +147,12 @@ android {
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-
+    implementation("com.facebook.react:flipper-integration")
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'    
 
-    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
-        exclude group:'com.squareup.okhttp3', module:'okhttp'
-    }
-
-    // Import the Firebase BOM
-    // implementation platform("com.google.firebase:firebase-bom:32.3.1")
-
-    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}")
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
