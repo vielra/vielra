@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // types
 import { RootState } from '@/plugins/redux';
-import { IPhrasebook, IPhraseCategory } from '@/modules/phrasebook/interfaces';
+import { IPhrase, IPhrasebook, IPhraseCategory } from '@/modules/phrasebook/interfaces';
 
 // type for our state
 export type PhrasebookPersistedSliceState = {
@@ -11,12 +11,14 @@ export type PhrasebookPersistedSliceState = {
   listPhrasebook: {
     [key: string]: IPhrasebook;
   };
+  listFavoritePhrase: Array<IPhrase>;
 };
 
 // initial state
 export const phrasebookPersisted_initialState: PhrasebookPersistedSliceState = {
   listCategories: [],
   listPhrasebook: {},
+  listFavoritePhrase: [],
 };
 
 export const phrasebookPersistedSlice = createSlice({
@@ -33,6 +35,9 @@ export const phrasebookPersistedSlice = createSlice({
           [action.payload.category.id]: action.payload,
         };
       }
+    },
+    phrasebookPersisted_setListFavoritePhrase(state, action: PayloadAction<Array<IPhrase>>) {
+      state.listFavoritePhrase = action.payload ?? [];
     },
     phrasebookPersisted_reset() {
       return phrasebookPersisted_initialState;

@@ -23,6 +23,11 @@ export const usePhrasebook = () => {
     { isLoading: phrasebook_getListPhraseIsLoading, data: phrasebook_getListPhraseData },
   ] = phrasebookApi.useLazyGetListPhraseQuery();
 
+  const [
+    phrasebook_getFavoritePhrases,
+    { isLoading: phrasebook_getFavoritePhrasesIsLoading, data: phrasebook_getFavoritePhrasesData },
+  ] = phrasebookApi.useLazyGetFavoritePhrasesQuery();
+
   const [phrasebook_create, { isLoading: phrasebook_createIsLoading, error: phrasebook_createError }] =
     phrasebookApi.useCreatePhraseMutation();
 
@@ -38,6 +43,11 @@ export const usePhrasebook = () => {
     phrasebook_getListPhrase,
     phrasebook_getListPhraseIsLoading,
     phrasebook_getListPhraseData,
+
+    phrasebook_getFavoritePhrases,
+    phrasebook_getFavoritePhrasesIsLoading,
+    phrasebook_getFavoritePhrasesData,
+
     phrasebook_create,
     phrasebook_createIsLoading,
     phrasebook_createError,

@@ -27,7 +27,6 @@ import { storageUtils } from '@/modules/app/utilities';
 
 import { useAuth } from '@/modules/auth/hooks';
 import { log } from '@/modules/common/helpers';
-import { AxiosError } from 'axios';
 
 // screens & navigators
 import BottomTabStackNavigator from './bottom-tab-stack.navigator';
@@ -38,7 +37,7 @@ import { RegisterScreen, LoginScreen } from '@/modules/auth/screens';
 // api
 import { useAppDispatch } from '@/plugins/redux';
 import { SettingsScreen } from '@/modules/settings/screens';
-import { AddPhraseScreen, PhraseListScreen } from '@/modules/phrasebook/screens';
+import { AddPhraseScreen, PhraseFavoriteScreen, PhraseListScreen } from '@/modules/phrasebook/screens';
 
 const SCREENS: Array<ScreenType> = [
   { name: 'splash_screen', component: SplashScreen },
@@ -47,7 +46,8 @@ const SCREENS: Array<ScreenType> = [
   { name: 'settings_screen', component: SettingsScreen },
   { name: 'register_screen', component: RegisterScreen },
   { name: 'login_screen', component: LoginScreen },
-  { name: 'phrase_list_screen', component: PhraseListScreen },
+  { name: 'phrase_list_screen', component: PhraseListScreen as () => JSX.Element },
+  { name: 'phrase_favorite_screen', component: PhraseFavoriteScreen as () => JSX.Element },
   { name: 'add_phrase_screen', component: AddPhraseScreen },
 ];
 
@@ -59,7 +59,7 @@ const RootStackNavigator = (): JSX.Element | null => {
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
   const { showToast } = useToast();
-  const { auth_setUser, auth_reset, auth_getUser } = useAuth();
+  const { persistedAuth_setUser, auth_reset, auth_getUser } = useAuth();
   const [isAppLoaded, setIsAppLoaded] = useState(false);
   const [_, setAppStateVisible] = useState(appState.current);
   const { app_setLanguage, alreadyLaunched, app_setAlreadyLaunched, app_checkServerStatus } = useApp();
@@ -122,7 +122,7 @@ const RootStackNavigator = (): JSX.Element | null => {
       if (sanctumToken) {
         const response = await auth_getUser(sanctumToken);
         if (response?.isSuccess) {
-          dispatch(auth_setUser(response.data));
+          dispatch(persistedAuth_setUser(response.data));
         }
       } else {
         auth_reset();
