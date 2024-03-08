@@ -16,6 +16,7 @@ export type NavigatorParamList = {
   phrase_list_screen: {
     category: IPhraseCategory;
   };
+  phrase_favorite_screen: undefined;
   add_phrase_screen: {
     category?: IPhraseCategory | null;
   };

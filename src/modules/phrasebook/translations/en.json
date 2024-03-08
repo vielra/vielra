@@ -1,5 +1,7 @@
 {
   "phrasebook": {
-    "add_new_phrase": "Add new phrase"
+    "add_new_phrase": "Add new phrase",
+    "favorite_phrase_empty_title": "Empty",
+    "favorite_phrase_empty_desc": "Phrases that you add to favorites will appear here"
   }
 }

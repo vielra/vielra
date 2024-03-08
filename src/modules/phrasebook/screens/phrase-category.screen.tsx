@@ -2,7 +2,7 @@ import React, { FC, useCallback, useEffect, useMemo } from 'react';
 import { ActivityIndicator, ListRenderItem, StyleSheet, View, FlatList } from 'react-native';
 
 // cpre components
-import { Screen } from '@/components/core';
+import { IconButton, Screen } from '@/components/core';
 
 // component
 import { PhraseCategoryItem } from '@/modules/phrasebook/components';
@@ -10,7 +10,7 @@ import { PhraseCategoryItem } from '@/modules/phrasebook/components';
 // Hooks
 import { useAuth } from '@/modules/auth/hooks';
 import { usePhrasebook } from '@/modules/phrasebook/hooks';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 // import { phrasebook_actionFetchPraseCategory } from '@/modules/phrasebook/redux';
 // import { common_actionSetBottomSheetAuthRequired } from '@/modules/common/redux';
@@ -28,9 +28,13 @@ import { useTheme } from '@/modules/theme/hooks';
 import { uiConfig } from '@/modules/app/configs/ui.config';
 import { useAppDispatch } from '@/plugins/redux';
 import { screenUtils } from '@/modules/app/utilities';
+import { NavigationProps } from '@/navigators';
+import { paletteLibs } from '@/modules/theme/libs';
 
 const PhraseCategoryScreen: FC = () => {
   const theme = useTheme();
+
+  const navigation = useNavigation<NavigationProps>();
 
   const dispatch = useAppDispatch();
 
@@ -73,13 +77,39 @@ const PhraseCategoryScreen: FC = () => {
     }, []),
   );
 
+  const renderRightHeader = () => (
+    <IconButton
+      size='large'
+      onPress={() => navigation.navigate('phrase_favorite_screen')}
+      icon='heart'
+      iconType='ionicons'
+      iconSize={26}
+      iconColor={paletteLibs.red[500]}
+      style={{ flexDirection: 'row', marginRight: -16 }}
+    />
+  );
+
+  const renderLeftHeader = () => (
+    <IconButton
+      size='large'
+      onPress={() => navigation.goBack()}
+      icon='arrow-back'
+      iconType='ionicons'
+      iconSize={24}
+      style={{ marginLeft: -16, marginRight: createSpacing(4) }}
+    />
+  );
+
   const renderItem: ListRenderItem<IPhraseCategory> = ({ item }) => <PhraseCategoryItem item={item} />;
 
   return (
     <Screen
       preset='fixed'
       title='Phrasebook'
+      titleSize='small'
       backgroundColor={theme.palette.background.paper}
+      headerLeftContent={renderLeftHeader()}
+      headerRightContent={renderRightHeader()}
       style={{ paddingTop: 12 }}>
       {isFirstLoading ? (
         <View style={styles.loadingBox}>

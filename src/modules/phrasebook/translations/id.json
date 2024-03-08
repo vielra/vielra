@@ -1,5 +1,7 @@
 {
   "phrasebook": {
-    "add_new_phrase": "Tambah frasa baru"
+    "add_new_phrase": "Tambah frasa baru",
+    "favorite_phrase_empty_title": "Kosong",
+    "favorite_phrase_empty_desc": "Frasa yang kamu tambahkan ke favorite akan muncul disini"
   }
 }

@@ -10,6 +10,10 @@ interface IRequestGetListPhrase {
   limit?: number | null;
 }
 
+interface IRequestGetFavoritePhrases {
+  limit?: number | null;
+}
+
 export const phrasebookApi = createApi({
   reducerPath: 'phrasebook_api',
   baseQuery: fetchBaseQuery({
@@ -34,6 +38,12 @@ export const phrasebookApi = createApi({
     getListPhrase: builder.query<IPhrasebook, IRequestGetListPhrase>({
       query: (params) => ({
         url: '/phrasebook/phrase',
+        params,
+      }),
+    }),
+    getFavoritePhrases: builder.query<IPhrase[], IRequestGetFavoritePhrases>({
+      query: (params) => ({
+        url: '/phrasebook/phrase/favorite',
         params,
       }),
     }),

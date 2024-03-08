@@ -25,10 +25,13 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import FastImage from 'react-native-fast-image';
 import { Assets } from '@/assets';
 import { useAppDispatch } from '@/plugins/redux';
+import { NavigationProps, navigate } from '@/navigators';
+import { useNavigation } from '@react-navigation/native';
 
 const AVATAR_SIZE = 132;
 
 const ProfileInfo = (): JSX.Element => {
+  const navigation = useNavigation<NavigationProps>();
   const dispatch = useAppDispatch();
   const [uploadIsLoading, setUploadIsLoading] = useState(false);
 
@@ -142,7 +145,17 @@ const ProfileInfo = (): JSX.Element => {
           {user?.name}
         </Typography>
       </View>
-      <View style={{ width: 140, alignSelf: 'center' }}>
+      <View style={{ alignSelf: 'center' }}>
+        <Button
+          rounded
+          onPress={() => navigation.navigate('phrase_favorite_screen')}
+          title='Favorite Phrases'
+          color='primary'
+          variant='contained'
+          startIcon='heart'
+          iconType='ionicons'
+          style={{ marginBottom: createSpacing(4) }}
+        />
         <Button
           rounded
           onPress={onPressLogout}
